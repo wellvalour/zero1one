@@ -8,9 +8,13 @@ Die beste Software die ich jemals gesehen hab!
 ```
 *Zitat eines unabhängigen Entwicklers*
 
+## Dokumentation
+
+Quellcode ist in [diesem GitHub-Repository](https://github.com/wellvalour/zero1one) hinterlegt.
+
 ## Authoren
-* Til Wohlmuth
-* Daniel Reimann
-* Gianna Dihpol
-* Marcel Mahlfeld
-* Pascal Jung
+* :suspect: Til Wohlmuth
+* :godmode: Daniel Reimann
+* :woman: Gianna Dihpol
+* :child: Marcel Mahlfeld
+* :man: Pascal Jung
