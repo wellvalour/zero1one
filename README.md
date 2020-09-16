@@ -19,3 +19,4 @@ Quellcode ist in [diesem GitHub-Repository](https://github.com/wellvalour/zero1o
 * :child: Marcel Mahlfeld
 * :man: Pascal Jung
 * :bearded_person: Max Schneider
+* Laura Bieberle
