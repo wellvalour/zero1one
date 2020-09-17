@@ -1,10 +1,5 @@
 package bdgjmrsww.zero1one.controller;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
-
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -32,24 +27,6 @@ public class HomeController {
 		return String.format("Hello %s!", name);
 	}
 
-	/**
-	 * Beispiel wie man einfach ne HTML ausgibt...ist halt statisch
-	 * 
-	 * @return HTML-Seite als String
-	 * @throws IOException
-	 */
-	@GetMapping(value = "/home", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String showHomePage() throws IOException {
-		File file = new File("src/main/resources/templates/test.html");
-		BufferedReader br = new BufferedReader(new FileReader(file));
-
-		String st, result = "";
-		while ((st = br.readLine()) != null) {
-			result = result + st;
-		}
-		br.close();
-		return result;
-	}
 
 	/**
 	 * Und das ist das gleiche wie /home mit Thymleaf
