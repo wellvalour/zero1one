@@ -4,18 +4,16 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
-@RestController
-public class CmsController {
+@Controller
+public class HomeController {
 
 	/**
 	 * Als Beispiel wie Spring arbeitet
@@ -39,10 +37,10 @@ public class CmsController {
 	 */
 	@GetMapping(value = "/home", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String showHomePage() throws IOException {
-		File file = new File("src/main/resources/templates/html/test.html");
+		File file = new File("src/main/resources/templates/test.html");
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		String st, result="";
+		String st, result = "";
 		while ((st = br.readLine()) != null) {
 			result = result + st;
 		}
@@ -50,21 +48,13 @@ public class CmsController {
 		return result;
 	}
 
-	
 	/**
-	 * Demonstration von XSLT 
-	 * Kann zum Befüllen des HTMLs mit Werte genutzt werden
+	 * Und das ist das gleiche wie /home mit Thymleaf
 	 * @return
 	 */
-	@GetMapping(value = "/a", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public ConfigItemErgebnis presentAttribute2() {
-		ConfigItemErgebnis test = new ConfigItemErgebnis();
-		test.setConfigtyp("Server");
-		List<ItemAttribut> list = new ArrayList<ItemAttribut>();
-		list.add(new ItemAttribut("Größe", "sehr größ"));
-		list.add(new ItemAttribut("Leistung", "3"));
-		test.setAttribute(list);
-
-		return test;
+	@GetMapping("/test")
+	String test() {
+		return "test";
 	}
+
 }

@@ -47,28 +47,9 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!-- Das ist die eigentliche Version die bis Java 8/9 funktioniert hat -->
-		<!-- Damit konnte die com.sun.xml.bind.v2.ContextFactory verwendet werden 
-			um eine serverseitige XSLT durchzuführen -->
-		<!-- <dependency> -->
-		<!-- <groupId>javax.xml.bind</groupId> -->
-		<!-- <artifactId>jaxb-api</artifactId> -->
-		<!-- </dependency> -->
-		<!-- Die folgenden zwei Abhängigkeiten schaffen einen Workarround für die 
-			Methoden -->
-		<!-- Eine adäquat Lösung aus Java 11 währe noch besser -->
 		<dependency>
-			<groupId>jakarta.xml.bind</groupId>
-			<artifactId>jakarta.xml.bind-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.glassfish.jaxb</groupId>
-			<artifactId>jaxb-runtime</artifactId>
-		</dependency>
-		<!-- bis hier -->
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-xml</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 	</dependencies>
 
