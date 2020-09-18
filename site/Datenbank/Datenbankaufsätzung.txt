@@ -10,12 +10,6 @@ Name char(30),
 Passwort char(30),
 BerechtigungsID int(5));
 
-create table User(
-ID int(5),
-Name char(30),
-Passwort char(30),
-BerechtigungsID int(5));
-
 create table ConfigItemTyp(
 ID int(5),
 Name char(30));
