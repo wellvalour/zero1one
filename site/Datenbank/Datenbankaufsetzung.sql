@@ -1,4 +1,4 @@
-create database zero1one;
+create database if not exists zero1one;
 
 create table Berechtigung(
 ID int(5),
@@ -11,18 +11,18 @@ Passwort char(30),
 BerechtigungsID int(5));
 
 create table ConfigItemTyp(
-ID int(5),
+ID int (5),
 Name char(30));
 
 create table Instanz(
 ID int(5),
-ConfigItemTypID int (5),
+ConfigItemTypname char (30),
 Name char(30));
 
 create table Attributtyp(
 ID int(5),
 Name char(30),
-ConfigItemTypID int (5));
+ConfigItemTypname char (30));
 
 create table Attribut(
 ID int(5),
