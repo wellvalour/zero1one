@@ -1,4 +1,4 @@
-create database zero1one if not  exist;
+create database zero1one;
 
 create table Berechtigung(
 ID int(5),
