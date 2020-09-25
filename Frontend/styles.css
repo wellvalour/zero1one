@@ -207,18 +207,8 @@
   line-height: 22px;
 }
 
-/* after adding active class */
-.wrapper.active .sidebar{
-  width: 80px;
-}
+.profile-bottom{
 
-.wrapper.active .sidebar ul li a span.title,
-.wrapper.active .profile_info
-{
-  display: none;
-}
+  
 
-.wrapper.active .main_container .container{
-  width: calc(100% - 80px);
-  margin-left: 80px;
 }
