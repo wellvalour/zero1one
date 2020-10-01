@@ -1,4 +1,4 @@
--- Berechtigungen erstellen
+
 INSERT INTO berechtigung (ID, Bezeichnung)
 VALUES (1, 'Admin');
 
@@ -11,7 +11,7 @@ VALUES (3, 'Azubi');
 INSERT INTO berechtigung (ID, Bezeichnung)
 VALUES (4, 'Teamleiter');
 
--- User erstellen
+
 INSERT INTO User (Name, Passwort, BerechtigungsID)
 VALUES ('Peter', 'peter1234', 4);
 
@@ -27,7 +27,7 @@ VALUES ('Dimitri', 'dimitri1234', 3);
 INSERT INTO User (Name, Passwort, BerechtigungsID)
 VALUES ('Johanna', 'johanna1234', 2);
 
--- ConfigItemtyp erstellen
+
 INSERT INTO ConfigItemTyp (Name)
 VALUES ('Computer');
 
@@ -46,12 +46,9 @@ VALUES ('Tastatur');
 INSERT INTO ConfigItemTyp (Name)
 VALUES ('Maus');
 
---Instanzen erstellen
-INSERT INTO Instanz (ID, ConfigItemTypname, Name)
-VALUES (1, 'Maus', 'Logitech Maus');
 
 INSERT INTO Instanz (ID, ConfigItemTypname, Name)
-VALUES (2, 'Maus', 'Logitech Maus');
+VALUES (1, 'Maus', 'Logitech Maus');
 
 INSERT INTO Instanz (ID, ConfigItemTypname, Name)
 VALUES (2, 'Maus', 'Logitech Maus');
@@ -114,7 +111,7 @@ INSERT INTO Instanz (ID, ConfigItemTypname, Name)
 VALUES (21, 'Drucker', 'Samsung MultiXpress C9251NA CLX-9251');
 
 
---Attributtypen erstellen
+
 INSERT INTO AttributTyp (Name, ConfigItemTypname)
 VALUES ('Farbe', 'Drucker');
 
@@ -140,8 +137,8 @@ INSERT INTO AttributTyp (Name, ConfigItemTypname)
 VALUES ('Reaktionszeit', 'Bildschirm');
 
 
---Attribute erstellen
---Drucker1
+
+
 INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('weiß', 20, 'Farbe');
 
@@ -152,7 +149,7 @@ INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('64MB', 20, 'Speicher');
 
 
---Drucker2
+
 INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('schwarz', 21, 'Farbe');
 
@@ -163,7 +160,7 @@ INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('64MB', 21, 'Speicher');
 
 
---Computer
+
 INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('1000GB', 11, 'Speicher');
 
