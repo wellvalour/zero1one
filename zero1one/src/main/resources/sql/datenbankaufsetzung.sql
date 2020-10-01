@@ -3,6 +3,7 @@ create database if not exists zero1one;
 create table if not exists Berechtigung(
 ID int(5),
 Bezeichnung char(30));
+PRIMARY KEY(ID));
 
 create table if not exists User(
 Name char(30),
