@@ -7,33 +7,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import bdgjmrsww.zero1one.controller.UnserTestobjekt;
-import bdgjmrsww.zero1one.repository.ConfigItemRepository;
-import bdgjmrsww.zero1one.repository.Mitarbeiter;
+import bdgjmrsww.zero1one.repository.Instanz;
+import bdgjmrsww.zero1one.repository.InstanzRepository;
 
 @Controller
 public class ServiceManager {
 	
 	@Autowired
-	private ConfigItemRepository repo;
+	InstanzRepository instanzRepo;
 	
-	public List<UnserTestobjekt> getMitarbeiter() {
-		
-		List<Mitarbeiter> mitarbeiter = repo.findByNachname("Maier");
-		
-		List<UnserTestobjekt> tobj = mitarbeiter.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-		
-		return tobj;
+	public List<UnserTestobjekt> getInstanzGanz() {
+		List<Instanz> mitarbeiter = instanzRepo.findAll();
+
+		List<UnserTestobjekt> testobj = mitarbeiter.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
 	}
-	
-	private UnserTestobjekt convertTestobjekt(Mitarbeiter m) {
+
+	private UnserTestobjekt convertTestobjekt(Instanz i) {
 		UnserTestobjekt u = new UnserTestobjekt();
-		
-		u.setEins(""+ m.getPersnr());
-		u.setZwei(m.getNachname());
-		u.setDrei(m.getVorname());
-		u.setVier(m.getBeruf());
-		u.setFuenf(""+ m.getGehalt());
-		
+
+		u.setEins(""+ i.getId());
+		u.setZwei(i.getConfigItemTypname());
+		u.setDrei(i.getName());
+
 		return u;
 	}
 }
