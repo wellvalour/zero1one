@@ -13,6 +13,9 @@ public class Mitarbeiter {
 	
 	private String beruf;
 	
+	private String vorname;
+	
+	private double gehalt;
 	
 	public String getBeruf() {
 		return beruf;
@@ -24,6 +27,22 @@ public class Mitarbeiter {
 	
 	public int getPersnr() {
 		return persnr;
+	}
+	
+	public double getGehalt() {
+		return gehalt;
+	}
+	
+	public String getVorname() {
+		return vorname;
+	}
+	
+	public void setGehalt(double gehalt) {
+		this.gehalt = gehalt;
+	}
+	
+	public void setVorname(String vorname) {
+		this.vorname = vorname;
 	}
 	
 	public void setBeruf(String beruf) {

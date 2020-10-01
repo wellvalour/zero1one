@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+<title>Test123</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container-fluid">
+
+		<div class="jumbotron jumbotron-fluid">
+			<div class="container">
+				<h1 class="display-4">Testausgabe der Datenbankabfrage</h1>
+				<br />
+				<div class="alert alert-danger" role="alert">Hier stehen
+					hoffentlich alle Daten die hier stehen sollen!</div>
+			</div>
+		</div>
+	</div>
+	<div class="container">
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope="col">EINS</th>
+					<th scope="col">ZWEI</th>
+					<th scope="col">DREI</th>
+					<th scope="col">VIER</th>
+					<th scope="col">FUENF</th>
+					<th scope="col">SECHS</th>
+					<th scope="col">SIEBEN</th>
+					<th scope="col">ACHT</th>
+					<th scope="col">NEUN</th>
+					<th scope="col">ZEHN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="unserTestobjekt : ${unserTestTemplate}">
+					<tr>
+						<td th:text="${unserTestobjekt.eins}" />
+						<td th:text="${unserTestobjekt.zwei}" />
+						<td th:text="${unserTestobjekt.drei}" />
+						<td th:text="${unserTestobjekt.vier}" />
+						<td th:text="${unserTestobjekt.fuenf}" />
+						<td th:text="${unserTestobjekt.sechs}" />
+						<td th:text="${unserTestobjekt.sieben}" />
+						<td th:text="${unserTestobjekt.acht}" />
+						<td th:text="${unserTestobjekt.neun}" />
+						<td th:text="${unserTestobjekt.zehn}" />
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>
