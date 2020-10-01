@@ -168,4 +168,4 @@ INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
 VALUES ('8GB', 11, 'Arbeitsspeicher');
 
 INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('3,2GHz 8Core', 11, 'Speicher');
+VALUES ('3,2GHz 8Core', 11, 'Prozessor');
