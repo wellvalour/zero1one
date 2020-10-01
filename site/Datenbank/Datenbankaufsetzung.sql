@@ -26,7 +26,7 @@ ConfigItemTypname char (30),
 PRIMARY KEY(Name));
 
 create table if not exists Attribut(
-Wert char(15),
 InstanzID int (5),
 AttributtypID char(30),
+Wert char(15),
 PRIMARY KEY(InstanzID, AttributtypID));

@@ -139,33 +139,33 @@ VALUES ('Reaktionszeit', 'Bildschirm');
 
 
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('weiß', 20, 'Farbe');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (20, 'Farbe', 'weiß');
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('25', 20, 'Blattdruckanzahl/m');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (20, 'Blattdruckanzahl/m', '25');
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('64MB', 20, 'Speicher');
-
-
-
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('schwarz', 21, 'Farbe');
-
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('25', 21, 'Blattdruckanzahl/m');
-
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('64MB', 21, 'Speicher');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (20, 'Speicher', '64MB');
 
 
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('1000GB', 11, 'Speicher');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (21, 'Farbe', 'schwarz');
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('8GB', 11, 'Arbeitsspeicher');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (21, 'Blattdruckanzahl/m', '25');
 
-INSERT INTO Attribut (Wert, InstanzID, AttributtypID)
-VALUES ('3,2GHz 8Core', 11, 'Prozessor');
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (21, 'Speicher', '64MB');
+
+
+
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (11, 'Speicher', '1000GB');
+
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (11, 'Arbeitsspeicher', '8GB');
+
+INSERT INTO Attribut (InstanzID, AttributtypID, Wert)
+VALUES (11, 'Prozessor', '3,2GHz 8Core');
