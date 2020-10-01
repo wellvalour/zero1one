@@ -20,3 +20,8 @@ Quellcode ist in [diesem GitHub-Repository](https://github.com/wellvalour/zero1o
 * :man: Pascal Jung
 * :bearded_person: Max Schneider
 * Laura Bieberle
+
+
+## Lokaler Start
+
+Für den lokalen Start muss die Verbindung inklusive User in der application.properies angegeben werden, damit eine Verbindung zur Datenbank aufgebaut werden kann.
