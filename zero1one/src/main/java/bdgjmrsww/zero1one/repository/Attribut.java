@@ -5,7 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Attribut {
- 
+	
 	@Id
 	private int configItemID;
 	

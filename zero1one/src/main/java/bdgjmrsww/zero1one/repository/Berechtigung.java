@@ -5,6 +5,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Berechtigung {
+	
 	@Id
 	private int ID;
 	
