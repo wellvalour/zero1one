@@ -81,12 +81,20 @@
   #content{
     background:white;
     grid-area:content;
+    padding: 40px;
+    
   }
   
   #sidebar ul  a i{
     margin-right: 16px;
   }
   
+#dropdown{
+    width:500px;
+}
+
+
+
   
   #footer{
     background:black;
