@@ -1,5 +1,6 @@
 package bdgjmrsww.zero1one.repository;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,6 +10,7 @@ public class Instanz {
 	@Id
 	private int id;
 	
+	@Column(name = "ConfigItemTypname")
 	private String configItemTypname;
 	
 	private String name;
