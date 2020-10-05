@@ -1,6 +1,6 @@
 CREATE TABLE if not exists Berechtigung(
 ID int(5),
-Bezeichnung char(30),
+Bezeichnung char(50),
 PRIMARY KEY(ID));
 
 CREATE TABLE if not exists User(
@@ -15,17 +15,17 @@ PRIMARY KEY(Name));
 
 CREATE TABLE if not exists Instanz(
 ID int(5),
-ConfigItemTypname char (30),
+ConfigItemTypname char (50),
 Name char(50),
 PRIMARY KEY(ID));
 
 CREATE TABLE if not exists Attributtyp(
 Name char(50),
-ConfigItemTypname char (30),
+ConfigItemTypname char (50),
 PRIMARY KEY(Name));
 
 CREATE TABLE if not exists Attribut(
 InstanzID int (5),
-AttributtypID char(30),
-Wert char(15),
+AttributtypID char(50),
+Wert char(50),
 PRIMARY KEY(InstanzID, AttributtypID));

@@ -17,9 +17,9 @@ public class ServiceManager {
 	InstanzRepository instanzRepo;
 	
 	public List<UnserTestobjekt> getInstanzGanz() {
-		List<Instanz> mitarbeiter = instanzRepo.findAll();
+		List<Instanz> instanz = instanzRepo.findAll();
 
-		List<UnserTestobjekt> testobj = mitarbeiter.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+		List<UnserTestobjekt> testobj = instanz.stream().map(this::convertTestobjekt).collect(Collectors.toList());
 
 		return testobj;
 	}
