@@ -1,15 +1,31 @@
-CREATE TABLE `mitarbeiter` (
-  `persnr` int(3),
-  `nachname` char(30),
-  `vorname` char(30),
-  `wohnort` char(30),
-  `beruf` char(30),
-  `gehalt` decimal(7,2),
-  `zulage` decimal(7,2),
-  `stellenr` int(3),
-  `gebdatum` date,
-  `einstelldatum` date,
-  PRIMARY KEY (`persnr`),
-  UNIQUE KEY `mit_nr_2` (`persnr`),
-  UNIQUE KEY `mit_nr_3` (`persnr`)
-);
+CREATE TABLE if not exists Berechtigung(
+ID int(5),
+Bezeichnung char(50),
+PRIMARY KEY(ID));
+
+CREATE TABLE if not exists User(
+Name char(50),
+Passwort char(30),
+BerechtigungsID int(5),
+PRIMARY KEY(Name));
+
+CREATE TABLE if not exists ConfigItemTyp(
+Name char(50),
+PRIMARY KEY(Name));
+
+CREATE TABLE if not exists Instanz(
+ID int(5),
+ConfigItemTypname char (50),
+Name char(50),
+PRIMARY KEY(ID));
+
+CREATE TABLE if not exists Attributtyp(
+Name char(50),
+ConfigItemTypname char (50),
+PRIMARY KEY(Name));
+
+CREATE TABLE if not exists Attribut(
+InstanzID int (5),
+AttributtypID char(50),
+Wert char(50),
+PRIMARY KEY(InstanzID, AttributtypID));

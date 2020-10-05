@@ -1,28 +1,25 @@
 package bdgjmrsww.zero1one.repository;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+
 @Entity
-public class Instanz {
-	
+public class Attributtyp {
+
 	@Id
-	private int id;
+	private String name;
 	
-	@Column(name = "ConfigItemTypname")
 	private String configItemTypname;
 	
-	private String name;
-
-	public int getId() {
-		return id;
+	public String getName() {
+		return name;
 	}
-
-	public void setId(int id) {
-		this.id = id;
+	
+	public void setName(String name) {
+		this.name = name;
 	}
-
+	
 	public String getConfigItemTypname() {
 		return configItemTypname;
 	}
@@ -30,14 +27,5 @@ public class Instanz {
 	public void setConfigItemTypname(String configItemTypname) {
 		this.configItemTypname = configItemTypname;
 	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 	
 }

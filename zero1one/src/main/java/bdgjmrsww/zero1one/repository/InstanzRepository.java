@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface InstanzRepository extends JpaRepository<Instanz, Long> {
 		
 		List<Instanz> findByName(String name);
+		
+		List<Instanz> findByConfigItemTypname(String configItemTypname);
 }
