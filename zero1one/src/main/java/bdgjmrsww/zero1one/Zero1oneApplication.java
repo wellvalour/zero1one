@@ -24,6 +24,7 @@ public class Zero1oneApplication {
 			sc = new Scanner(file);
 			while (sc.hasNextLine()) {
 				System.out.println(sc.nextLine());
+				
 			}
 		} catch (FileNotFoundException e) {
 			// Ignored if it fails
