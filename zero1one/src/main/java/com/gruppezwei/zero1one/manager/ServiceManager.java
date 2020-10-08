@@ -11,8 +11,10 @@ import com.gruppezwei.zero1one.repository.Attribut;
 import com.gruppezwei.zero1one.repository.AttributRepository;
 import com.gruppezwei.zero1one.repository.Attributtyp;
 import com.gruppezwei.zero1one.repository.AttributtypRepository;
+import com.gruppezwei.zero1one.repository.Configitemtyp;
+import com.gruppezwei.zero1one.repository.ConfigItemTypRepository;
 import com.gruppezwei.zero1one.repository.Configitem;
-import com.gruppezwei.zero1one.repository.ConfigItemRepository;
+import com.gruppezwei.zero1one.repository.ConfigitemRepository;
 import com.gruppezwei.zero1one.repository.Instanz;
 import com.gruppezwei.zero1one.repository.InstanzRepository;
 import com.gruppezwei.zero1one.repository.User;
@@ -23,7 +25,7 @@ import com.gruppezwei.zero1one.repository.UserRepository;
 public class ServiceManager {
 	
 	@Autowired
-	ConfigItemRepository itemRepo;
+	ConfigitemRepository itemRepo;
 	
 	@Autowired
 	InstanzRepository instanzRepo;
@@ -36,6 +38,9 @@ public class ServiceManager {
 	
 	@Autowired
 	AttributRepository attributRepo;
+	
+	@Autowired 
+	ConfigItemTypRepository confTypRepo;
 	
 	
 	public List<UnserTestobjekt> getConfigItemGanz() {
@@ -124,6 +129,22 @@ public class ServiceManager {
 		u.setEins(""+ i.getId());
 		u.setZwei(""+ i.getInstanzTypname());
 		u.setDrei(i.getName());
+
+		return u;
+	}
+	
+	public List<UnserTestobjekt> getConfigItemTypGanz() {
+		List<Configitemtyp> item = confTypRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+
+	private UnserTestobjekt convertTestobjekt(Configitemtyp i) {
+		UnserTestobjekt u = new UnserTestobjekt();
+
+		u.setEins(""+ i.getName());
 
 		return u;
 	}
