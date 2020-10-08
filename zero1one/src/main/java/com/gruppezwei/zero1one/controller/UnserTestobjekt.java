@@ -1,4 +1,4 @@
-package bdgjmrsww.zero1one.controller;
+package com.gruppezwei.zero1one.controller;
 
 public class UnserTestobjekt {
 	

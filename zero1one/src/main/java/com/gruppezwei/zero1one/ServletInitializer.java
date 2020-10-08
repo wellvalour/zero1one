@@ -1,14 +1,8 @@
-package bdgjmrsww.zero1one;
+package com.gruppezwei.zero1one;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-/**
- * Für Start auf Server
- * Wird bei lokalem Start nicht benötigt
- * @author wellvalour
- *
- */
 public class ServletInitializer extends SpringBootServletInitializer {
 
 	@Override

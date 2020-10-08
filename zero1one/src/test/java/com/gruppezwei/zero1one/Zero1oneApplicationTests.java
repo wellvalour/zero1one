@@ -1,4 +1,4 @@
-package bdgjmrsww.zero1one;
+package com.gruppezwei.zero1one;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
