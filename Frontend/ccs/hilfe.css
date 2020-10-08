@@ -36,7 +36,7 @@
   }
   
   #sidebar{
-    background:#1E8C93;
+    background:#156268;
     grid-area:sidebar;
   }
   
@@ -62,7 +62,7 @@
   #sidebar ul li a:hover,
   #sidebar ul li a.aktiv{
     background: #fff;
-    color:  #1E8C93;
+    color:  #156268;
   }
   
   #sidebar ul{

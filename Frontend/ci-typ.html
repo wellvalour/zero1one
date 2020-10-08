@@ -36,13 +36,34 @@
             
         </div>
         <div id="content">
-            <label>Name</label>
-            <input type="text" name="name-ci-typ">
             
-            <textarea name="message" rows="5" cols="30">Eintrag wurde erfolgreich angelegt</textarea>
-            <button type="button">Anlegen</button>
-            <button type="button">Änderungen</button>
-            <button type="button">Löschen</button>
+            <p id="name">
+                <label id="ci-typ-name">CI-Typ Name</label>
+                <input type="text" name="name-ci-typ">
+            </p> 
+            <p>                         
+                <label>Attributvorgabe für CI-Records.</label>
+            </p>
+            <table id="attribute">
+                <tr>
+                    <!--ID in Datenbank hinzufügen, bitte Schleife einarbeiten zur Erstellung weiterer Attribute, immer eine leere Zeile-->
+                    <td>Name</td>
+                    <td>Attribut</td>
+                    <td>Wert</td>
+                    
+                </tr>
+                <tr>
+                    
+                    <td><input type="text" name="1" id="1"/></td>
+                    <td><input type="text" name="1" id="1"/></td>
+                    <td><input type="text" name="1" id="1"/></td>
+                </tr>
+            </table>
+            <div id="buttons">
+                <button type="button" id="anlegen">Anlegen</button>
+                <button type="button" id="änderungen">Ändern</button>
+                <button type="button" id="löschen">Löschen</button>
+            </div>
         </div>
         <div id="footer">footer</div>
     </div>
