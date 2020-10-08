@@ -6,8 +6,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConfigItemRepository extends JpaRepository<Mitarbeiter, Long> {
+public interface ConfigItemRepository extends JpaRepository<ConfigItem, Long> {
 	
-	List<Mitarbeiter> findByNachname(String nachname);
+	List<ConfigItem> findByName(String name);
 	
+	List<ConfigItem> findByConfigItemTypname(String configItemTypname);
 }

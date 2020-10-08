@@ -13,8 +13,8 @@ CREATE TABLE if not exists ConfigItemTyp(
 Name char(50),
 PRIMARY KEY(Name));
 
-CREATE TABLE if not exists Instanz(
-ID int(5),
+CREATE TABLE if not exists ConfigItem(
+ID int(5) NOT NULL,
 ConfigItemTypname char (50),
 Name char(50),
 PRIMARY KEY(ID));
@@ -25,7 +25,8 @@ ConfigItemTypname char (50),
 PRIMARY KEY(Name));
 
 CREATE TABLE if not exists Attribut(
-InstanzID int (5),
+ID int(5),
+ConfigItemID int (5),
 AttributtypID char(50),
 Wert char(50),
-PRIMARY KEY(InstanzID, AttributtypID));
+PRIMARY KEY(ID));
