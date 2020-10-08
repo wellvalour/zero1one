@@ -1,4 +1,4 @@
-package bdgjmrsww.zero1one.repository;
+package com.gruppezwei.zero1one.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

@@ -169,3 +169,14 @@ VALUES (8, 11, 'Arbeitsspeicher', '8GB');
 
 INSERT INTO Attribut (ID, ConfigItemID, AttributtypID, Wert)
 VALUES (9, 11, 'Prozessor', '3,2GHz 8Core');
+
+
+
+INSERT INTO Instanz (ID, InstanzTypname, Name)
+VALUES (16, 'Bildschirm', 'Lenovo L24-10');
+
+INSERT INTO Instanz (ID, InstanzTypname, Name)
+VALUES (17, 'Bildschirm', 'Lenovo L24-10');
+
+INSERT INTO instanz (ID, InstanzTypname, Name)
+VALUES (18, 'Bildschirm', 'Samsung C24F396FH');

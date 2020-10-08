@@ -19,6 +19,12 @@ ConfigItemTypname char (50),
 Name char(50),
 PRIMARY KEY(ID));
 
+CREATE TABLE if not exists Instanz(
+ID int(5) NOT NULL,
+Instanztypname char (50),
+Name char(50),
+PRIMARY KEY(ID));
+
 CREATE TABLE if not exists Attributtyp(
 Name char(50),
 ConfigItemTypname char (50),

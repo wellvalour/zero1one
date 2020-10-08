@@ -1,15 +1,15 @@
-package bdgjmrsww.zero1one.repository;
+package com.gruppezwei.zero1one.repository;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name="ConfigItem")
-public class ConfigItem {
+@Entity
+public class Instanz {
 	
 	@Id
 	private int id;
 	
-	private String configItemTypname;
+	private String instanztypname;
 	
 	private String name;
 
@@ -21,12 +21,12 @@ public class ConfigItem {
 		this.id = id;
 	}
 
-	public String getConfigItemTypname() {
-		return configItemTypname;
+	public String getInstanzTypname() {
+		return instanztypname;
 	}
 
-	public void setConfigItemTypname(String configItemTypname) {
-		this.configItemTypname = configItemTypname;
+	public void setInstanzTypname(String instanzTypname) {
+		this.instanztypname = instanzTypname;
 	}
 
 	public String getName() {
