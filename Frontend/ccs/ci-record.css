@@ -25,6 +25,7 @@
   #nav{
     background: black;
     grid-area: nav;
+    font-size: 30px;
   }
 
   
@@ -129,10 +130,12 @@ button:hover{
 
   #nav .fas{
     color: white;
-    margin-left: 98%;
-    margin-top:20px;
+    margin-left: 97%;
+    margin-top:25px;
     position: absolute;
+    
   }
+
 
   table{
     font-size:20px;
