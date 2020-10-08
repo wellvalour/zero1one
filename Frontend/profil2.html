@@ -41,7 +41,12 @@
                 <h3>Benutzername: </h3>
                 <!---Name aus Datenbank auslesen und anzeigen hinter ":"-->
                 <h3>Benutzername ändern</h3>
-                <label for="name" id="neuer-benutzername">Neuer Benutzername</label><input type="text" size="10" id="eingabe-name"/>
+                <table>
+                    <tr>
+                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
+                        <td><input type="text" size="10" id="eingabe-name"/></td>
+                    </tr>    
+                </table>
                 <p>
                     <input type="submit" value="Bestätigen">
                 </p>
@@ -51,15 +56,16 @@
                 <h3>Passwort ändern</h3>
                 <table>
                     <tr>
-                        <td><label for="name" id="altes-passwort">Altes Passwort</label><input type="password" size="10" maxlength="10" /></td>
+                        <td><label for="name" id="altes-passwort">Altes Passwort</label></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
                     </tr>
                     <tr>
-                        <td><label for="name" id="neuers-passwort">Neues Passwort</label>
-                            <input type="password" size="10" maxlength="10" /></td>
+                        <td><label for="name" id="neuers-passwort">Neues Passwort</label></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
                     </tr>
                     <tr>
                         <td><label for="name" id="neues-passwort">Neues Passwort wiederholen</label></td> 
-                          <td> <input type="password" size="10" maxlength="10" /></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
                     </tr>
                 </table>
                 
@@ -71,22 +77,39 @@
             <div class="benutzer-anlegen">
 
                 <h3>Benutzer anlegen</h3>
-                <div id="benutzername">Benutzername</div>
-                <input type="text" size="10" maxlength="10" />
-                <div id="password">Passwort</div>
-                <input type="password" size="10" maxlength="10" />
+                <table>
+                    <tr>
+                        <td> <lable for="name" id="benutzername">Benutzername</lable></td>
+                        <td><input type="text" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="password">Passwort</lable></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><lable for="name" id="passwort">Passwort wiederholen</lable></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>                    
+                    </tr>
+                </table>
+            
                 <input type="submit" value="Bestätigen">
             </div>
 
             <div class="benutzer-loeschen">
                 <h3>Benutzer löschen</h3>
-                <div id="benutzer">Benutzer wählen</div>
-                <input list="benutzer" type="text">
-                <datalist id="benutzer">
-                    <option value="benutzer1"/>
-                    <option value="benutzer2"/>
-                    <option value="benutzer3"/>
-                </datalist>
+                <table>
+                    <tr>
+                        <td><lable for="name" id="benutzer">Benutzer wählen</lable></td>
+                        <td><input list="benutzer" type="text">
+                            <datalist id="benutzer">
+                                <option value="benutzer1"/>
+                                <option value="benutzer2"/>
+                                <option value="benutzer3"/>
+                            </datalist>
+                        </td>
+                    </tr>
+                </table>
+                
                 <input type="submit" value="Bestätigen">
             </div>
 
