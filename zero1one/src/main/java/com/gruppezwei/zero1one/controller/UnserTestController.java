@@ -70,4 +70,13 @@ public class UnserTestController {
 
 		return "unserTestTemplate";
 	}
+	
+	@GetMapping(value = "/ciname", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getConfigItemByName(Model model) {
+		List<UnserTestobjekt> testobj = manager.getConfigItemByName("Maus");
+		
+		model.addAttribute("unserTestTemplate", testobj);
+
+		return "unserTestTemplate";
+	}
 }
