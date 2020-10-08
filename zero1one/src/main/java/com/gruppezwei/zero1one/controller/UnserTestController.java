@@ -61,4 +61,13 @@ public class UnserTestController {
 
 		return "unserTestTemplate";
 	}
+	
+	@GetMapping(value = "/confTyp", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getConfigItemTYpGanz(Model model) {
+		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
+		
+		model.addAttribute("unserTestTemplate", testobj);
+
+		return "unserTestTemplate";
+	}
 }
