@@ -29,12 +29,10 @@
   
   #logo{
     padding:10px;
-    width:300px;
   }
   
   #logo img{
-    height:60px; 
-    width: auto; 
+    height:60px;  
   }
   
   #sidebar{
@@ -83,60 +81,30 @@
   #content{
     background:white;
     grid-area:content;
-    padding: 40px;
-    
   }
   
   #sidebar ul  a i{
     margin-right: 16px;
   }
-
-  #ci-record-name{
-    margin-top:20px;
-    margin-bottom:20px;
-  }
- 
-
-label{
-    font-size:20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-right:10px;
-}
-
-
-button{
-    width: 120px;
-    font-size:20px;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-right:20px;
-    color:white;
-    background-color: black;
-    border-color:black;
-}
-
-#buttons{
-    margin-top:40px;
-}
-button:hover{
-    background-color: #1E8C93;
-    color: #fff;
-    border-color:#1E8C93;
-    
   
-  }
-  #nav .fas{
-    color: white;
-    margin-left: 98%;
-    margin-top:20px;
-    position: absolute;
-  }
-   
-   
-
-
   
   #footer{
     background:black;
       grid-area:footer;
       height:200px;
+  }
+
+
+  .passwort-aendern{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .benutzer-anlegen{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+
+  .benutzer-loeschen{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }

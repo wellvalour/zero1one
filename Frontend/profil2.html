@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   
+    <link rel="stylesheet" tyoe="test/css" href=".\ccs\profilstyle.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="nav">
+            <div id="logo">
+                <img src="logo-ohne-hintergrund.png">
+            </div>
+       
+        </div>               
+        
+        <div id="sidebar">
+            <div class="profil">
+                <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+                <div id="profil-name">Name</div>
+            </div>
+               
+            <ul>
+                <li><a href="dashboard.html" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="ci-typ.html" id="ci-types"><i class="fas fa-align-justify"></i>CI-Typ anlegen</a></li>
+                <li><a href="ci-record.html" id="ci-records"><i class="fas fa-align-justify"></i>CI-Record anlegen</a></li>
+                <br>
+                <li><a href="profil2.html" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="hilfe.html" id="hilfe" class="aktiv"><i class="fas fa-question"></i>Hilfe</a></li>
+        
+            </ul>
+
+            
+        </div>
+        <div id="content">
+            <div class="passwort-aendern">
+                <h3>Passwort ändern</h3>
+                <div id="altes-password">Altes Passwort</div>
+                <input type="password" size="10" maxlength="10" />
+                <div id="neues-password">Neues Passwort</div>
+                <input type="password" size="10" maxlength="10" />
+                <div id="neues-password">Neues Passwort wiederholen</div>
+                <input type="password" size="10" maxlength="10" />
+                <input type="submit" value="Bestätigen">
+            </div>
+
+            <div class="benutzer-anlegen">
+                <h3>Benutzer anlegen</h3>
+                <div id="benutzername">Benutzername</div>
+                <input type="text" size="10" maxlength="10" />
+                <div id="password">Passwort</div>
+                <input type="password" size="10" maxlength="10" />
+                <input type="submit" value="Bestätigen">
+            </div>
+
+            <div class="benutzer-loeschen">
+                <h3>Benutzer löschen</h3>
+                <div id="benutzer">Benutzer wählen</div>
+                <input list="benutzer" type="text">
+                <datalist id="benutzer">
+                    <option value="benutzer1"/>
+                    <option value="benutzer2"/>
+                    <option value="benutzer3"/>
+                </datalist>
+                <input type="submit" value="Bestätigen">
+            </div>
+
+
+        </div>
+        <div id="footer">footer</div>
+    </div>
+   
+</body>
+</html>
