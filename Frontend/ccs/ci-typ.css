@@ -25,6 +25,7 @@
   #nav{
     background: black;
     grid-area: nav;
+    font-size: 30px;
   }
   
   #logo{
@@ -132,6 +133,14 @@ table{
   margin-top:40px;
   
 }
+#nav .fas{
+  color: white;
+  margin-left: 97%;
+  margin-top:25px;
+  position: absolute;
+  
+}
+
 
 
   

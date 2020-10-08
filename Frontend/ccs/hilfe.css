@@ -25,6 +25,7 @@
   #nav{
     background: black;
     grid-area: nav;
+    font-size: 30px;
   }
   
   #logo{
@@ -86,7 +87,13 @@
   #sidebar ul  a i{
     margin-right: 16px;
   }
-  
+  #nav .fas{
+    color: white;
+    margin-left: 97%;
+    margin-top:25px;
+    position: absolute;
+    
+  }
   
   #footer{
     background:black;
