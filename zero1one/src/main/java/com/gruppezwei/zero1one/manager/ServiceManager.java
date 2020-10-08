@@ -12,7 +12,7 @@ import com.gruppezwei.zero1one.repository.AttributRepository;
 import com.gruppezwei.zero1one.repository.Attributtyp;
 import com.gruppezwei.zero1one.repository.AttributtypRepository;
 import com.gruppezwei.zero1one.repository.Configitemtyp;
-import com.gruppezwei.zero1one.repository.ConfigItemTypRepository;
+import com.gruppezwei.zero1one.repository.ConfigitemtypRepository;
 import com.gruppezwei.zero1one.repository.Configitem;
 import com.gruppezwei.zero1one.repository.ConfigitemRepository;
 import com.gruppezwei.zero1one.repository.Instanz;
@@ -40,7 +40,7 @@ public class ServiceManager {
 	AttributRepository attributRepo;
 	
 	@Autowired 
-	ConfigItemTypRepository confTypRepo;
+	ConfigitemtypRepository confTypRepo;
 	
 	
 	public List<UnserTestobjekt> getConfigItemGanz() {
@@ -148,4 +148,21 @@ public class ServiceManager {
 
 		return u;
 	}
+	
+	public List<UnserTestobjekt> getConfigItemByName(String name) {
+		List<Configitem> item = itemRepo.findByConfigitemtypname(name);
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt2).collect(Collectors.toList());
+
+		return testobj;
+	}
+
+	private UnserTestobjekt convertTestobjekt2(Configitem i) {
+		UnserTestobjekt u = new UnserTestobjekt();
+
+		u.setEins(""+ i.getName());
+
+		return u;
+	}
+	
 }
