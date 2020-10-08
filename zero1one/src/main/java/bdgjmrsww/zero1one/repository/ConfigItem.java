@@ -3,23 +3,24 @@ package bdgjmrsww.zero1one.repository;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-
-@Entity
-public class Attributtyp {
-
+@Entity(name="ConfigItem")
+public class ConfigItem {
+	
 	@Id
-	private String name;
+	private int id;
 	
 	private String configItemTypname;
 	
-	public String getName() {
-		return name;
+	private String name;
+
+	public int getId() {
+		return id;
 	}
-	
-	public void setName(String name) {
-		this.name = name;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	
+
 	public String getConfigItemTypname() {
 		return configItemTypname;
 	}
@@ -27,5 +28,14 @@ public class Attributtyp {
 	public void setConfigItemTypname(String configItemTypname) {
 		this.configItemTypname = configItemTypname;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 	
 }

@@ -11,7 +11,7 @@ public class User {
 	
 	private String passwort;
 	
-	private int BerechtigungsID;
+	private int berechtigungsID;
 	
 	public void setName(String name) {
 		this.name = name;
@@ -30,11 +30,11 @@ public class User {
 	}
 	
 	public void setBerechtigungsID(int berechtigungsID) {
-		BerechtigungsID = berechtigungsID;
+		this.berechtigungsID = berechtigungsID;
 	}
 	
 	public int getBerechtigungsID() {
-		return BerechtigungsID;
+		return berechtigungsID;
 	}
 	
 }
