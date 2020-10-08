@@ -36,18 +36,40 @@
             
         </div>
         <div id="content">
+
+            <div class="benutzername-aendern">
+                <h3>Benutzername: </h3>
+                <!---Name aus Datenbank auslesen und anzeigen hinter ":"-->
+                <h3>Benutzername ändern</h3>
+                <label for="name" id="neuer-benutzername">Neuer Benutzername</label><input type="text" size="10" id="eingabe-name"/>
+                <p>
+                    <input type="submit" value="Bestätigen">
+                </p>
+            </div>
+
             <div class="passwort-aendern">
                 <h3>Passwort ändern</h3>
-                <div id="altes-password">Altes Passwort</div>
-                <input type="password" size="10" maxlength="10" />
-                <div id="neues-password">Neues Passwort</div>
-                <input type="password" size="10" maxlength="10" />
-                <div id="neues-password">Neues Passwort wiederholen</div>
-                <input type="password" size="10" maxlength="10" />
+                <table>
+                    <tr>
+                        <td><label for="name" id="altes-passwort">Altes Passwort</label><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="neuers-passwort">Neues Passwort</label>
+                            <input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="neues-passwort">Neues Passwort wiederholen</label></td> 
+                          <td> <input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                </table>
+                
+                    
                 <input type="submit" value="Bestätigen">
             </div>
 
+            <!--Ab hier nur für Admins sichtbar, muss noch hinzugefügt werden-->
             <div class="benutzer-anlegen">
+
                 <h3>Benutzer anlegen</h3>
                 <div id="benutzername">Benutzername</div>
                 <input type="text" size="10" maxlength="10" />
