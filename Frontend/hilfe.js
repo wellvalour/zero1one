@@ -1,17 +1,9 @@
-function leitfaden() {
-    var txt;
-      txt = "Text wird angezeigt";
-    document.getElementById("leitfadentext").innerHTML = txt;
+  function toggle(id){
+    var e = document.getElementById(id);
+     
+    if (e.style.display == "none"){
+       e.style.display = "";
+    } else {
+       e.style.display = "none";
+    }
   }
-
-  function letsstart() {
-    var txt;
-    txt = "Text wird angezeigt";
-    document.getElementById("letsstarttext").innerHTML = txt;
-  }
-
-  function impressum() {
-    var txt;
-    txt = "Text wird angezeigt";
-    document.getElementById("impressumtext").innerHTML = txt;
-  } 
