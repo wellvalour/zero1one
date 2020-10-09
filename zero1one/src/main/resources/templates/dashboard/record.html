@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
    
-    <link rel="stylesheet" th:href="@{./ccs/dashboard}" tyoe="test/css" href="./ccs/dasboard.css">
+    <link rel="stylesheet" type="text/css" href="./../ccs/dasboard.css">
 </head>
 <body>
 
     <div class="container">
         <div id="nav">
             <div id="logo">
-                <img src="logo-ohne-hintergrund.png">
+                <img src="./../logo-ohne-hintergrund.png">
             </div>
        
         </div>               
@@ -37,11 +37,8 @@
             
         </div>
         <div id="content">
-<<<<<<< HEAD
+          
 
-
-            
-=======
             <div id="Suchfeld">
                     <input type="CI-Type bitte eingeben" id="suchfeld" name="suchfeld">
                     <button type="submit">CI Suchen</button>
@@ -53,6 +50,15 @@
         <!-- Muss über ein Script neue Tabellen erzeugt werden wenn CI-Record gedrückt wird muss dadurch eine liste erstellt werden , frage ist wie man dies umsetzt ??? -->
         <ul class="CI-Type">
         	<th:block  th:each="ciTypen : ${type}">
+				<li><a th:text="${ciTypen.eins}" th:href="@{/dashboard/{type}(type=${ciTypen.eins})}"></a></li>
+					<ul th:each="ciRecord : ${record}" class="CI-Record">
+                   		<li th:if="${ciTypen.eins == id}"><a th:text="${ciRecord.eins}"></a></li>
+                </ul>
+            </th:block> 
+        	
+        	
+        	
+        	<!--  <th:block  th:each="ciTypen : ${type}">
 				<li><a th:text="${ciTypen.eins}" th:href="@{/dashboard/{type}(type=${ciTypen.eins})}"></a></li>
             </th:block> 
 
@@ -69,10 +75,8 @@
 					</tr>
 				</th:block>
 			</tbody>
-		</table>
+		</table> -->
 
-
->>>>>>> a761d8990f2518104b4b1c46593a4cb8253bb7e9
         </div>
         <div id="footer">footer</div>
     </div>
