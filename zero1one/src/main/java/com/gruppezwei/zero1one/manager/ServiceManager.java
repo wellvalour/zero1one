@@ -42,7 +42,9 @@ public class ServiceManager {
 	@Autowired 
 	ConfigitemtypRepository confTypRepo;
 	
-	
+	/**
+	 * Gibt alle ConfigItems zurück
+	 */
 	public List<UnserTestobjekt> getConfigItemGanz() {
 		List<Configitem> item = itemRepo.findAll();
 
@@ -51,6 +53,77 @@ public class ServiceManager {
 		return testobj;
 	}
 
+	/**
+	 * Gibt ConfigItems mit gefragtem Configitemname zurück
+	 * @param name
+	 * @return
+	 */
+	public List<UnserTestobjekt> getConfigItemByName(String name) {
+		List<Configitem> item = itemRepo.findByConfigitemtypname(name);
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt2).collect(Collectors.toList());
+
+		return testobj;
+	}
+
+	/**
+	 * Gibt alle User zurück
+	 */
+	public List<UnserTestobjekt> getUserGanz() {
+		List<User> item = userRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+	
+	/**
+	 * Gibt alle Attributtypen zurück
+	 */
+	public List<UnserTestobjekt> getAttributTypGanz() {
+		List<Attributtyp> item = attTypRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+	
+	/**
+	 * Gibt alle Attribute zurück
+	 */
+	public List<UnserTestobjekt> getAttributGanz() {
+		List<Attribut> item = attributRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+	
+	/**
+	 * Gibt alle ConfigItemTypen zurück
+	 */
+	public List<UnserTestobjekt> getConfigItemTypGanz() {
+		List<Configitemtyp> item = confTypRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+	
+	/**
+	 * Gibt alle ConfigItems zurück
+	 */
+	public List<UnserTestobjekt> getInstanzGanz() {
+		List<Instanz> item = instanzRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+
+	//Mapping-Methoden
+	//Mappen Abfrageobjekt in unserTestobjekte
+	
 	private UnserTestobjekt convertTestobjekt(Configitem i) {
 		UnserTestobjekt u = new UnserTestobjekt();
 
@@ -61,14 +134,6 @@ public class ServiceManager {
 		return u;
 	}
 	
-	public List<UnserTestobjekt> getUserGanz() {
-		List<User> item = userRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
-	}
-
 	private UnserTestobjekt convertTestobjekt(User u) {
 		UnserTestobjekt t = new UnserTestobjekt();
 
@@ -78,14 +143,6 @@ public class ServiceManager {
 
 		return t;
 	}
-	
-	public List<UnserTestobjekt> getAttributTypGanz() {
-		List<Attributtyp> item = attTypRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
-	}
 
 	private UnserTestobjekt convertTestobjekt(Attributtyp u) {
 		UnserTestobjekt t = new UnserTestobjekt();
@@ -94,14 +151,6 @@ public class ServiceManager {
 		t.setZwei(u.getConfigItemTypname());
 
 		return t;
-	}
-	
-	public List<UnserTestobjekt> getAttributGanz() {
-		List<Attribut> item = attributRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
 	}
 
 	private UnserTestobjekt convertTestobjekt(Attribut u) {
@@ -115,14 +164,6 @@ public class ServiceManager {
 		return t;
 	}
 	
-	public List<UnserTestobjekt> getInstanzGanz() {
-		List<Instanz> item = instanzRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
-	}
-
 	private UnserTestobjekt convertTestobjekt(Instanz i) {
 		UnserTestobjekt u = new UnserTestobjekt();
 
@@ -131,14 +172,6 @@ public class ServiceManager {
 		u.setDrei(i.getName());
 
 		return u;
-	}
-	
-	public List<UnserTestobjekt> getConfigItemTypGanz() {
-		List<Configitemtyp> item = confTypRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
 	}
 
 	private UnserTestobjekt convertTestobjekt(Configitemtyp i) {
@@ -149,14 +182,6 @@ public class ServiceManager {
 		return u;
 	}
 	
-	public List<UnserTestobjekt> getConfigItemByName(String name) {
-		List<Configitem> item = itemRepo.findByConfigitemtypname(name);
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt2).collect(Collectors.toList());
-
-		return testobj;
-	}
-
 	private UnserTestobjekt convertTestobjekt2(Configitem i) {
 		UnserTestobjekt u = new UnserTestobjekt();
 
