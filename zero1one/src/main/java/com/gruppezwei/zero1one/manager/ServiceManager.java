@@ -4,24 +4,23 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Component;
 
 import com.gruppezwei.zero1one.controller.UnserTestobjekt;
 import com.gruppezwei.zero1one.repository.Attribut;
 import com.gruppezwei.zero1one.repository.AttributRepository;
 import com.gruppezwei.zero1one.repository.Attributtyp;
 import com.gruppezwei.zero1one.repository.AttributtypRepository;
-import com.gruppezwei.zero1one.repository.Configitemtyp;
-import com.gruppezwei.zero1one.repository.ConfigitemtypRepository;
 import com.gruppezwei.zero1one.repository.Configitem;
 import com.gruppezwei.zero1one.repository.ConfigitemRepository;
+import com.gruppezwei.zero1one.repository.Configitemtyp;
+import com.gruppezwei.zero1one.repository.ConfigitemtypRepository;
 import com.gruppezwei.zero1one.repository.Instanz;
 import com.gruppezwei.zero1one.repository.InstanzRepository;
 import com.gruppezwei.zero1one.repository.User;
 import com.gruppezwei.zero1one.repository.UserRepository;
 
-
-@Controller
+@Component
 public class ServiceManager {
 	
 	@Autowired
@@ -41,6 +40,36 @@ public class ServiceManager {
 	
 	@Autowired 
 	ConfigitemtypRepository confTypRepo;
+	
+	
+
+	/**
+	 * Gibt alle User zurück
+	 */
+	public List<UnserTestobjekt> getUserGanz() {
+		List<User> item = userRepo.findAll();
+
+		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
+
+		return testobj;
+	}
+	
+	/**
+	 * Gibt alle User zurück
+	 */
+	public void persistUserGanz(List<User> users) {
+		userRepo.saveAll(users);
+	}
+	
+	
+	/**
+	 * Gibt alle User zurück
+	 */
+	public void deleteUser(List<User> users) {
+		userRepo.delete(users.get(0));;
+	}
+	
+	
 	
 	/**
 	 * Gibt alle ConfigItems zurück
@@ -62,17 +91,6 @@ public class ServiceManager {
 		List<Configitem> item = itemRepo.findByConfigitemtypname(name);
 
 		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt2).collect(Collectors.toList());
-
-		return testobj;
-	}
-
-	/**
-	 * Gibt alle User zurück
-	 */
-	public List<UnserTestobjekt> getUserGanz() {
-		List<User> item = userRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
 
 		return testobj;
 	}
