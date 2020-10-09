@@ -1,5 +1,6 @@
 package com.gruppezwei.zero1one.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,18 +61,7 @@ public class HomeController {
 //		model.addAttribute("greeting", greeting);
 //		return "result";
 //	}
-	
-	@Autowired
-	ServiceManager manager;
 
-	@GetMapping(value = "/dashboard", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String getType(Model model) {
-		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-		
-		model.addAttribute("type", testobj);
-
-		return "dashboard";
-	}
 	
 //	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 //	public String getRecordsByType(@PathVariable("type") String type, Model model) {
@@ -96,6 +86,26 @@ public class HomeController {
 //		return "dashboard";
 //	}
 //
+	
+	@Autowired
+	ServiceManager manager;
+
+	@GetMapping(value = "/dashboard", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getType(Model model) {
+		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
+//		List<List<UnserTestobjekt>> liste = new ArrayList<List<UnserTestobjekt>>();
+//		for(UnserTestobjekt x :testobj) {
+//			liste.add(manager.getConfigItemByName(x.getEins()));
+			
+//		}
+		
+		model.addAttribute("type", testobj);
+//		model.addAttribute("record", liste);
+		
+		
+		return "dashboard";
+	}
+	
 	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecordsByName(@PathVariable String type, Model model) {
 		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
@@ -103,6 +113,7 @@ public class HomeController {
 		
 		model.addAttribute("type", testobj);
 		model.addAttribute("record", testobject);
+		model.addAttribute("id", type);
 
 		return "dashboard/record";
 	}
@@ -110,15 +121,15 @@ public class HomeController {
 //	Methode für Unterseiten	
 //	@GetMapping(value = "/dashboard/eins", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 //	public String gettype(Model model) {
-//		List<UnserTestobjekt> testobj = manager.getUserGanz();
-//		List<UnserTestobjekt> testobject = manager.getUserGanz();
+//		List<UnserTestobjekt> testobj = manager.getConfigItemGanz()();
+//		List<UnserTestobjekt> testobject = manager.getConfig();
 //		
 //		model.addAttribute("type", testobj);
 //		model.addAttribute("record", testobject);
 //
 //		return "dashboard";
 //	}
-	
+//	
 
 
 	
