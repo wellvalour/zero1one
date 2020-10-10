@@ -54,7 +54,44 @@
                 	</ul>
             </th:block> 
         </ul>
-
+	<div>
+        <th:block  th:each="ciAttribute : ${attribute}">
+				<li><a th:text="${ciAttribute.eins}" th:href="@{/dashboard/{type}(type=${ciTypen.eins})}"></a></li>
+            </th:block> 
+		
+		<table>
+			<thead>
+				<tr>
+					<th>EINS</th>
+					<th>ZWEI</th>
+					<th>DREI</th>
+					<th>VIER</th>
+					<th>FUENF</th>
+					<th>SECHS</th>
+					<th>SIEBEN</th>
+					<th>ACHT</th>
+					<th>NEUN</th>
+					<th>ZEHN</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="ciAttribute : ${attribute}">
+					<tr>
+						<td th:text="${ciAttribute.eins}" />
+						<td th:text="${ciAttribute.zwei}" />
+						<td th:text="${ciAttribute.drei}" />
+						<td th:text="${ciAttribute.vier}" />
+						<td th:text="${ciAttribute.fuenf}" />
+						<td th:text="${ciAttribute.sechs}" />
+						<td th:text="${ciAttribute.sieben}" />
+						<td th:text="${ciAttribute.acht}" />
+						<td th:text="${ciAttribute.neun}" />
+						<td th:text="${ciAttribute.zehn}" />
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
         </div>
         <div id="footer">footer</div>
     </div>

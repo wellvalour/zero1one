@@ -50,12 +50,8 @@
         <ul class="CI-Type">
         	<th:block  th:each="ciTypen : ${type}">
 				<li><a th:text="${ciTypen.eins}" th:href="@{/dashboard/{type}(type=${ciTypen.eins})}"></a></li>
-					<!--<ul th:each="ciRecord : ${record}}" class="CI-Record">
-                   		<li><a th:text="${ciRecord.eins}"></a></li>-->
-                </ul>
             </th:block> 
-               
-
+        </ul>
         </div>
         <div id="footer">footer</div>
     </div>
