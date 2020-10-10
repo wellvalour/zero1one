@@ -84,7 +84,7 @@ public class UnserTestController {
 	public String getConfigItemTYpGanz(Model model) {
 		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
 		
-		List<CiRecord> test = persman.getCiRecordByTyp("Maus");
+		List<CiRecord> test = persman.getCiRecordByTyp("Drucker");
 		
 		for(CiRecord x : test) {
 			System.out.println(x.getName());
