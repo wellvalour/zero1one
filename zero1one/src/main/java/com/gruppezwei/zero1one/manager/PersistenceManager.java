@@ -29,6 +29,10 @@ public class PersistenceManager {
 	AttributRepository attributRepo;
 	
 	
+//	
+//	Methoden zum Lesen aus der Datenbank
+//	
+	
 	/**
 	 * Liefert eine Liste aller CiTypen
 	 */
@@ -72,10 +76,27 @@ public class PersistenceManager {
 	}
 	
 	
+//	
+//	Methoden zum Speichern in der Datenbank
+//	
+	
+	
+	/**
+	 * Speichert einen ConfigItemType in der Datenbank ab
+	 */
+	public void persistConfigItemTypeGanz(List<CiType> ciType) {
+		confTypRepo.saveAll(ciType.stream().map(this::convertToConfigItemTyp).collect(Collectors.toList()));
+	}
 	
 	
 	
-	//Here starts the dark realm!
+	
+	
+//	Here starts the dark realm!
+//	You don't want to go down there!
+//	(ab hier kommen alle Mapping-Methoden)
+	
+	
 	
 	private CiType convertToCiType(Configitemtyp i) {
 		CiType o = new CiType();
@@ -110,5 +131,13 @@ public class PersistenceManager {
 	
 	private String convertToString(Configitem i) {
 		return i.getName();
+	}
+	
+	private Configitemtyp convertToConfigItemTyp(CiType t) {
+		Configitemtyp c = new Configitemtyp();
+		
+		c.setName(t.getName());
+		
+		return c;
 	}
 }
