@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gruppezwei.zero1one.manager.PersistenceManager;
 import com.gruppezwei.zero1one.manager.ServiceManager;
 
 @SpringBootApplication
@@ -63,57 +64,26 @@ public class HomeController {
 //	}
 
 	
-//	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-//	public String getRecordsByType(@PathVariable("type") String type, Model model) {
-//		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-//		List<UnserTestobjekt> testobject = manager.getConfigItemByName(type);
-//		
-//		model.addAttribute("type", testobj);
-//		model.addAttribute("record", testobject);
-//
-//		return "dashboard";
-//	}
-
-//	@RequestMapping(value = "/dashboard", method = {RequestMethod.GET, RequestMethod.POST},
-//					consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-//	public String getRecordsBy(@RequestParam String type, Model model) {
-//		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-//		List<UnserTestobjekt> testobject = manager.getConfigItemByName(type);
-//		
-//		model.addAttribute("type", testobj);
-//		model.addAttribute("record", testobject);
-//
-//		return "dashboard";
-//	}
-//
-	
 	@Autowired
-	ServiceManager manager;
+	PersistenceManager manager;
 
 	@GetMapping(value = "/dashboard", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getType(Model model) {
-		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-//		List<List<UnserTestobjekt>> liste = new ArrayList<List<UnserTestobjekt>>();
-//		for(UnserTestobjekt x :testobj) {
-//			liste.add(manager.getConfigItemByName(x.getEins()));
-			
-//		}
+		List<CiType> TypObj = manager.getCiTypeAll();
+
+		model.addAttribute("type", TypObj);
 		
-		model.addAttribute("type", testobj);
-//		model.addAttribute("record", liste);
-		
-		
-		return "dashboard";
+		return "dashboard/record";
 	}
 	
 	
 	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecordsByName(@PathVariable String type, Model model) {
-		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-		List<UnserTestobjekt> testobject = manager.getConfigItemByName(type);
+		List<CiType> TypObj = manager.getCiTypeAll();
+		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
 		
-		model.addAttribute("type", testobj);
-		model.addAttribute("record", testobject);
+		model.addAttribute("type", TypObj);
+		model.addAttribute("record", RecObj);
 		model.addAttribute("id", type);
 
 		return "dashboard/record";
@@ -121,32 +91,15 @@ public class HomeController {
 	
 	@GetMapping(value = "/dashboard/{type}/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributesByName(@PathVariable String type, @PathVariable String record, Model model) {
-		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
-		List<UnserTestobjekt> testobject = manager.getConfigItemByName(type);
-		List<UnserTestobjekt> testobject1 = manager.getConfigItemByName(record);
+		List<CiType> TypObj = manager.getCiTypeAll();
+		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
+		List<Attribute> AttObj = manager.getAttributToRecord(Integer.parseInt(record));
 		
-		model.addAttribute("type", testobj);
-		model.addAttribute("record", testobject);
-		model.addAttribute("attribute", testobject1);
+		model.addAttribute("type", TypObj);
+		model.addAttribute("record", RecObj);
+		model.addAttribute("id", type);
+		model.addAttribute("attribute", AttObj);
 
 		return "dashboard/attribute";
 	}
-//	
-//	Methode für Unterseiten	
-//	@GetMapping(value = "/dashboard/eins", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-//	public String gettype(Model model) {
-//		List<UnserTestobjekt> testobj = manager.getConfigItemGanz()();
-//		List<UnserTestobjekt> testobject = manager.getConfig();
-//		
-//		model.addAttribute("type", testobj);
-//		model.addAttribute("record", testobject);
-//
-//		return "dashboard";
-//	}
-//	
-
-
-	
-	
-	
 }
