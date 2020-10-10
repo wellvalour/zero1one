@@ -29,15 +29,23 @@ public class PersistenceManager {
 	AttributRepository attributRepo;
 	
 	
-	
+	/**
+	 * Liefert eine Liste aller CiTypen
+	 */
 	public List<CiType> getCiTypeAll() {
 		return confTypRepo.findAll().stream().map(this::convertToCiType).collect(Collectors.toList());
 	}
 	
+	/**
+	 * Liefert eine Liste aller CiRecords
+	 */
 	public List<CiRecord> getCiRecordAll(){
 		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 	
+	/**
+	 * Liefert eine Liste aller Namen von CiTypen und CiRecords
+	 */
 	public List<String> getSuchbegriffeAll(){
 		List<String> list = confTypRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
 		List<String> list2 = confItemRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
@@ -47,11 +55,18 @@ public class PersistenceManager {
 		return list;
 	}
 	
+	/**
+	 * Liefert alle CiRecords eines bestimmten CiTypes
+	 * @param type
+	 */
 	public List<CiRecord> getCiRecordByTyp(String type){
 		return confItemRepo.findByConfigitemtypname(type).stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 	
-	
+	/**
+	 * Liefert alle Attribute zu einem bestimmten CiRecord
+	 * @param record ist die Id des CiRecords
+	 */
 	public List<Attribute> getAttributToRecord(int record) {
 		return attributRepo.findByConfigitemid(record).stream().map(this::convertToAttribute).collect(Collectors.toList());
 	}
