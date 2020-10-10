@@ -106,6 +106,7 @@ public class HomeController {
 		return "dashboard";
 	}
 	
+	
 	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecordsByName(@PathVariable String type, Model model) {
 		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
@@ -116,6 +117,19 @@ public class HomeController {
 		model.addAttribute("id", type);
 
 		return "dashboard/record";
+	}
+	
+	@GetMapping(value = "/dashboard/{type}/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getAttributesByName(@PathVariable String type, @PathVariable String record, Model model) {
+		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
+		List<UnserTestobjekt> testobject = manager.getConfigItemByName(type);
+		List<UnserTestobjekt> testobject1 = manager.getConfigItemByName(record);
+		
+		model.addAttribute("type", testobj);
+		model.addAttribute("record", testobject);
+		model.addAttribute("attribute", testobject1);
+
+		return "dashboard/attribute";
 	}
 //	
 //	Methode für Unterseiten	
