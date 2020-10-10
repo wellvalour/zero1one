@@ -9,17 +9,17 @@ public class Attribut {
 	@Id
 	private int id;
 	
-	private String configitemid;
+	private int configitemid;
 	
 	private String attributtypid;
 	
 	private String wert;
 	
-	public String getConfigItemID() {
+	public int getConfigItemID() {
 		return configitemid;
 	}
 	
-	public void setConfigItemID(String configItemID) {
+	public void setConfigItemID(int configItemID) {
 		this.configitemid = configItemID;
 	}
 	

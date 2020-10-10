@@ -8,5 +8,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface AttributRepository extends JpaRepository<Attribut, Long> {
 
-	public List<Attribut> findByConfigitemid(String configitemid); 
+	public List<Attribut> findByConfigitemid(int configitemid); 
 }

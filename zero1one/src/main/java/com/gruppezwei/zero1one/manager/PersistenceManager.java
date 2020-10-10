@@ -43,7 +43,7 @@ public class PersistenceManager {
 	}
 	
 	
-	public List<Attribute> getAttributToRecord(String record) {
+	public List<Attribute> getAttributToRecord(int record) {
 		return attributRepo.findByConfigitemid(record).stream().map(this::convertToAttribute).collect(Collectors.toList());
 	}
 	
@@ -64,8 +64,9 @@ public class PersistenceManager {
 	private CiRecord convertToCiRecord(Configitem i) {
 		CiRecord o = new CiRecord();
 
+		o.setId(i.getId());
 		o.setName(i.getName());
-		o.setAttribute(getAttributToRecord(""+i.getId()));
+		o.setAttribute(getAttributToRecord(i.getId()));
 
 		return o;
 	}
