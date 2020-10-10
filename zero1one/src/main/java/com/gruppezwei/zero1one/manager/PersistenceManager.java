@@ -38,6 +38,15 @@ public class PersistenceManager {
 		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 	
+	public List<String> getSuchbegriffeAll(){
+		List<String> list = confTypRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
+		List<String> list2 = confItemRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
+		
+		list.addAll(list2);
+		
+		return list;
+	}
+	
 	public List<CiRecord> getCiRecordByTyp(String type){
 		return confItemRepo.findByConfigitemtypname(type).stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
@@ -78,5 +87,13 @@ public class PersistenceManager {
 		o.setWert(i.getWert());
 
 		return o;
+	}
+	
+	private String convertToString(Configitemtyp i) {
+		return i.getName();
+	}
+	
+	private String convertToString(Configitem i) {
+		return i.getName();
 	}
 }
