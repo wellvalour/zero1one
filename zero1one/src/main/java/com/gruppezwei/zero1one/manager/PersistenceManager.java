@@ -29,6 +29,7 @@ public class PersistenceManager {
 	AttributRepository attributRepo;
 	
 	
+	
 	public List<CiType> getCiTypeAll() {
 		return confTypRepo.findAll().stream().map(this::convertToCiType).collect(Collectors.toList());
 	}
@@ -36,6 +37,11 @@ public class PersistenceManager {
 	public List<CiRecord> getCiRecordAll(){
 		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
+	
+	public List<CiRecord> getCiRecordByTyp(String type){
+		return confItemRepo.findByConfigitemtypname(type).stream().map(this::convertToCiRecord).collect(Collectors.toList());
+	}
+	
 	
 	public List<Attribute> getAttributToRecord(String record) {
 		return attributRepo.findAll().stream().map(this::convertToAttribute).collect(Collectors.toList());
