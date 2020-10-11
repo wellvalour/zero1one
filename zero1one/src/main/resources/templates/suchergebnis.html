@@ -46,16 +46,17 @@
 		            </form>
              	</div>
             </div>
-
-        <!-- Muss über ein Script neue Tabellen erzeugt werden wenn CI-Record gedrückt wird muss dadurch eine liste erstellt werden , frage ist wie man dies umsetzt ??? -->
+            
+       <!-- Muss über ein Script neue Tabellen erzeugt werden wenn CI-Record gedrückt wird muss dadurch eine liste erstellt werden , frage ist wie man dies umsetzt ??? -->
         <ul class="CI-Type">
         	<th:block  th:each="ciTypen : ${type}">
 				<li><a th:text="${ciTypen.name}" th:href="@{/dashboard/{type}(type=${ciTypen.name})}"></a></li>
 					<ul th:each="ciRecord : ${record}" class="CI-Record">
-                   		<li th:if="${ciTypen.name == id}"><a th:text="${ciRecord.id +' '+ ciRecord.name}" th:href="@{/dashboard/{type}/{record}/(type=${ciTypen.name}, record=${ciRecord.id})}"></a></li>
+                   		<li th:if="${ciTypen.name == id}"><a th:text="${ciRecord.name}" th:href="@{/dashboard/{type}/{record}/(type=${ciTypen.name}, record=${ciRecord.id})}"></a></li>
                 	</ul>
             </th:block> 
         </ul>
+       	<p th:each="ausgabe : ${ausgabe}" th:text="${ausgabe}"></p>
 
         </div>
         <div id="footer">footer</div>

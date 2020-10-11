@@ -70,10 +70,26 @@ public class HomeController {
 	@GetMapping(value = "/dashboard", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getType(Model model) {
 		List<CiType> TypObj = manager.getCiTypeAll();
+		List<String> SeaObj = manager.getSuchbegriffeAll();
 
 		model.addAttribute("type", TypObj);
+		model.addAttribute("search", SeaObj);
+		model.addAttribute("suche", new CiSearch());
 		
 		return "dashboard/record";
+	}
+	
+	@PostMapping("/dashboard")
+	public String searchSubmit(@ModelAttribute CiSearch suchobjekt, Model model) {		
+		List<CiType> TypObj = manager.getCiTypeAll();
+		List<String> SeaObj = manager.getSuchbegriffeAll();
+
+		model.addAttribute("type", TypObj);
+		model.addAttribute("search", SeaObj);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("ausgabe", suchobjekt.getSuchbegriff());
+		
+		return "suchergebnis";
 	}
 	
 	
@@ -81,10 +97,14 @@ public class HomeController {
 	public String getRecordsByName(@PathVariable String type, Model model) {
 		List<CiType> TypObj = manager.getCiTypeAll();
 		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
+		List<String> SeaObj = manager.getSuchbegriffeAll();
+
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObj);
 		model.addAttribute("id", type);
+		model.addAttribute("search", SeaObj);
+		model.addAttribute("suche", new CiSearch());
 
 		return "dashboard/record";
 	}
@@ -94,11 +114,14 @@ public class HomeController {
 		List<CiType> TypObj = manager.getCiTypeAll();
 		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
 		List<Attribute> AttObj = manager.getAttributToRecord(Integer.parseInt(record));
+		List<String> SeaObj = manager.getSuchbegriffeAll();
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObj);
 		model.addAttribute("id", type);
 		model.addAttribute("attribute", AttObj);
+		model.addAttribute("search", SeaObj);
+		model.addAttribute("suche", new CiSearch());
 
 		return "dashboard/attribute";
 	}

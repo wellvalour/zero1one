@@ -35,9 +35,16 @@
         </div>
         <div id="content">
 
-            <div id="Suchfeld">
-                    <input type="CI-Type bitte eingeben" id="suchfeld" name="suchfeld">
-                    <button type="submit">CI Suchen</button>
+               <div id="Suchfeld">
+				<div id="dropdown">
+					<form th:action="@{/dashboard}" th:object="${suche}" method="post">
+						<input list="ci-typ-liste" type="text" placeholder="Suchbegriff eingeben" th:field="*{suchbegriff}">
+							<datalist  id="ci-typ-liste">
+								<option th:each="search : ${search}" th:value="${search.toString()}" th:text="${search.toString()}"/>
+		                    </datalist>
+		                 <button type="submit">CI Suchen</button>
+		            </form>
+             	</div>
             </div>
 
         <!-- Muss über ein Script neue Tabellen erzeugt werden wenn CI-Record gedrückt wird muss dadurch eine liste erstellt werden , frage ist wie man dies umsetzt ??? -->
