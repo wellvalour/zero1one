@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   
+    <link rel="stylesheet" tyoe="test/css" href=".\ccs\profilstyle.css">
+</head>
+<body>
+
+    <div class="container">
+        <div id="nav">
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+            <div id="logo">
+                <img src="logo-ohne-hintergrund.png">
+            </div>
+       
+        </div>               
+        
+        <div id="sidebar">
+            <div class="profil">
+                <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+                <div id="profil-name">Name</div>
+            </div>
+               
+            <ul>
+                <li><a href="dashboard.html" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="ci-typ.html" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ anlegen</a></li>
+                <li><a href="ci-record.html" id="ci-records"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
+                
+                <br>
+                <li><a href="profil2.html" id="profil2" class="aktiv"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="hilfe.html" id="hilfe" ><i class="fas fa-question"></i>Hilfe</a></li>
+        
+            </ul>
+
+            
+        </div>
+        <div id="content">
+
+            <div class="benutzername-aendern">
+                <h3>Benutzername: </h3>
+                <!---Name aus Datenbank auslesen und anzeigen hinter ":"-->
+                <h3>Benutzername ändern</h3>
+                <table>
+                    <tr>
+                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
+                        <td><input type="text" size="10" id="eingabe-name"/></td>
+                    </tr>    
+                </table>
+                <p>
+                    <input type="submit" id="button" value="Bestätigen">
+                </p>
+            </div>
+
+            <div class="passwort-aendern">
+                <h3>Passwort ändern</h3>
+                <table>
+                    <tr>
+                        <td><label for="name" id="altes-passwort">Altes Passwort</label></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="neuers-passwort">Neues Passwort</label></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="neues-passwort">Neues Passwort wiederholen</label></td> 
+                        <td><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                </table>
+                
+                    
+                <input type="submit" id="button" value="Bestätigen">
+            </div>
+
+            <!--Ab hier nur für Admins sichtbar, muss noch hinzugefügt werden-->
+            <div class="benutzer-anlegen">
+
+                <h3>Benutzer anlegen</h3>
+                <table>
+                    <tr>
+                        <td> <lable for="name" id="benutzername">Benutzername</lable></td>
+                        <td><input type="text" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="name" id="password">Passwort</lable></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>
+                    </tr>
+                    <tr>
+                        <td><lable for="name" id="passwort">Passwort wiederholen</lable></td>
+                        <td><input type="password" size="10" maxlength="10" /></td>                    
+                    </tr>
+                </table>
+            
+                <input type="submit" id="button" value="Bestätigen">
+            </div>
+
+            <div class="benutzer-loeschen">
+                <h3>Benutzer löschen</h3>
+                <table>
+                    <tr>
+                        <td><lable for="name" id="benutzer">Benutzer wählen</lable></td>
+                        <td><input list="benutzer" type="text">
+                            <datalist id="benutzer">
+                                <option value="benutzer1"/>
+                                <option value="benutzer2"/>
+                                <option value="benutzer3"/>
+                            </datalist>
+                        </td>
+                    </tr>
+                </table>
+                
+                <input type="submit" id="button" value="Bestätigen">
+            </div>
+
+
+        </div>
+        <div id="footer">footer</div>
+    </div>
+   
+</body>
+</html>

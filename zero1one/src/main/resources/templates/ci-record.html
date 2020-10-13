@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="de" xmlns:th="http://www.thymleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+   
+    <link rel="stylesheet" type="text/css" th:href="@{/ccs/ci-record.css}">
+</head>
+<body>
+
+    <div class="container">
+        
+        <div id="nav">
+            
+            <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+            <div id="logo">
+                <img src="logo-ohne-hintergrund.png">
+            </div>
+            
+        </div>               
+        
+        <div id="sidebar">
+            <div class="profil">
+                <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
+                <div id="profil-name">Name</div>
+            </div>
+               
+            <ul>
+                <li><a href="dashboard" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="ci-typ" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ anlegen</a></li>
+                <li><a href="ci-record" id="ci-records" class="aktiv"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
+                <li><a href="profil2" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
+    
+            </ul>
+
+            
+        </div>
+        <div id="content">
+            <div id="dropdown">
+                <input list="ci-typ-liste" type="text" placeholder="CI-Typ">
+                    <datalist id="ci-typ-liste">
+                        <option value="CI-Typ 1"/>
+                        <option value="CI-Typ 2"/>
+                        <option value="CI-Typ 3"/>
+                    </datalist>
+                </input>
+             </div>
+
+             <div id="ci-record-name">
+                    <p>
+                        <label for="name" id=ci-record-name>CI-Record Name</label><input type="text" name="name" id="eingabe-name"/>
+                    </p>
+            </div>                   
+                     
+                        <table id="attribute">
+                            <tr>
+                                <!--ID aus Datenbank auslesen, ID noch in Datenbank hinzufügen, zudem Schleife einarbeiten-->
+                                <td>ID</td>        
+                                <td>Attribut</td>
+                                <td>Wert</td>
+                                
+                            </tr>
+                            <tr>
+                                <td><input type="text" name="1" id="1"/></td>
+                                <td><input type="text" name="1" id="1"/></td>
+                                <td><input type="text" name="1" id="1"/></td>
+                            </tr>
+                        </table>
+                                        
+                     <div id="buttons">
+                        <button type="button" id="anlegen">Anlegen</button>                       
+                        <button type="button" id="ändern">Ändern</button>
+                        <button type="button" id="löschen">Löschen</button>
+                        
+                    </div>
+             </div>
+            
+             
+
+        </div>
+        
+
+
+        <div id="footer"></div>
+    </div>
+   
+</body>
+</html>
