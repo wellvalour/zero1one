@@ -8,6 +8,8 @@ public class CiRecord {
 	
 	private String name;
 	
+	private String ciTyp;
+	
 	private List<Attribute> attribute;
 
 	public String getName() {
@@ -32,6 +34,14 @@ public class CiRecord {
 	
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public String getCiTyp() {
+		return ciTyp;
+	}
+
+	public void setCiTyp(String ciTyp) {
+		this.ciTyp = ciTyp;
 	}
 	
 	

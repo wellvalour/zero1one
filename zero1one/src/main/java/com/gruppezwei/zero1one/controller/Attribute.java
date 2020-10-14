@@ -5,8 +5,18 @@ public class Attribute {
 	private String attributtyp;
 
 	private String wert;
+	
+	private int ciRecordId;
 
 	
+	public int getCiRecordId() {
+		return ciRecordId;
+	}
+
+	public void setCiRecordId(int ciRecordId) {
+		this.ciRecordId = ciRecordId;
+	}
+
 	public String getWert() {
 		return wert;
 	}
