@@ -85,6 +85,16 @@
                         <td><input type="text" size="10" maxlength="10" /></td>
                     </tr>
                     <tr>
+                        <td><lable for="name" id="benutzername">Berechtigung</lable> </td>
+                        <td> <input list="berechtigung-liste" type="text" placeholder="Berechtigung">
+                        <datalist id="berechtigung-liste">
+                            <option value="User"/>
+                            <option value="Admin"/>
+                        </datalist>
+                        </input>
+                        </td>
+                    </tr>
+                    <tr>
                         <td><label for="name" id="password">Passwort</lable></td>
                         <td><input type="password" size="10" maxlength="10" /></td>
                     </tr>
@@ -92,6 +102,7 @@
                         <td><lable for="name" id="passwort">Passwort wiederholen</lable></td>
                         <td><input type="password" size="10" maxlength="10" /></td>                    
                     </tr>
+
                 </table>
             
                 <input type="submit" id="button" value="Bestätigen">
