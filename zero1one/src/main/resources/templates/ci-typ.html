@@ -30,36 +30,31 @@
                 <li><a href="ci-record" id="ci-records"><i class="fas fa-window-restore"></i></i>CI-Record anlegen</a></li>
                 <li><a href="profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
                 <li><a href="hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
-    
             </ul>
 
             
         </div>
         <div id="content">
-            
+           <form th:action="@{/ci-typ}" th:object="${TypObj}" method="post"> 
             <p id="name">
                 <label id="ci-typ-name">CI-Typ Name</label>
-                <input type="text" name="name-ci-typ">
-            </p> 
-            <p>                         
+                <input type="text" name="name-ci-typ" th:field="*{name}">
+  				<p>                         
                 <label>Attributvorgabe für CI-Records.</label>
-            </p>
-            <table id="attribute">
-                <tr>
-                    <!--ID in Datenbank hinzufügen, bitte Schleife einarbeiten zur Erstellung weiterer Attribute, immer eine leere Zeile-->
-                    
-                    <td>Attribut</td>
-                    
-                </tr>
-                <tr>
-                    <td><input type="text" name="1" id="1"/></td>
-                </tr>
-            </table>
+            	</p>
+            	<table id="attribute" th:each="typ,i: ${TypObj.typen}">
+            		<tr>
+	                    <td>Attribut</td>
+                    	<td><input type="text" name="1" id="1" th:field="*{typen[__${i.index}__].name}"/></td>
+                	</tr>
+				</table>
+          
             <div id="buttons">
-                <button type="button" id="anlegen">Anlegen</button>
-                <button type="button" id="änderungen">Ändern</button>
-                <button type="button" id="löschen">Löschen</button>
+                <button type="submit" id="anlegen">Anlegen</button>
+               <!--  <button type="button" id="änderungen">Ändern</button>
+                <button type="button" id="löschen">Löschen</button>  -->
             </div>
+          </form>
         </div>
         <div id="footer">footer</div>
     </div>
