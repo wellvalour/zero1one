@@ -45,6 +45,15 @@ public class PersistenceManager {
 	public List<CiType> getCiTypeAll() {
 		return confTypRepo.findAll().stream().map(this::convertToCiType).collect(Collectors.toList());
 	}
+	
+	/**
+	 * Liefert eine Liste aller CiTypen inklusive der Attributtypen
+	 */
+	public List<CiType> getCiTypeMitAttributtypen() {
+		return confTypRepo.findAll().stream().map(this::convertToCiTypeMitAttributtypen).collect(Collectors.toList());
+	}
+	
+	
 
 	/**
 	 * Liefert eine Liste aller CiRecords
@@ -182,6 +191,15 @@ public class PersistenceManager {
 		CiType o = new CiType();
 
 		o.setName(i.getName());
+
+		return o;
+	}
+	
+	private CiType convertToCiTypeMitAttributtypen(Configitemtyp i) {
+		CiType o = new CiType();
+
+		o.setName(i.getName());
+		o.setTypen(getAttributTypNachCiType(o.getName()));
 
 		return o;
 	}
