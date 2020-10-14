@@ -11,4 +11,6 @@ public interface ConfigitemRepository extends JpaRepository<Configitem, Long> {
 	List<Configitem> findByName(String name);
 	
 	List<Configitem> findByConfigitemtypname(String configitemtypname);
+	
+	List<Configitem>  findTopByOrderByIdDesc();
 }
