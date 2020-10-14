@@ -128,7 +128,7 @@ public class PersistenceManager {
 	}
 
 	/**
-	 * Speichert einen ConfigItemType in der Datenbank mit allen Attributen ab
+	 * Speichert einen ConfigItemType in der Datenbank mit allen Attributtypen ab
 	 */
 	public void persistConfigItemTypeMitAttributen(List<CiType> ciType) {
 		confTypRepo
@@ -136,10 +136,18 @@ public class PersistenceManager {
 	}
 
 	/**
-	 * Speichert einen ConfigItem in der Datenbank ab
+	 * Speichert einen ConfigItem in der Datenbank ab (Wird vermutlich nie
+	 * benötigt)
 	 */
 	public void persistConfigItem(List<CiRecord> ciRecord) {
 		confItemRepo.saveAll(ciRecord.stream().map(this::convertToConfigItem).collect(Collectors.toList()));
+	}
+	
+	/**
+	 * Speichert einen ConfigItem mit allen Attributen in der Datenbank ab 
+	 */
+	public void persistConfigItemMitAttributen(List<CiRecord> ciRecord) {
+		confItemRepo.saveAll(ciRecord.stream().map(this::convertToConfigItemMitAttributen).collect(Collectors.toList()));
 	}
 
 	/**
@@ -263,4 +271,21 @@ public class PersistenceManager {
 
 		return c;
 	}
+	
+	private Configitem convertToConfigItemMitAttributen(CiRecord t) {
+		Configitem c = new Configitem();
+
+		c.setName(t.getName());
+		c.setConfigItemTypname(t.getCiTyp());
+		c.setId(t.getId());
+
+		for (Attribute at : t.getAttribute()) {
+			List<Attribute> atl = new ArrayList<Attribute>();
+			atl.add(at);
+			persistAttribut(atl);
+		}
+		
+		return c;
+	}
+	
 }
