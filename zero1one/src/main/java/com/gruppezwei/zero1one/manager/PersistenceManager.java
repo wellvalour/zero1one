@@ -131,7 +131,8 @@ public class PersistenceManager {
 	 * Speichert einen ConfigItemType in der Datenbank mit allen Attributen ab
 	 */
 	public void persistConfigItemTypeMitAttributen(List<CiType> ciType) {
-		confTypRepo.saveAll(ciType.stream().map(this::convertToConfigItemTypMitAttributen).collect(Collectors.toList()));
+		confTypRepo
+				.saveAll(ciType.stream().map(this::convertToConfigItemTypMitAttributen).collect(Collectors.toList()));
 	}
 
 	/**
@@ -144,8 +145,8 @@ public class PersistenceManager {
 	/**
 	 * Speichert einen Attribut in der Datenbank ab
 	 */
-	public void persistAttribut(List<CiRecord> ciRecord) {
-		confItemRepo.saveAll(ciRecord.stream().map(this::convertToConfigItem).collect(Collectors.toList()));
+	public void persistAttribut(List<Attribute> ciRecord) {
+		attributRepo.saveAll(ciRecord.stream().map(this::convertToAttribut).collect(Collectors.toList()));
 	}
 
 	/**
@@ -155,6 +156,16 @@ public class PersistenceManager {
 		attTypRepo.saveAll(typen.stream().map(this::convertToAttributtyp).collect(Collectors.toList()));
 	}
 
+	
+	
+	
+	
+	
+	
+	
+//	
+//	
+//	
 //	Here starts the dark realm!
 //	You don't want to go down there!
 //	(ab hier kommen alle Mapping-Methoden)
@@ -239,6 +250,16 @@ public class PersistenceManager {
 
 		c.setName(a.getName());
 		c.setConfigItemTypname(a.getConfigItemTyp());
+
+		return c;
+	}
+
+	private Attribut convertToAttribut(Attribute a) {
+		Attribut c = new Attribut();
+
+		c.setAttributtypID(a.getAttributtyp());
+		c.setConfigItemID(a.getCiRecordId());
+		c.setWert(a.getWert());
 
 		return c;
 	}
