@@ -47,14 +47,19 @@ public class PersistenceManager {
 	}
 	
 	/**
+	 * Liefert eine Liste aller CiTypen als Strings
+	 */
+	public List<String> getCiTypeAsString() {
+		return confTypRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
+	}
+	
+	/**
 	 * Liefert eine Liste aller CiTypen inklusive der Attributtypen
 	 */
 	public List<CiType> getCiTypeMitAttributtypen() {
 		return confTypRepo.findAll().stream().map(this::convertToCiTypeMitAttributtypen).collect(Collectors.toList());
 	}
 	
-	
-
 	/**
 	 * Liefert eine Liste aller CiRecords
 	 */
