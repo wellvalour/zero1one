@@ -22,19 +22,22 @@ import com.gruppezwei.zero1one.repository.Attributtyp;
  */
 
 
+
 @SpringBootApplication
 @Controller
 public class anlegenController {
 
 	@Autowired
 	PersistenceManager manager;
+	String Zwischenspeicher = new String();
+	
 	
 	@GetMapping(value = "/ci-typ", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String setType(Model model) {
 
 		CiType neu = new CiType();
 		neu.setTypen(new ArrayList<Attributtypen>());
-		for(int i=1; i<=3; i++){
+		for(int i=0; i<3; i++){
 			neu.getTypen().add(new Attributtypen());
 		}
 
@@ -54,7 +57,7 @@ public class anlegenController {
 		
 		CiType neu = new CiType();
 		neu.setTypen(new ArrayList<Attributtypen>());
-		for(int i=1; i<=3; i++){
+		for(int i=0; i<3; i++){
 			neu.getTypen().add(new Attributtypen());
 		}
 
@@ -64,8 +67,60 @@ public class anlegenController {
 	}
 	
 	@GetMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String setRecord(Model model) {
+	public String getRecord(Model model) {
 
+		List<String> TypObj = manager.getCiTypeAsString();
+
+		model.addAttribute("search", TypObj);
+		model.addAttribute("suche", new CiSearch());
+		
+		return "ci-record";
+	}
+	
+	@PostMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
+
+		Zwischenspeicher=suche.getSuchbegriff();
+		List<Attributtypen> ListeAttributtypen = manager.getAttributTypNachCiType(suche.getSuchbegriff());
+		List<String> TypObj = manager.getCiTypeAsString();
+		
+		int laenge = ListeAttributtypen.size();
+		ArrayList<Attribute> ListeAttribute = new ArrayList<Attribute>();
+		for(int i=0; i<laenge; i++){
+			ListeAttribute.add(new Attribute());
+		}
+		
+		Hilfsobjekt hilfe = new Hilfsobjekt();
+		hilfe.setTypen(ListeAttributtypen);
+		hilfe.setType(ListeAttribute);
+		hilfe.setCiType(suche.getSuchbegriff());
+		
+		model.addAttribute("search", TypObj);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("AttObj", hilfe);
+		
+		return "ci-record1";
+	}
+	
+	
+	
+	@PostMapping(value = "/ci-record-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String getAttributeType(@ModelAttribute Hilfsobjekt hilfsObj, Model model) {
+		
+		CiRecord neuerRecord = new CiRecord();
+		neuerRecord.setAttribute(hilfsObj.getType());
+		neuerRecord.setCiTyp(Zwischenspeicher);
+		neuerRecord.setName(hilfsObj.getRecordName());
+		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
+		System.out.println(neuerRecord.getCiTyp() + neuerRecord.getName() + neuerRecord.getAttribute().size());
+		manager.persistConfigItemMitAttributen(neueRecordListe);
+		
+		
+		List<String> TypObj = manager.getCiTypeAsString();
+
+		model.addAttribute("search", TypObj);
+		model.addAttribute("suche", new CiSearch());
+		
 		
 		return "ci-record";
 	}

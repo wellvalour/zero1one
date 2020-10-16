@@ -38,16 +38,36 @@
             
         </div>
         <div id="content">
-            <div id="dropdown">
+             <div id="dropdown">
             	<form th:action="@{/ci-record}" th:object="${suche}" method="post">
-	                <input list="ci-typ-liste" type="text" placeholder="CI-Typ" th:field="*{suchbegriff}">
+	                <input list="ci-typ-liste" type="text" th:placeholder="${AttObj.CiType}" th:field="*{suchbegriff}">
 	                    <datalist id="ci-typ-liste">
 	                        <option th:each="search : ${search}" th:value="${search.toString()}" th:text="${search.toString()}"/>
 	                    </datalist>
 	                    <button type="submit" id="anlegen">Auswählen</button>
 	                </input>
-	            </form>    
+	            </form>   
              </div>
+
+             <form th:action="@{/ci-record-submit}" th:object="${AttObj}" method="post"> 
+            	<p id="name">
+                	<label id="ci-typ-name">Record Name: </label>
+                	<input type="text" name="name-ci-typ" th:field="*{recordName}">
+  				<p>                         
+                	<label>Attributvorgabe für CI-Records.</label>
+            	</p>
+            	<table id="attribute" th:each="typ,i: ${AttObj.typen}">
+            		<tr>
+                    	<td><label id="ci-typ-name" th:text="${typ.name}"></label></td>
+                    	<td><input type="text" name="1" id="1" th:field="${AttObj.type[__${i.index}__].wert}"/></td>
+                	</tr>
+				</table>
+          
+            <div id="buttons">
+                <button type="submit" id="anlegen">Anlegen</button>
+            </div>
+          </form>
+        </div>
         </div>
         
 
