@@ -81,21 +81,40 @@ public class UnserTestController {
 	}
 
 	@GetMapping(value = "/confTyp", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String getConfigItemTYpGanz(Model model) {
+	public String getConfigItemTYpGanz(Model model){
 		List<UnserTestobjekt> testobj = manager.getConfigItemTypGanz();
 		
-		List<CiRecord> test = persman.getCiRecordByTyp("Drucker");
+		List<CiRecord> test = new ArrayList<CiRecord>();
+		CiRecord rec = new CiRecord();
+		rec.setCiTyp("Typ21");
+		rec.setId(20004);
+		rec.setName("Neuer Record");
 		
-		for(CiRecord x : test) {
-			System.out.println(x.getName());
-			for(Attribute y : x.getAttribute()) {
-				System.out.println(y.getAttributtyp());
-				System.out.println(y.getWert());
-			}
-		}
-
+		List<Attribute> att = new ArrayList<Attribute>();
+		
+		Attribute att1 = new Attribute();
+		att1.setId(20006);
+		att1.setCiRecordId(20005);
+		att1.setAttributtyp("Attribut7");
+		att1.setWert("NeuerWert1");
+		
+		Attribute att2 = new Attribute();
+		att2.setId(20007);
+		att2.setCiRecordId(20008);
+		att2.setAttributtyp("Attribut8");
+		att2.setWert("NeuerWert2");
+		
+		att.add(att1);
+		att.add(att2);
+		
+		rec.setAttribute(att);
+		
+		test.add(rec);
+		
+		persman.persistConfigItemMitAttributen(test);
+		
 		model.addAttribute("unserTestTemplate", testobj);
-
+		
 		return "unserTestTemplate";
 	}
 
