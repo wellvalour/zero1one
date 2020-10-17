@@ -1,6 +1,8 @@
 package com.gruppezwei.zero1one.controller;
 
 public class Attribute {
+	
+	private int id;
 
 	private String attributtyp;
 
@@ -31,4 +33,13 @@ public class Attribute {
 	public void setAttributtyp(String attributtyp) {
 		this.attributtyp = attributtyp;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+	
 }
