@@ -1,31 +1,24 @@
 
-INSERT INTO berechtigung (ID, Bezeichnung)
-VALUES (1, 'Admin');
 
-INSERT INTO berechtigung (ID, Bezeichnung)
-VALUES (2, 'Mitarbeiter');
-
-INSERT INTO berechtigung (ID, Bezeichnung)
-VALUES (3, 'Azubi');
-
-INSERT INTO berechtigung (ID, Bezeichnung)
-VALUES (4, 'Teamleiter');
 
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
-VALUES ('Peter', 'peter1234', 4);
+VALUES ('pascal', '-995396628', 1);
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
-VALUES ('Max', 'max1234', 2);
+VALUES ('max', '107876', 1);
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
-VALUES ('Daniel', 'daniel1234', 1);
+VALUES ('daniel', '-1339089505', 1);
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
-VALUES ('Dimitri', 'dimitri1234', 3);
+VALUES ('dimitri', '1666022698', 0);
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
-VALUES ('Johanna', 'johanna1234', 2);
+VALUES ('johanna', '-1431976733', 1);
+
+INSERT INTO User (Name, Passwort, BerechtigungsID)
+VALUES ('til', '114839', 1);
 
 
 INSERT INTO ConfigItemTyp (Name)
