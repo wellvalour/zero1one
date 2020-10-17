@@ -158,7 +158,7 @@ public class PersistenceManager {
 	}
 	
 	/**
-	 * Speichert einen ConfigItem mit allen Attributen in der Datenbank ab 
+	 * Speichert einen neues ConfigItem mit allen Attributen in der Datenbank ab. Es wird automatisch eine ID für den CiRecord ermittelt
 	 */
 	public void persistConfigItemMitAttributen(List<CiRecord> ciRecord) {
 		confItemRepo.saveAll(ciRecord.stream().map(this::convertToConfigItemMitAttributen).collect(Collectors.toList()));
@@ -300,11 +300,12 @@ public class PersistenceManager {
 
 		c.setName(t.getName());
 		c.setConfigItemTypname(t.getCiTyp());
-		c.setId(t.getId());
+		c.setId(t.getId());//hier muss id ermittelt werden
 
 		for (Attribute at : t.getAttribute()) {
 			List<Attribute> atl = new ArrayList<Attribute>();
 			atl.add(at);
+			//für alle muss noch die id für den record angegeben werden
 			persistAttribut(atl);
 		}
 		
