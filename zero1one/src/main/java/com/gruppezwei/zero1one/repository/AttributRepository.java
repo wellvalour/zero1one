@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
 public interface AttributRepository extends JpaRepository<Attribut, Long> {
 
 	public List<Attribut> findByConfigitemid(int configitemid); 
+	
+	public List<Attribut>  findTopByOrderByIdDesc();
 }

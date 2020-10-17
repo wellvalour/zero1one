@@ -291,6 +291,7 @@ public class PersistenceManager {
 		c.setAttributtypID(a.getAttributtyp());
 		c.setConfigItemID(a.getCiRecordId());
 		c.setWert(a.getWert());
+		c.setId(a.getId());
 
 		return c;
 	}
@@ -300,14 +301,24 @@ public class PersistenceManager {
 
 		c.setName(t.getName());
 		c.setConfigItemTypname(t.getCiTyp());
-		c.setId(t.getId());//hier muss id ermittelt werden
-
+		int CiId = confItemRepo.findTopByOrderByIdDesc().get(0).getId() +1;// Ermittelt neue ID für Record
+		c.setId(CiId);
+		
 		for (Attribute at : t.getAttribute()) {
+			
 			List<Attribute> atl = new ArrayList<Attribute>();
+			
+			List<Attribut> list = attributRepo.findTopByOrderByIdDesc(); 	//Liest höchste aktuelle ID
+			int neueId = list.get(0).getId() +1; 							//Legt neue höchste ID fest
+			
+			at.setId(neueId);
+			at.setCiRecordId(CiId);
+			
 			atl.add(at);
-			//für alle muss noch die id für den record angegeben werden
+			
 			persistAttribut(atl);
 		}
+		
 		
 		return c;
 	}
