@@ -20,6 +20,7 @@ Quellcode ist in [diesem GitHub-Repository](https://github.com/wellvalour/zero1o
 * :man: Pascal Jung
 * :bearded_person: Max Schneider
 * Laura Bieberle
+* Dimitri Wagner
 
 
 ## Lokaler Start
