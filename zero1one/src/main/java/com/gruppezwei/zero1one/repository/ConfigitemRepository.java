@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ConfigitemRepository extends JpaRepository<Configitem, Long> {
+public interface ConfigitemRepository extends JpaRepository<Configitem, Integer> {
 	
 	List<Configitem> findByName(String name);
 	
