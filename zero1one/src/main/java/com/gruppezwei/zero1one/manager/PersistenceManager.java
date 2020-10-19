@@ -61,17 +61,17 @@ public class PersistenceManager {
 	}
 	
 	/**
-	 * Liefert eine Liste aller CiRecords zu einer ID
+	 * Liefert eine Liste aller CiRecords 
 	 */
 	public List<CiRecord> getCiRecordAll(int id) {
-		return confItemRepo.findById(id).stream().map(this::convertToCiRecord).collect(Collectors.toList());
+		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 	
 	/**
-	 * Liefert eine Liste aller CiRecords
+	 * Liefert eine Liste aller CiRecords zu einer ID
 	 */
 	public List<CiRecord> getCiRecordByID(int id) {
-		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
+		return confItemRepo.findById(id).stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 
 	/**
