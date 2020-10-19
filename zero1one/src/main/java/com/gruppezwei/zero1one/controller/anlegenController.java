@@ -112,7 +112,7 @@ public class anlegenController {
 		neuerRecord.setCiTyp(Zwischenspeicher);
 		neuerRecord.setName(hilfsObj.getRecordName());
 		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
-		System.out.println(neuerRecord.getCiTyp() + neuerRecord.getName() + neuerRecord.getAttribute().size());
+		neueRecordListe.add(neuerRecord);
 		manager.persistConfigItemMitAttributen(neueRecordListe);
 		
 		
