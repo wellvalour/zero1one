@@ -63,7 +63,7 @@ public class PersistenceManager {
 	/**
 	 * Liefert eine Liste aller CiRecords 
 	 */
-	public List<CiRecord> getCiRecordAll(int id) {
+	public List<CiRecord> getCiRecordAll() {
 		return confItemRepo.findAll().stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
 	
