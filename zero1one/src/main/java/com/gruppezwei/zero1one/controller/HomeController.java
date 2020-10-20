@@ -37,9 +37,11 @@ public class HomeController {
 	public String getType(Model model) {
 		List<CiType> TypObj = manager.getCiTypeAll();
 		List<String> SeaObj = manager.getSuchbegriffeAll();
+		List<CiRecord> SeaListRec = manager.getCiRecordAll();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("search", SeaObj);
+		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		
 		return "dashboard/record";
@@ -49,13 +51,19 @@ public class HomeController {
 	public String searchSubmit(@ModelAttribute CiSearch suchobjekt, Model model) {		
 		List<CiType> TypObj = manager.getCiTypeAll();
 		List<String> SeaObj = manager.getSuchbegriffeAll();
-
-		model.addAttribute("type", TypObj);
-		model.addAttribute("search", SeaObj);
-		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("ausgabe", suchobjekt.getSuchbegriff());
+		List<CiRecord> SeaListRec = manager.getCiRecordAll();
+		List<Attribute> neuListAtt = manager.getAttributToRecord(suchobjekt.getId());
+		List<CiRecord> RecObj = manager.getCiRecordByID(suchobjekt.getId());
 		
-		return "suchergebnis";
+		model.addAttribute("type", TypObj);
+		model.addAttribute("record", RecObj);
+		model.addAttribute("id", suchobjekt.getId());
+		model.addAttribute("attribute", neuListAtt);
+//		model.addAttribute("search", SeaObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		
+		return "dashboard/attribute";
 	}
 	
 	
