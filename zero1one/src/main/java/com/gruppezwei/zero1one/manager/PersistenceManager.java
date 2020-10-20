@@ -174,21 +174,35 @@ public class PersistenceManager {
 	/**
 	 * Speichert einen Attribut in der Datenbank ab
 	 */
-	public void persistAttribut(List<Attribute> ciRecord) {
-		attributRepo.saveAll(ciRecord.stream().map(this::convertToAttribut).collect(Collectors.toList()));
+	private void persistAttribut(List<Attribute> attribute) {
+		attributRepo.saveAll(attribute.stream().map(this::convertToAttribut).collect(Collectors.toList()));
 	}
 
 	/**
 	 * Speichert einen Attributtyp in der Datenbank ab
 	 */
-	public void persistAttributtyp(List<Attributtypen> typen) {
+	private void persistAttributtyp(List<Attributtypen> typen) {
 		attTypRepo.saveAll(typen.stream().map(this::convertToAttributtyp).collect(Collectors.toList()));
 	}
 
 	
 	
+//	
+//	Methoden zum Updaten in der Datenbank
+//	
+	/**
+	 * Aktualisiert eine Liste von CiRecord mit allen ihren Attributen
+	 */
+	public void updateConfigItemMitAttributen(List<CiRecord> ciRecord) {
+		confItemRepo.saveAll(ciRecord.stream().map(this::convertToConfigItemMitAttributenUpdate).collect(Collectors.toList()));
+	}
 	
-	
+	/**
+	 * Updated alle Attribute
+	 */
+	private void updateAttribut(List<Attribute> attribute) {
+		attributRepo.saveAll(attribute.stream().map(this::convertToAttribut).collect(Collectors.toList()));
+	}
 	
 	
 	
@@ -311,12 +325,16 @@ public class PersistenceManager {
 		int CiId = confItemRepo.findTopByOrderByIdDesc().get(0).getId() +1;// Ermittelt neue ID für Record
 		c.setId(CiId);
 		
+		System.out.println(CiId);
+		
 		for (Attribute at : t.getAttribute()) {
 			
 			List<Attribute> atl = new ArrayList<Attribute>();
 			
 			List<Attribut> list = attributRepo.findTopByOrderByIdDesc(); 	//Liest höchste aktuelle ID
 			int neueId = list.get(0).getId() +1; 							//Legt neue höchste ID fest
+			
+			System.out.println(neueId);
 			
 			at.setId(neueId);
 			at.setCiRecordId(CiId);
@@ -330,4 +348,23 @@ public class PersistenceManager {
 		return c;
 	}
 	
+	private Configitem convertToConfigItemMitAttributenUpdate(CiRecord t) {
+		Configitem c = new Configitem();
+
+		c.setName(t.getName());
+		c.setConfigItemTypname(t.getCiTyp());
+		c.setId(t.getId());
+		
+		for (Attribute at : t.getAttribute()) {
+			
+			List<Attribute> atl = new ArrayList<Attribute>();
+			
+			atl.add(at);
+			
+			updateAttribut(atl);
+		}
+		
+		
+		return c;
+	}
 }
