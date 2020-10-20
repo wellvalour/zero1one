@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.gruppezwei.zero1one.exception.ObjektAllreadyExistsException;
+import com.gruppezwei.zero1one.manager.DeleteManager;
 import com.gruppezwei.zero1one.manager.PersistenceManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
 import com.gruppezwei.zero1one.manager.ServiceManager;
@@ -29,6 +31,9 @@ public class UnserTestController {
 	
 	@Autowired
 	UpdateManager upman;
+	
+	@Autowired
+	DeleteManager deleman;
 	
 	
 	@GetMapping(value = "/item", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
@@ -126,8 +131,11 @@ public class UnserTestController {
 	public String getConfigItemByName(Model model) {
 		List<UnserTestobjekt> testobj = manager.getConfigItemByName("Maus");
 
-		model.addAttribute("unserTestTemplate", testobj);
-
-		return "unserTestTemplate";
+		throw new ObjektAllreadyExistsException();
+		
+//		deleman.deleteCiType("Typ21");
+//		model.addAttribute("unserTestTemplate", testobj);
+//
+//		return "unserTestTemplate";
 	}
 }

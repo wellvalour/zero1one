@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.gruppezwei.zero1one.controller.CiType;
+
 @ControllerAdvice
 public class CiExceptionHandler {
 
@@ -26,11 +28,11 @@ public class CiExceptionHandler {
 	public String handleException(Model model, ObjektAllreadyExistsException ex){
 
 		String message = "Das Item das angelegt werden soll existiert bereits!";
-		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+		CiType neu = new CiType();
 		
+		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
-		model.addAttribute("timestamp", timestamp);
 		
-		return "errormanual";
+		return "ci-typ";
 	}
 }
