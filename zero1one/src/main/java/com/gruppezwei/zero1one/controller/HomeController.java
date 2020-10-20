@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.gruppezwei.zero1one.manager.DeleteManager;
 import com.gruppezwei.zero1one.manager.PersistenceManager;
+import com.gruppezwei.zero1one.manager.ReadManager;
 import com.gruppezwei.zero1one.manager.ServiceManager;
+import com.gruppezwei.zero1one.manager.UpdateManager;
 
 /**
  * Controller für das Dashboard und die Unterseiten.
@@ -31,16 +34,14 @@ public class HomeController {
 
 	
 	@Autowired
-	PersistenceManager manager;
+	ReadManager lesen;
 
 	@GetMapping(value = "/dashboard", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getType(Model model) {
-		List<CiType> TypObj = manager.getCiTypeAll();
-		List<String> SeaObj = manager.getSuchbegriffeAll();
-		List<CiRecord> SeaListRec = manager.getCiRecordAll();
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
 
 		model.addAttribute("type", TypObj);
-		model.addAttribute("search", SeaObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		
@@ -49,17 +50,15 @@ public class HomeController {
 	
 	@PostMapping("/dashboard")
 	public String searchSubmit(@ModelAttribute CiSearch suchobjekt, Model model) {		
-		List<CiType> TypObj = manager.getCiTypeAll();
-		List<String> SeaObj = manager.getSuchbegriffeAll();
-		List<CiRecord> SeaListRec = manager.getCiRecordAll();
-		List<Attribute> neuListAtt = manager.getAttributToRecord(suchobjekt.getId());
-		List<CiRecord> RecObj = manager.getCiRecordByID(suchobjekt.getId());
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		List<Attribute> neuListAtt = lesen.getAttributToRecord(suchobjekt.getId());
+		List<CiRecord> RecObj = lesen.getCiRecordByID(suchobjekt.getId());
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObj);
 		model.addAttribute("id", suchobjekt.getId());
 		model.addAttribute("attribute", neuListAtt);
-//		model.addAttribute("search", SeaObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		
@@ -69,15 +68,14 @@ public class HomeController {
 	
 	@GetMapping(value = "/dashboard/{type}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecordsByName(@PathVariable String type, Model model) {
-		List<CiType> TypObj = manager.getCiTypeAll();
-		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
-		List<String> SeaObj = manager.getSuchbegriffeAll();
-
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> RecObj = lesen.getCiRecordByTyp(type);
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObj);
 		model.addAttribute("id", type);
-		model.addAttribute("search", SeaObj);
+		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 
 		return "dashboard/record";
@@ -85,16 +83,20 @@ public class HomeController {
 	
 	@GetMapping(value = "/dashboard/{type}/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributesByName(@PathVariable String type, @PathVariable String record, Model model) {
-		List<CiType> TypObj = manager.getCiTypeAll();
-		List<CiRecord> RecObj = manager.getCiRecordByTyp(type);
-		List<Attribute> AttObj = manager.getAttributToRecord(Integer.parseInt(record));
-		List<String> SeaObj = manager.getSuchbegriffeAll();
+		
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> RecObjList = lesen.getCiRecordByTyp(type);
+		List<Attribute> AttObj = lesen.getAttributToRecord(Integer.parseInt(record));
+		List<CiRecord> RecObjListTemp = lesen.getCiRecordByID(Integer.parseInt(record));
+		CiRecord RecObj = RecObjListTemp.get(0);
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
 		
 		model.addAttribute("type", TypObj);
-		model.addAttribute("record", RecObj);
+		model.addAttribute("record", RecObjList);
 		model.addAttribute("id", type);
 		model.addAttribute("attribute", AttObj);
-		model.addAttribute("search", SeaObj);
+		model.addAttribute("RecObj", RecObj);
+		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 
 		return "dashboard/attribute";
