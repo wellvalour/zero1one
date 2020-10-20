@@ -15,8 +15,6 @@ import com.gruppezwei.zero1one.repository.Configitem;
 import com.gruppezwei.zero1one.repository.ConfigitemRepository;
 import com.gruppezwei.zero1one.repository.Configitemtyp;
 import com.gruppezwei.zero1one.repository.ConfigitemtypRepository;
-import com.gruppezwei.zero1one.repository.Instanz;
-import com.gruppezwei.zero1one.repository.InstanzRepository;
 import com.gruppezwei.zero1one.repository.User;
 import com.gruppezwei.zero1one.repository.UserRepository;
 
@@ -25,9 +23,6 @@ public class ServiceManager {
 	
 	@Autowired
 	ConfigitemRepository itemRepo;
-	
-	@Autowired
-	InstanzRepository instanzRepo;
 	
 	@Autowired
 	UserRepository userRepo;
@@ -128,16 +123,6 @@ public class ServiceManager {
 		return testobj;
 	}
 	
-	/**
-	 * Gibt alle ConfigItems zurück
-	 */
-	public List<UnserTestobjekt> getInstanzGanz() {
-		List<Instanz> item = instanzRepo.findAll();
-
-		List<UnserTestobjekt> testobj = item.stream().map(this::convertTestobjekt).collect(Collectors.toList());
-
-		return testobj;
-	}
 
 	//Mapping-Methoden
 	//Mappen Abfrageobjekt in unserTestobjekte
@@ -182,15 +167,6 @@ public class ServiceManager {
 		return t;
 	}
 	
-	private UnserTestobjekt convertTestobjekt(Instanz i) {
-		UnserTestobjekt u = new UnserTestobjekt();
-
-		u.setEins(""+ i.getId());
-		u.setZwei(""+ i.getInstanzTypname());
-		u.setDrei(i.getName());
-
-		return u;
-	}
 
 	private UnserTestobjekt convertTestobjekt(Configitemtyp i) {
 		UnserTestobjekt u = new UnserTestobjekt();
