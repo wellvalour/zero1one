@@ -79,6 +79,13 @@ public class ReadManager {
 	public List<CiRecord> getCiRecordByID(int id) {
 		return confItemRepo.findById(id).stream().map(this::convertToCiRecord).collect(Collectors.toList());
 	}
+	
+	/**
+	 * Liefert ein CiRecords zu einer ID
+	 */
+	public CiRecord getSingleCiRecordByID(int id) {
+		return confItemRepo.findById(id).stream().map(this::convertToCiRecord).collect(Collectors.toList()).get(0);
+	}
 
 	/**
 	 * Liefert eine Liste aller Namen von CiTypen und CiRecords
