@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gruppezwei.zero1one.manager.DeleteManager;
 import com.gruppezwei.zero1one.manager.PersistenceManager;
+import com.gruppezwei.zero1one.manager.ReadManager;
+import com.gruppezwei.zero1one.manager.UpdateManager;
 import com.gruppezwei.zero1one.repository.Attributtyp;
 
 /**
@@ -25,10 +28,13 @@ import com.gruppezwei.zero1one.repository.Attributtyp;
 
 @SpringBootApplication
 @Controller
-public class anlegenController {
+public class AnlegenController {
 
 	@Autowired
-	PersistenceManager manager;
+	PersistenceManager speichern;
+	@Autowired
+	ReadManager lesen;
+	
 	String Zwischenspeicher = new String();
 	
 	
@@ -53,7 +59,7 @@ public class anlegenController {
 		}
 		ArrayList<CiType> neueListe = new ArrayList<CiType>();
 		neueListe.add(TypObj);
-		manager.persistConfigItemTypeMitAttributen(neueListe);
+		speichern.persistConfigItemTypeMitAttributen(neueListe);
 		
 		CiType neu = new CiType();
 		neu.setTypen(new ArrayList<Attributtypen>());
@@ -69,7 +75,7 @@ public class anlegenController {
 	@GetMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecord(Model model) {
 
-		List<String> TypObj = manager.getCiTypeAsString();
+		List<String> TypObj = lesen.getCiTypeAsString();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
@@ -81,8 +87,8 @@ public class anlegenController {
 	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
 
 		Zwischenspeicher=suche.getSuchbegriff();
-		List<Attributtypen> ListeAttributtypen = manager.getAttributTypNachCiType(suche.getSuchbegriff());
-		List<String> TypObj = manager.getCiTypeAsString();
+		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
+		List<String> TypObj = lesen.getCiTypeAsString();
 		
 		int laenge = ListeAttributtypen.size();
 		ArrayList<Attribute> ListeAttribute = new ArrayList<Attribute>();
@@ -113,10 +119,10 @@ public class anlegenController {
 		neuerRecord.setName(hilfsObj.getRecordName());
 		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
 		neueRecordListe.add(neuerRecord);
-		manager.persistConfigItemMitAttributen(neueRecordListe);
+		speichern.persistConfigItemMitAttributen(neueRecordListe);
 		
 		
-		List<String> TypObj = manager.getCiTypeAsString();
+		List<String> TypObj = lesen.getCiTypeAsString();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
