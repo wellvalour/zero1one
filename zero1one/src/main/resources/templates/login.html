@@ -7,59 +7,73 @@
 <link rel="stylesheet" type="text/css" th:href="@{/ccs/login.css}">
 <style>
 /*Wegen Spring bug inline CSS*/
-.banner{
+.banner {
 	padding: 2% 0 0;
-	display: flex; 
-    justify-content: center; 
+	display: flex;
+	justify-content: center;
 	align-items: center;
-}	
+}
+
+.image {
+	width :250px;
+	height:auto;
+}
+
 .login-page {
-  width: 360px;
-  padding: 2% 0 0;
-  margin: auto;
+	width: 360px;
+	padding: 2% 0 0;
+	margin: auto;
 }
+
 .form {
-  position: relative;
-  z-index: 1;
-  background: #FFFFFF;
-  max-width: 360px;
-  margin: 0 auto 100px;
-  padding: 45px;
-  text-align: center;
-  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+	position: relative;
+	z-index: 1;
+	background: #FFFFFF;
+	max-width: 360px;
+	margin: 0 auto 100px;
+	padding: 45px;
+	text-align: center;
+	box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0
+		rgba(0, 0, 0, 0.24);
 }
+
 .form input {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  outline: 0;
-  background: #f2f2f2;
-  width: 100%;
-  border: 0;
-  margin: 0 0 15px;
-  padding: 15px;
-  box-sizing: border-box;
-  font-size: 14px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	outline: 0;
+	background: #f2f2f2;
+	width: 100%;
+	border: 0;
+	margin: 0 0 15px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-size: 14px;
 }
+
 .form button {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  text-transform: uppercase;
-  outline: 0;
-  background: #000000;
-  width: 100%;
-  border: 0;
-  padding: 15px;
-  color: #FFFFFF;
-  font-size: 14px;
-  -webkit-transition: all 0.3 ease;
-  transition: all 0.3 ease;
-  cursor: pointer;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	text-transform: uppercase;
+	outline: 0;
+	background: #000000;
+	width: 100%;
+	border: 0;
+	padding: 15px;
+	color: #FFFFFF;
+	font-size: 14px;
+	-webkit-transition: all 0.3 ease;
+	transition: all 0.3 ease;
+	cursor: pointer;
 }
-.form button:hover,.form button:active,.form button:focus {
-  background: #1E8C93;
+
+.form button:hover, .form button:active, .form button:focus {
+	background: #1E8C93;
 }
 
 body {
-  background: #156268; 
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background: #156268;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 </style>
 
@@ -67,20 +81,20 @@ body {
 
 <body>
 	<div class="banner">
-		<img  src="logo-ohne-hintergrund.png" width="250px" height="auto" alt="…" >
+		<img class="image" src="logo-ohne-hintergrund.png">
 	</div>
 	<div class="login-page">
 		<div class="form">
-		  <form class="login-form" th:action="@{/login}" method="post">
-			<input type="text" name="username" placeholder="username"/>
-			<input type="password" name="password" placeholder="password"/>
-			<button type="submit">login</button>
-			<div th:if="${param.error}" class="alert alert-error">Invalid
-				username and password.</div>
-			<div th:if="${param.logout}" class="alert alert-success">You
-				have been logged out.</div>
-		  </form>
+			<form class="login-form" th:action="@{/login}" method="post">
+				<input type="text" name="username" placeholder="username" /> <input
+					type="password" name="password" placeholder="password" />
+				<button type="submit">login</button>
+				<div th:if="${param.error}" class="alert alert-error">Invalid
+					username and password.</div>
+				<div th:if="${param.logout}" class="alert alert-success">You
+					have been logged out.</div>
+			</form>
 		</div>
-	  </div>
+	</div>
 </body>
 </html>
