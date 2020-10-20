@@ -88,18 +88,6 @@ public class ReadManager {
 	}
 
 	/**
-	 * Liefert eine Liste aller Namen von CiTypen und CiRecords
-	 */
-	public List<String> getSuchbegriffeAll() {
-		List<String> list = confTypRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
-		List<String> list2 = confItemRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
-
-		list.addAll(list2);
-
-		return list;
-	}
-
-	/**
 	 * Liefert alle CiRecords eines bestimmten CiTypes
 	 * 
 	 * @param type
@@ -224,10 +212,6 @@ public class ReadManager {
 	}
 
 	private String convertToString(Configitemtyp i) {
-		return i.getName();
-	}
-
-	private String convertToString(Configitem i) {
 		return i.getName();
 	}
 
