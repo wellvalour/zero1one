@@ -7,14 +7,12 @@
 </head>
 <main>
 	<div class="col-md-6 align-self-center">
-		<h1 th:text="${status +' '+ error}">404</h1>
+		<h1 th:text="${message}">404</h1>
 		<h5 th:text=${timestamp}></h5>
-		<h2 th:if="${status == 404}">OH NEIN! Du hast dich verlaufen!</h2>
-		<h2 th:unless="${status == 404}">Irgendetwas ist schrecklich schief gelaufen!</h2>
-		<p th:if="${status == 404}">Die Seite die du suchst scheint nicht zu existieren.</p>
 
-		<p>Aber du kannst hier klicken, um wieder auf die Startseite zu kommen.</p>
-		
+		<br>
+		<p>Aber du kannst hier klicken, um wieder auf die Startseite zu
+			kommen.</p>
 		<form method="get" action="dashboard">
 			<button class="btn" type="submit">Start</button>
 		</form>

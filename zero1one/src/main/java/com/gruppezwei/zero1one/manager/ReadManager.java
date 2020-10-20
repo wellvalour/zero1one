@@ -1,5 +1,6 @@
 package com.gruppezwei.zero1one.manager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -140,6 +141,37 @@ public class ReadManager {
 
 		return testobj;
 	}
+	
+	/**
+	 * Liefert zu einem CiTyp alle Attributtypen nach ihrer ID
+	 * @param name
+	 */
+	public List<String> getAttributTypIDtoCiType(String name){
+		List<Attributtyp> attyp = attTypRepo.findByConfigitemtypname(name);
+		List<String> ids = new ArrayList<String>();
+		
+		for(Attributtyp a : attyp) {
+			ids.add(a.getName());
+		}
+		
+		return ids;
+	}
+	
+	/**
+	 * Liefert zu einem CiRecord alle Attribute nach ihrer ID
+	 * @param name
+	 */
+	public List<Integer> getAttributIDtoCiRecord(int RecId){
+		List<Attribut> attyp = attributRepo.findByConfigitemid(RecId);
+		List<Integer> ids = new ArrayList<Integer>();
+		
+		for(Attribut a : attyp) {
+			ids.add(a.getId());
+		}
+		
+		return ids;
+	}
+	
 
 //	
 //	

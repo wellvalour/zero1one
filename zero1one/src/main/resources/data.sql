@@ -1,5 +1,8 @@
+INSERT INTO berechtigung (ID, Bezeichnung)
+VALUES (1, 'ADMIN');
 
-
+INSERT INTO berechtigung (ID, Bezeichnung)
+VALUES (0, 'USER');
 
 
 INSERT INTO User (Name, Passwort, BerechtigungsID)
