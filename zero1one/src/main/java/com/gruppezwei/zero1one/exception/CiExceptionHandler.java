@@ -47,4 +47,30 @@ public class CiExceptionHandler {
 		
 		return "ci-typ";
 	}
+	
+	@ExceptionHandler(TypeMussGesetztSeinException.class)
+	public String handleException(Model model, TypeMussGesetztSeinException ex){
+
+		String message = "Das Feld CiTyp darf niemals leer sein!";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//Recordanlegen-Seite + Model richtig befüllen
+	}
+	
+	@ExceptionHandler(UserAllreadyExistsException.class)
+	public String handleException(Model model, UserAllreadyExistsException ex){
+
+		String message = "User existiert bereits!";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//User-Seite + Model richtig befüllen
+	}
+	
+	
 }
