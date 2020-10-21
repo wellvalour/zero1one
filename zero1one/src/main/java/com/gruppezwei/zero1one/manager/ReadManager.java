@@ -208,6 +208,8 @@ public class ReadManager {
 
 		o.setAttributtyp(i.getAttributtypID());
 		o.setWert(i.getWert());
+		o.setId(i.getId());
+		o.setCiRecordId(i.getConfigItemID());
 
 		return o;
 	}
