@@ -21,6 +21,7 @@ Quellcode ist in [diesem GitHub-Repository](https://github.com/wellvalour/zero1o
 * :bearded_person: Max Schneider
 * Laura Bieberle
 * Dimitri Wagner
+* Johanna Gröll
 
 
 ## Lokaler Start
