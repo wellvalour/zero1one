@@ -63,7 +63,7 @@ public class CiExceptionHandler {
 	@ExceptionHandler(UserAllreadyExistsException.class)
 	public String handleException(Model model, UserAllreadyExistsException ex){
 
-		String message = "User existiert bereits!";
+		String message = ex.getMessage();
 		CiType neu = new CiType();
 		
 		model.addAttribute("TypObj", neu);
