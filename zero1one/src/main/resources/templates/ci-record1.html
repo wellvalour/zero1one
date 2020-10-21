@@ -27,11 +27,11 @@
             </div>
                
             <ul>
-                <li><a href="dashboard" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
-                <li><a href="ci-typ" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ anlegen</a></li>
-                <li><a href="ci-record" id="ci-records" class="aktiv"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
-                <li><a href="profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
-                <li><a href="hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
+                <li><a href="/dashboard" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="/ci-typ" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
+                <li><a href="/ci-record" id="ci-records" class="aktiv"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
+                <li><a href="/profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="/hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
     
             </ul>
 
@@ -40,7 +40,7 @@
         <div id="content">
              <div id="dropdown">
             	<form th:action="@{/ci-record}" th:object="${suche}" method="post">
-	                <input list="ci-typ-liste" type="text" th:placeholder="${AttObj.CiType}" th:field="*{suchbegriff}">
+	                <input list="ci-typ-liste" type="text" placeholder="Ci-Typ" th:field="*{suchbegriff}">
 	                    <datalist id="ci-typ-liste">
 	                        <option th:each="search : ${search}" th:value="${search.toString()}" th:text="${search.toString()}"/>
 	                    </datalist>
@@ -49,17 +49,17 @@
 	            </form>   
              </div>
 
-             <form th:action="@{/ci-record-submit}" th:object="${AttObj}" method="post"> 
+             <form th:action="@{/ci-record-submit}" th:object="${RecObj}" method="post"> 
             	<p id="name">
                 	<label id="ci-typ-name">Record Name: </label>
-                	<input type="text" name="name-ci-typ" th:field="*{recordName}">
+                	<input type="text" name="name-ci-typ" th:field="*{name}">
   				<p>                         
                 	<label>Attributvorgabe für CI-Records.</label>
             	</p>
-            	<table id="attribute" th:each="typ,i: ${AttObj.typen}">
+            	<table id="attribute" th:each="typ,i: ${RecObj.attribute}">
             		<tr>
-                    	<td><label id="ci-typ-name" th:text="${typ.name}"></label></td>
-                    	<td><input type="text" name="1" id="1" th:field="${AttObj.type[__${i.index}__].wert}"/></td>
+                    	<td><label id="ci-typ-name" th:text="${RecObj.attribute[__${i.index}__].attributtyp}"></label></td>
+                    	<td><input type="text" name="1" id="1" th:field="${RecObj.attribute[__${i.index}__].wert}"/></td>
                 	</tr>
 				</table>
           

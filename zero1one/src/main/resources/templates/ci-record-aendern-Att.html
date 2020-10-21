@@ -25,30 +25,28 @@
             </div>
                
             <ul>
-                <li><a href="/dashboard" id="übersicht"><i class="fas fa-align-justify"></i>Dashboard</a></li>
-                <li><a href="/ci-typ" id="ci-types" class="aktiv" ><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
-                <li><a href="/ci-record" id="ci-records"><i class="fas fa-window-restore"></i></i>CI-Record anlegen</a></li>
-                <li><a href="/profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
-                <li><a href="/hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
+                <li><a href="dashboard" id="übersicht"><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="ci-typ" id="ci-types" class="aktiv" ><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
+                <li><a href="ci-record" id="ci-records"><i class="fas fa-window-restore"></i></i>CI-Record anlegen</a></li>
+                <li><a href="profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
             </ul>
 
             
         </div>
         <div id="content">
-           <form th:action="@{/ci-record-aendern-submit}" th:object="${RecObj}" method="post"> 
-           
-    
 			<p id="name">
 				<label id="ci-typ-name">CI-Record Name: </label>
-                <input type="text" name="name-ci-typ" th:placeholder="${RecObj.name}" th:field="*{name}">
+                <label id="ci-typ-name" th:text="${RecObj.name}"></label>
             </p>
   			<p id="name">                         
                 <label id="ci-typ-name">Attribute:</label>
             </p>
+             <form th:action="@{/ci-record-aendern-Att-submit}" th:object="${RecObjIn}" method="post">
             	<table id="attribute" th:each="rec,i: ${RecObj.attribute}">
             		<tr>
-	                    <td th:text="${RecObj.attribute[__${i.index}__].attributtyp}" th:field="${RecObj.attribute[__${i.index}__].attributtyp}"></td>
-                    	<td><input type="text" name="1" id="1" th:placeholder="${RecObj.attribute[__${i.index}__].wert}" th:field="${RecObj.attribute[__${i.index}__].wert}"/></td>
+	                    <td><input type="text" name="1" id="1" th:placeholder="${RecObj.attribute[__${i.index}__].attributtyp}" th:field="${RecObjIn.attribute[__${i.index}__].attributtyp}"/></td>
+                    	<td><input type="text" name="1" id="1" th:placeholder="${RecObj.attribute[__${i.index}__].wert}" th:field="${RecObjIn.attribute[__${i.index}__].wert}"/></td>
                 	</tr>
 				</table>
           
@@ -56,11 +54,11 @@
                 <button type="submit" id="änderungen">Ändern</button>
             </div>
 		   </form>
-			</div>
-			<div>
-				<a th:href="@{/ci-record-aendern-Att/{record}(record=${RecObj.id})}"><Button type="Button" >neues Attribut</Button><a/>
+            <div id="buttons">
+				<a th:href="@{/dashboard}"><Button type="Button">Schließen</Button></a>
 			</div>
 
+          
         </div>
         <div id="footer">footer</div>
     </div>

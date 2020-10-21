@@ -53,12 +53,14 @@ public class HomeController {
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
 		List<Attribute> neuListAtt = lesen.getAttributToRecord(suchobjekt.getId());
-		List<CiRecord> RecObj = lesen.getCiRecordByID(suchobjekt.getId());
+		List<CiRecord> RecObjList = lesen.getCiRecordByID(suchobjekt.getId());
+		CiRecord RecObj = lesen.getSingleCiRecordByID(suchobjekt.getId());
 		
 		model.addAttribute("type", TypObj);
-		model.addAttribute("record", RecObj);
+		model.addAttribute("record", RecObjList);
 		model.addAttribute("id", suchobjekt.getId());
 		model.addAttribute("attribute", neuListAtt);
+		model.addAttribute("RecObj", RecObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		

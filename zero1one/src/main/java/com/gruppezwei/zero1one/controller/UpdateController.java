@@ -79,69 +79,98 @@ public class UpdateController {
 	}
 	
 	
-	@GetMapping(value = "/ci-record-aendern-Att/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String getNewAttributes(@PathVariable String record, Model model) {
+//	@GetMapping(value = "/ci-record-aendern-Att/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+//	public String getNewAttributes(@PathVariable String record, Model model) {
+//
+//		
+//		List<CiRecord> RecObjList = lesen.getCiRecordByID(Integer.parseInt(record));
+//		CiRecord RecObjOut = RecObjList.get(0);
+//		RecObjOut.getAttribute().add(new Attribute());
+//		int laenge = RecObjOut.getAttribute().size();
+//		CiRecord RecObjIn = new CiRecord();
+//		List<Attribute> neuAttList = new ArrayList<Attribute>();
+//		for(int i=0; i< laenge; i++) {
+//			Attribute neuAtt = new Attribute();
+//			neuAttList.add(neuAtt);
+//		}
+//		RecObjIn.setAttribute(neuAttList);
+//		
+//		ZwischenspeicherObj = RecObjOut;
+//		
+//		model.addAttribute("RecObj", RecObjOut);
+//		model.addAttribute("RecObjIn", RecObjIn);
+//
+//		return "ci-record-aendern-Att";
+//	}
+//	
+//	
+//	@PostMapping(value = "/ci-record-aendern-Att-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+//	public String neuesAttribute(@ModelAttribute CiRecord RecObjIn, Model model) {
+//
+//		List<Attribute> alteAtt = ZwischenspeicherObj.getAttribute();
+//		List<Attribute> neueAtt = RecObjIn.getAttribute();
+//			for(int i=0; i<neueAtt.size();i++) {
+//				if(neueAtt.get(i).getWert() == null){
+//					neueAtt.set(i, alteAtt.get(i));
+//				}
+//			}
+//			RecObjIn.setAttribute(neueAtt);
+//			if(RecObjIn.getName() == null) {
+//				RecObjIn.setName(ZwischenspeicherObj.getName());
+//			}
+//			RecObjIn.setCiTyp(ZwischenspeicherObj.getCiTyp());
+//			RecObjIn.setId(ZwischenspeicherObj.getId());
+//			ZwischenspeicherObj=RecObjIn;
+//			List<CiRecord> RecObjList = new ArrayList<CiRecord>();
+//			RecObjList.add(RecObjIn);
+//			update.updateConfigItemMitAttributen(RecObjList);
+//
+//			ZwischenspeicherObj.getAttribute().add(new Attribute());
+//			int laenge = ZwischenspeicherObj.getAttribute().size();
+//			CiRecord RecObjnewIn = new CiRecord();
+//			List<Attribute> neuAttList = new ArrayList<Attribute>();
+//			for(int i=0; i< laenge; i++) {
+//				Attribute neuAtt = new Attribute();
+//				neuAttList.add(neuAtt);
+//			}
+//			RecObjnewIn.setAttribute(neuAttList);
+//		
+//		CiRecord RecObjOut = ZwischenspeicherObj;
+//
+//		model.addAttribute("RecObj", RecObjOut);
+//		model.addAttribute("RecObjIn", RecObjnewIn);
+//
+//
+//		return "ci-record-aendern-Att";
+//	}
+	
+	@GetMapping(value = "/ci-record-loeschen/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String deleteRecord(@PathVariable String record, Model model) {
 
-		
-		List<CiRecord> RecObjList = lesen.getCiRecordByID(Integer.parseInt(record));
-		CiRecord RecObjOut = RecObjList.get(0);
-		RecObjOut.getAttribute().add(new Attribute());
-		int laenge = RecObjOut.getAttribute().size();
-		CiRecord RecObjIn = new CiRecord();
-		List<Attribute> neuAttList = new ArrayList<Attribute>();
-		for(int i=0; i< laenge; i++) {
-			Attribute neuAtt = new Attribute();
-			neuAttList.add(neuAtt);
-		}
-		RecObjIn.setAttribute(neuAttList);
-		
-		ZwischenspeicherObj = RecObjOut;
-		
-		model.addAttribute("RecObj", RecObjOut);
-		model.addAttribute("RecObjIn", RecObjIn);
 
-		return "ci-record-aendern-Att";
+		loeschen.deleteCiRecord(Integer.parseInt(record));
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+
+		model.addAttribute("type", TypObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		
+		return "dashboard/record";
 	}
 	
-	
-	@PostMapping(value = "/ci-record-aendern-Att-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String neuesAttribute(@ModelAttribute CiRecord RecObjIn, Model model) {
+	@PostMapping(value = "/ci-typ-loeschen", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String deleteTyp(@ModelAttribute CiSearch suchobjekt , Model model) {
 
-		List<Attribute> alteAtt = ZwischenspeicherObj.getAttribute();
-		List<Attribute> neueAtt = RecObjIn.getAttribute();
-			for(int i=0; i<neueAtt.size();i++) {
-				if(neueAtt.get(i).getWert() == null){
-					neueAtt.set(i, alteAtt.get(i));
-				}
-			}
-			RecObjIn.setAttribute(neueAtt);
-			if(RecObjIn.getName() == null) {
-				RecObjIn.setName(ZwischenspeicherObj.getName());
-			}
-			RecObjIn.setCiTyp(ZwischenspeicherObj.getCiTyp());
-			RecObjIn.setId(ZwischenspeicherObj.getId());
-			ZwischenspeicherObj=RecObjIn;
-			List<CiRecord> RecObjList = new ArrayList<CiRecord>();
-			RecObjList.add(RecObjIn);
-			update.updateConfigItemMitAttributen(RecObjList);
+		System.out.println(suchobjekt.getSuchbegriff());
+		loeschen.deleteCiType(suchobjekt.getSuchbegriff());
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
 
-			ZwischenspeicherObj.getAttribute().add(new Attribute());
-			int laenge = ZwischenspeicherObj.getAttribute().size();
-			CiRecord RecObjnewIn = new CiRecord();
-			List<Attribute> neuAttList = new ArrayList<Attribute>();
-			for(int i=0; i< laenge; i++) {
-				Attribute neuAtt = new Attribute();
-				neuAttList.add(neuAtt);
-			}
-			RecObjnewIn.setAttribute(neuAttList);
+		model.addAttribute("type", TypObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
 		
-		CiRecord RecObjOut = ZwischenspeicherObj;
-
-		model.addAttribute("RecObj", RecObjOut);
-		model.addAttribute("RecObjIn", RecObjnewIn);
-
-
-		return "ci-record-aendern-Att";
+		return "dashboard/record";
 	}
-	
 }

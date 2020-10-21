@@ -25,11 +25,11 @@
             </div>
                
             <ul>
-                <li><a href="dashboard" id="übersicht"><i class="fas fa-align-justify"></i>Dashboard</a></li>
-                <li><a href="ci-typ" id="ci-types" class="aktiv" ><i class="fas fa-folder-plus"></i>CI-Typ anlegen</a></li>
-                <li><a href="ci-record" id="ci-records"><i class="fas fa-window-restore"></i></i>CI-Record anlegen</a></li>
-                <li><a href="profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
-                <li><a href="hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
+                <li><a href="/dashboard" id="übersicht"><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="/ci-typ" id="ci-types" class="aktiv" ><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
+                <li><a href="/ci-record" id="ci-records"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
+                <li><a href="/profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="/hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
             </ul>
 
             
@@ -53,10 +53,22 @@
           
             <div id="buttons">
                 <button type="submit" id="anlegen">Anlegen</button>
-               <!--  <button type="button" id="änderungen">Ändern</button>
-                <button type="button" id="löschen">Löschen</button>  -->
             </div>
           </form>
+
+           <p id="name"><label id="ci-typ-name">Ci-Type-Löschen</label></p>
+             <div id="Suchfeld">
+				<div id="dropdown">
+					<form th:action="@{/ci-typ-loeschen}" th:object="${suche}" method="post">
+						<input list="ci-typ-liste" type="text" th:field="*{suchbegriff}" th:placeholder="Ci-Typ-Suche">
+							<datalist  id="ci-typ-liste">
+								<option th:each="search, i : ${suchliste}" th:value="${suchliste[__${i.index}__].name}" th:text="${suchliste[__${i.index}__].name}"/>
+		                    </datalist>
+		                 <button type="submit" id="löschen">Löschen</button>
+		            </form>
+             	</div>
+            </div>
+            
         </div>
         <div id="footer">footer</div>
     </div>

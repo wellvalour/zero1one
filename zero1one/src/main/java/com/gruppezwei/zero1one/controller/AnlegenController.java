@@ -36,6 +36,7 @@ public class AnlegenController {
 	ReadManager lesen;
 	
 	String Zwischenspeicher = new String();
+	CiRecord ZwischenspeicherCiRecObj = new CiRecord();
 	
 	
 	@GetMapping(value = "/ci-typ", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
@@ -47,6 +48,10 @@ public class AnlegenController {
 			neu.getTypen().add(new Attributtypen());
 		}
 
+		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		
 		return "ci-typ";
@@ -67,6 +72,10 @@ public class AnlegenController {
 			neu.getTypen().add(new Attributtypen());
 		}
 
+		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		
 		return "ci-typ";
@@ -86,25 +95,41 @@ public class AnlegenController {
 	@PostMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
 
-		Zwischenspeicher=suche.getSuchbegriff();
-		
 		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
+		CiRecord neuRec = new CiRecord();
+		neuRec.setCiTyp(suche.getSuchbegriff());
+		List<Attribute> neuAttList = new ArrayList<Attribute>();
+		int laenge = ListeAttributtypen.size();
+		for(int i=0; i<laenge; i++){
+			Attribute neuAtt = new Attribute();
+			neuAtt.setAttributtyp(ListeAttributtypen.get(i).getName());
+			neuAttList.add(neuAtt);
+		}
+		neuRec.setAttribute(neuAttList);
+		ZwischenspeicherCiRecObj=neuRec;
+		
 		List<String> TypObj = lesen.getCiTypeAsString();
 		
-		int laenge = ListeAttributtypen.size();
-		ArrayList<Attribute> ListeAttribute = new ArrayList<Attribute>();
-		for(int i=0; i<laenge; i++){
-			ListeAttribute.add(new Attribute());
-		}
-		
-		Hilfsobjekt hilfe = new Hilfsobjekt();
-		hilfe.setTypen(ListeAttributtypen);
-		hilfe.setType(ListeAttribute);
-		hilfe.setCiType(suche.getSuchbegriff());
+//		Zwischenspeicher=suche.getSuchbegriff();
+//		
+//		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
+//		List<String> TypObj = lesen.getCiTypeAsString();
+//		
+//		int laenge = ListeAttributtypen.size();
+//		ArrayList<Attribute> ListeAttribute = new ArrayList<Attribute>();
+//		for(int i=0; i<laenge; i++){
+//			ListeAttribute.add(new Attribute());
+//		}
+//		
+//		Hilfsobjekt hilfe = new Hilfsobjekt();
+//		hilfe.setTypen(ListeAttributtypen);
+//		hilfe.setType(ListeAttribute);
+//		hilfe.setCiType(suche.getSuchbegriff());
 		
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("AttObj", hilfe);
+		model.addAttribute("RecObj", neuRec);
+//		model.addAttribute("AttObj", hilfe);
 		
 		return "ci-record1";
 	}
@@ -112,15 +137,25 @@ public class AnlegenController {
 	
 	
 	@PostMapping(value = "/ci-record-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
-	public String getAttributeType(@ModelAttribute Hilfsobjekt hilfsObj, Model model) {
+	public String getAttributeType(@ModelAttribute CiRecord RecObj, Model model) {
 		
-		CiRecord neuerRecord = new CiRecord();
-		neuerRecord.setAttribute(hilfsObj.getType());
-		neuerRecord.setCiTyp(Zwischenspeicher);
-		neuerRecord.setName(hilfsObj.getRecordName());
-		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
-		neueRecordListe.add(neuerRecord);
-		speichern.persistConfigItemMitAttributen(neueRecordListe);
+		ZwischenspeicherCiRecObj.setName(RecObj.getName());
+		int laenge = ZwischenspeicherCiRecObj.getAttribute().size();
+		for(int i =0; i<laenge;i++) {
+			ZwischenspeicherCiRecObj.getAttribute().get(i).setWert(RecObj.getAttribute().get(i).getWert());
+		}
+		List<CiRecord> neuRecList = new ArrayList<CiRecord>();
+		neuRecList.add(ZwischenspeicherCiRecObj);
+		speichern.persistConfigItemMitAttributen(neuRecList);
+		ZwischenspeicherCiRecObj=null;
+		
+//		CiRecord neuerRecord = new CiRecord();
+//		neuerRecord.setAttribute(hilfsObj.getType());
+//		neuerRecord.setCiTyp(Zwischenspeicher);
+//		neuerRecord.setName(hilfsObj.getRecordName());
+//		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
+//		neueRecordListe.add(neuerRecord);
+//		speichern.persistConfigItemMitAttributen(neueRecordListe);
 		
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
