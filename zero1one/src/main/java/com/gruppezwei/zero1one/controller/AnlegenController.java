@@ -87,6 +87,7 @@ public class AnlegenController {
 	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
 
 		Zwischenspeicher=suche.getSuchbegriff();
+		
 		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
 		List<String> TypObj = lesen.getCiTypeAsString();
 		

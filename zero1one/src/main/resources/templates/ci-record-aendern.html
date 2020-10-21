@@ -13,7 +13,7 @@
         <div id="nav">
             <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
             <div id="logo">
-                <img src="logo-ohne-hintergrund.png">
+                <img src="/logo-ohne-hintergrund.png">
             </div>
        
         </div>               
@@ -35,27 +35,32 @@
             
         </div>
         <div id="content">
-           <form th:action="@{/ci-recod-aendern-submit}" th:object="${RecObj}" method="post"> 
-            <p id="name">
-                <label id="ci-typ-name">CI-Record ID</label><label id="ci-typ-name" th:value="${RecObj.id}" th:field="*{id}" ></label></br>
-				<label id="ci-typ-name">CI-Record Name</label>
-                <input type="text" name="name-ci-typ" th:value="${RecObj.name}" th:field="*{name}">
-  				<p>                         
-                <label>Attribute</label>
-            	</p>
+           <form th:action="@{/ci-record-aendern-submit}" th:object="${RecObj}" method="post"> 
+           
+    
+			<p id="name">
+				<label id="ci-typ-name">CI-Record Name: </label>
+                <input type="text" name="name-ci-typ" th:placeholder="${RecObj.name}" th:field="*{name}">
+            </p>
+  			<p id="name">                         
+                <label id="ci-typ-name">Attribute:</label>
+            </p>
             	<table id="attribute" th:each="rec,i: ${RecObj.attribute}">
             		<tr>
-	                    <td th:text="*{attribute[__${i.index}__].attributtyp}"></td>
-                    	<td><input type="text" name="1" id="1" th:value="*{attribute[__${i.index}__].wert}" th:field="*{attribute[__${i.index}__].wert}"/></td>
+	                    <td th:text="${RecObj.attribute[__${i.index}__].attributtyp}" th:field="${RecObj.attribute[__${i.index}__].attributtyp}"></td>
+                    	<td><input type="text" name="1" id="1" th:placeholder="${RecObj.attribute[__${i.index}__].wert}" th:field="${RecObj.attribute[__${i.index}__].wert}"/></td>
                 	</tr>
 				</table>
           
             <div id="buttons">
-                <button type="submit" id="anlegen">Aendern</button>
-               <!--  <button type="button" id="änderungen">Ändern</button>
-                <button type="button" id="löschen">Löschen</button>  -->
+                <button type="submit" id="änderungen">Ändern</button>
             </div>
-          </form>
+		   </form>
+			</div>
+			<div>
+				<a th:href="@{/ci-record-aendern-Att/{record}(record=${RecObj.id})}"><Button type="Button" >neues Attribut</Button><a/>
+			</div>
+
         </div>
         <div id="footer">footer</div>
     </div>
