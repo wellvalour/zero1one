@@ -11,6 +11,7 @@ import com.gruppezwei.zero1one.controller.Attribute;
 import com.gruppezwei.zero1one.controller.Attributtypen;
 import com.gruppezwei.zero1one.controller.CiRecord;
 import com.gruppezwei.zero1one.controller.CiType;
+import com.gruppezwei.zero1one.exception.FieldCanNotBeEmptyException;
 import com.gruppezwei.zero1one.exception.ObjektAllreadyExistsException;
 import com.gruppezwei.zero1one.repository.Attribut;
 import com.gruppezwei.zero1one.repository.AttributRepository;
@@ -105,6 +106,10 @@ public class PersistenceManager {
 	private Configitemtyp convertToConfigItemTyp(CiType t) {
 		Configitemtyp c = new Configitemtyp();
 
+		if(t.getName().isEmpty()) {
+			throw new FieldCanNotBeEmptyException();
+		}
+		
 		c.setName(t.getName());
 
 		return c;
@@ -113,6 +118,10 @@ public class PersistenceManager {
 	private Configitem convertToConfigItem(CiRecord t) {
 		Configitem c = new Configitem();
 
+		if(t.getName().isEmpty()) {
+			throw new FieldCanNotBeEmptyException();
+		}
+		
 		c.setName(t.getName());
 		c.setConfigItemTypname(t.getCiTyp());
 		c.setId(t.getId());
@@ -123,6 +132,10 @@ public class PersistenceManager {
 	private Configitemtyp convertToConfigItemTypMitAttributen(CiType t) {
 		Configitemtyp c = new Configitemtyp();
 
+		if(t.getName().isEmpty()) {
+			throw new FieldCanNotBeEmptyException();
+		}
+		
 		c.setName(t.getName());
 
 		for (Attributtypen at : t.getTypen()) {

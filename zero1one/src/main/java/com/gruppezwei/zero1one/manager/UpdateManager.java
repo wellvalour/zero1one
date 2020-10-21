@@ -46,8 +46,10 @@ public class UpdateManager {
 	 * Aktualisiert eine Liste von CiRecord mit allen ihren Attributen
 	 */
 	public void updateConfigItemMitAttributen(List<CiRecord> ciRecord) {
-		confItemRepo.saveAll(
-				ciRecord.stream().map(this::convertToConfigItemMitAttributenUpdate).collect(Collectors.toList()));
+		confItemRepo.saveAll(ciRecord
+				.stream()
+				.map(this::convertToConfigItemMitAttributenUpdate)
+				.collect(Collectors.toList()));
 	}
 
 	/**

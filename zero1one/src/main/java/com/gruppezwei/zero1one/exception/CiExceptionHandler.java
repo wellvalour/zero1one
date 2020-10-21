@@ -35,4 +35,16 @@ public class CiExceptionHandler {
 		
 		return "ci-typ";
 	}
+	
+	@ExceptionHandler(FieldCanNotBeEmptyException.class)
+	public String handleException(Model model, FieldCanNotBeEmptyException ex){
+
+		String message = "Das Feld Name darf niemals leer sein!";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";
+	}
 }
