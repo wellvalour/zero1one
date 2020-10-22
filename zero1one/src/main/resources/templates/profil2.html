@@ -38,33 +38,37 @@
 
             <div class="benutzername-aendern">
                 <h3>Benutzername: </h3>
-                <!---Name aus Datenbank auslesen und anzeigen hinter ":"-->
+                <h3 th:text="${nameAlt}"></h3>
+
                 <h3>Benutzername ändern</h3>
-                <table>
-                    <tr>
-                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
-                        <td><input type="text" size="10" id="eingabe-name"/></td>
-                    </tr>    
-                </table>
-                <p>
-                    <input type="submit" id="button" value="Bestätigen">
-                </p>
+                <form th:action="@{/profil/Name-Aendern}" th:object="${nameObj}" method="post">
+	                <table>
+	                    <tr>
+	                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
+	                        <td><input type="text" size="10" id="eingabe-name" th:field="*{nameNeu}"/></td>
+	                    </tr>    
+	                </table>
+	                <p>
+	                    <input type="submit" id="button" value="Bestätigen">
+	                </p>
+                </form>
             </div>
 
             <div class="passwort-aendern">
                 <h3>Passwort ändern</h3>
+                <form th:action="@{/profil/PW-Aendern}" th:object="${PWObj}" method="post">
                 <table>
                     <tr>
                         <td><label for="name" id="altes-passwort">Altes Passwort</label></td>
-                        <td><input type="password" size="10" maxlength="10" /></td>
+                        <td><input type="password" size="10" maxlength="10" th:field="*{PWAlt}" /></td>
                     </tr>
                     <tr>
                         <td><label for="name" id="neuers-passwort">Neues Passwort</label></td>
-                        <td><input type="password" size="10" maxlength="10" /></td>
+                        <td><input type="password" size="10" maxlength="10" th:field="*{PWNeu}"/></td>
                     </tr>
                     <tr>
                         <td><label for="name" id="neues-passwort">Neues Passwort wiederholen</label></td> 
-                        <td><input type="password" size="10" maxlength="10" /></td>
+                        <td><input type="password" size="10" maxlength="10" th:field="*{PWNeuWdh}"/></td>
                     </tr>
                 </table>
                 

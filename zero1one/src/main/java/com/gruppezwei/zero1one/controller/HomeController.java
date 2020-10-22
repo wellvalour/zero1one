@@ -1,6 +1,5 @@
 package com.gruppezwei.zero1one.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,15 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.gruppezwei.zero1one.manager.DeleteManager;
-import com.gruppezwei.zero1one.manager.PersistenceManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
-import com.gruppezwei.zero1one.manager.ServiceManager;
-import com.gruppezwei.zero1one.manager.UpdateManager;
+
 
 /**
  * Controller für das Dashboard und die Unterseiten.
@@ -32,7 +25,18 @@ import com.gruppezwei.zero1one.manager.UpdateManager;
 @Controller
 public class HomeController {
 
+	//Zwischenspeicher für den angemelden Benutzer
+	private static String user = "max";//new String();
 	
+	
+	public static String getUser() {
+		return user;
+	}
+
+	public static void setUser(String user) {
+		HomeController.user = user;
+	}
+
 	@Autowired
 	ReadManager lesen;
 
