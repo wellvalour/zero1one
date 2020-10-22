@@ -5,13 +5,10 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,18 +62,6 @@ public class Gui extends JFrame {
 		this.getContentPane().add(buttonGit);
 		this.pack();
 	}
-
-	public ImageIcon showImg() {
-
-		 BufferedImage img = null;
-	        try {
-	        	img = ImageIO.read(getClass().getResource("zero1oneBild.jpg"));
-	           
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	        return new ImageIcon(img);
-	}
 	
 	public void seiteAufrufen(String seite) {
 		
@@ -97,7 +82,6 @@ public class Gui extends JFrame {
 		Gui gui = new Gui();
 		gui.setBounds((bildschirm.width-300)/2, (bildschirm.height-300)/2, 380, 150);//280, 200
 		gui.setVisible(true);
-		//gui.initialisiereFenster();
 	}
 }
 
