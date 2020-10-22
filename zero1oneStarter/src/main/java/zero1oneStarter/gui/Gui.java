@@ -1,18 +1,20 @@
 package zero1oneStarter.gui;
 
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
-
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.awt.Desktop;
-import java.awt.Dimension;
-import java.awt.Toolkit;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 public class Gui extends JFrame {
 	JButton buttonStart, buttonAbbrechen, buttonGit;
@@ -29,12 +31,6 @@ public class Gui extends JFrame {
 		buttonStart = new JButton("Start");
 		ActionListener al1 = new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
-//				try {
-//					startGedrueckt();
-//				} catch (IOException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
 				seiteAufrufen("http://localhost:8080/dashboard/");
 			}
 		};
@@ -56,13 +52,6 @@ public class Gui extends JFrame {
 			} 
 		}; 
 		buttonGit.addActionListener(al3);
-		
-//		JPanel panel = new JPanel();
-//		JLabel label = new JLabel(showImg());
-//		panel.add(label);
-//
-//		panel.setBounds(5, 10, 150, 100);
-//		this.add(panel);
 		
 		labelText.setBounds(5, 10, 200, 30);
 		buttonStart.setBounds(5, 60, 100, 30);
@@ -100,19 +89,10 @@ public class Gui extends JFrame {
 	        }
 	}
 	
-
-	public void startGedrueckt() throws IOException {
-		try {
-			Runtime.getRuntime().exec("cmd /c start C:/zero1one/zero1one/zero1one/src/main/java/StartSpring.bat");
-			
-		} catch (Exception e) {
-			System.out.println("Uppps Fehler beim Ausführen der Spring Applikation");
-		}
+	public static void main(String[] args) throws IOException, InterruptedException {
 		
-	}
-	
-
-	public static void main(String[] args) {
+		Runtime.getRuntime().exec("java -jar zero1one-0.0.1-SNAPSHOT.war");
+		
 		Dimension bildschirm = Toolkit.getDefaultToolkit().getScreenSize();
 		Gui gui = new Gui();
 		gui.setBounds((bildschirm.width-300)/2, (bildschirm.height-300)/2, 380, 150);//280, 200
