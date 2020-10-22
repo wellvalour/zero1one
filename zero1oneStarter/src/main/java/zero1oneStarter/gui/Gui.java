@@ -29,18 +29,19 @@ public class Gui extends JFrame {
 		ActionListener al1 = new ActionListener() {
 			public void actionPerformed(ActionEvent ae) {
 				seiteAufrufen("http://localhost:8080/dashboard/");
+				System.exit(0);
 			}
 		};
 		buttonStart.addActionListener(al1);
 
 		
-		buttonAbbrechen = new JButton("ENDE");
-		ActionListener al2 = new ActionListener() {
-			public void actionPerformed(ActionEvent ae) {
-				System.exit(0);
-			} 
-		}; 
-		buttonAbbrechen.addActionListener(al2);
+//		buttonAbbrechen = new JButton("ENDE");
+//		ActionListener al2 = new ActionListener() {
+//			public void actionPerformed(ActionEvent ae) {
+//				System.exit(0);
+//			} 
+//		}; 
+//		buttonAbbrechen.addActionListener(al2);
 
 		buttonGit = new JButton("Git");
 		ActionListener al3 = new ActionListener() {
@@ -52,12 +53,12 @@ public class Gui extends JFrame {
 		
 		labelText.setBounds(5, 10, 200, 30);
 		buttonStart.setBounds(5, 60, 100, 30);
-		buttonAbbrechen.setBounds(125, 60, 100, 30);
+//		buttonAbbrechen.setBounds(125, 60, 100, 30);
 		buttonGit.setBounds(245, 60, 100, 30);
 		
 		
 		this.getContentPane().add(labelText);
-		this.getContentPane().add(buttonAbbrechen);
+//		this.getContentPane().add(buttonAbbrechen);
 		this.getContentPane().add(buttonStart);
 		this.getContentPane().add(buttonGit);
 		this.pack();
@@ -76,7 +77,10 @@ public class Gui extends JFrame {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
-		Runtime.getRuntime().exec("java -jar zero1one-0.0.1-SNAPSHOT.war");
+		  Process p = Runtime.getRuntime().exec("java -jar zero1one-1.0.0.war");
+		  
+		
+//		Runtime.getRuntime().exec("java -jar zero1one-1.0.0.war");
 		
 		Dimension bildschirm = Toolkit.getDefaultToolkit().getScreenSize();
 		Gui gui = new Gui();

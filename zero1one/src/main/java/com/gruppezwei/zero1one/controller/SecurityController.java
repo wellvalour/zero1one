@@ -12,4 +12,11 @@ public class SecurityController {
 	public String login(Model model) {
 		return "login";
 	}
+	
+	@GetMapping(value = "/exit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String exit() {
+
+		System.exit(0);
+		return "login";
+	}
 }
