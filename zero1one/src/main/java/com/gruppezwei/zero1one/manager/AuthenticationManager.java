@@ -28,7 +28,7 @@ public class AuthenticationManager {
 	}
 	
 	/**
-	 * Gibt berchtigung zu einem User
+	 * Gibt Berechtigung zu einem User
 	 * @param username
 	 */
 	public String getBerechtigung(String username) {
@@ -85,5 +85,17 @@ public class AuthenticationManager {
 	 */
 	public void deleteUserById(String name) {
 		userRepo.deleteById(name);
+	}
+	
+	/**
+	 * ändert Username
+	 * @param nameAlt
+	 * @param nameNeu
+	 */
+	public void changeUsername(String nameAlt, String nameNeu) {
+		User user = getUserByName(nameAlt).get(0);
+		deleteUser(user);
+		user.setName(nameNeu);
+		userAnlegen(user);
 	}
 }

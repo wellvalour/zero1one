@@ -23,7 +23,8 @@ import com.gruppezwei.zero1one.repository.Configitemtyp;
 import com.gruppezwei.zero1one.repository.ConfigitemtypRepository;
 
 /**
- * Dieser Manager bietet Methoden zum Speicher von neuen Objekten in einer Datenbank.
+ * Dieser Manager bietet Methoden zum Speicher von neuen Objekten in einer
+ * Datenbank.
  * 
  * @author wellvalour
  *
@@ -43,13 +44,12 @@ public class PersistenceManager {
 	@Autowired
 	AttributtypRepository attTypRepo;
 
-
 	/**
 	 * Speichert einen ConfigItemType in der Datenbank ab (Wird vermutlich nie
 	 * benötigt)
 	 */
 	public void persistConfigItemTypeNurNamen(List<CiType> ciType) {
-		if(confTypRepo.existsById(ciType.get(0).getName())){
+		if (confTypRepo.existsById(ciType.get(0).getName())) {
 			throw new ObjektAllreadyExistsException();
 		}
 		confTypRepo.saveAll(ciType.stream().map(this::convertToConfigItemTyp).collect(Collectors.toList()));
@@ -59,7 +59,7 @@ public class PersistenceManager {
 	 * Speichert einen ConfigItemType in der Datenbank mit allen Attributtypen ab
 	 */
 	public void persistConfigItemTypeMitAttributen(List<CiType> ciType) {
-		if(confTypRepo.existsById(ciType.get(0).getName())){
+		if (confTypRepo.existsById(ciType.get(0).getName())) {
 			throw new ObjektAllreadyExistsException();
 		}
 		confTypRepo
@@ -106,10 +106,10 @@ public class PersistenceManager {
 	private Configitemtyp convertToConfigItemTyp(CiType t) {
 		Configitemtyp c = new Configitemtyp();
 
-		if(t.getName().isEmpty()) {
+		if (t.getName().isEmpty()) {
 			throw new FieldCanNotBeEmptyException();
 		}
-		
+
 		c.setName(t.getName());
 
 		return c;
@@ -118,10 +118,10 @@ public class PersistenceManager {
 	private Configitem convertToConfigItem(CiRecord t) {
 		Configitem c = new Configitem();
 
-		if(t.getName().isEmpty()) {
+		if (t.getName().isEmpty()) {
 			throw new FieldCanNotBeEmptyException();
 		}
-		
+
 		c.setName(t.getName());
 		c.setConfigItemTypname(t.getCiTyp());
 		c.setId(t.getId());
@@ -132,10 +132,10 @@ public class PersistenceManager {
 	private Configitemtyp convertToConfigItemTypMitAttributen(CiType t) {
 		Configitemtyp c = new Configitemtyp();
 
-		if(t.getName().isEmpty()) {
+		if (t.getName().isEmpty()) {
 			throw new FieldCanNotBeEmptyException();
 		}
-		
+
 		c.setName(t.getName());
 
 		for (Attributtypen at : t.getTypen()) {
@@ -172,7 +172,15 @@ public class PersistenceManager {
 
 		c.setName(t.getName());
 		c.setConfigItemTypname(t.getCiTyp());
-		int CiId = confItemRepo.findTopByOrderByIdDesc().get(0).getId() + 1;// Ermittelt neue ID für Record
+
+		int CiId;
+
+		if (confItemRepo.existsById(1)) {
+			CiId = confItemRepo.findTopByOrderByIdDesc().get(0).getId() + 1;// Ermittelt neue ID für Record
+		} else {
+			CiId = 1;
+		}
+
 		c.setId(CiId);
 
 		System.out.println(CiId);
@@ -181,8 +189,13 @@ public class PersistenceManager {
 
 			List<Attribute> atl = new ArrayList<Attribute>();
 
-			List<Attribut> list = attributRepo.findTopByOrderByIdDesc(); // Liest höchste aktuelle ID
-			int neueId = list.get(0).getId() + 1; // Legt neue höchste ID fest
+			int neueId;
+
+			if (attributRepo.existsById(1)) {
+				neueId = attributRepo.findTopByOrderByIdDesc().get(0).getId() + 1; // Legt neue höchste ID fest
+			} else {
+				neueId = 1;
+			}
 
 			System.out.println(neueId);
 
