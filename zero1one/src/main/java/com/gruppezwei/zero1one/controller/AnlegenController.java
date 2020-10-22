@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gruppezwei.zero1one.exception.FieldCanNotBeEmptyException;
+import com.gruppezwei.zero1one.exception.TypeMussGesetztSeinException;
 import com.gruppezwei.zero1one.manager.DeleteManager;
 import com.gruppezwei.zero1one.manager.PersistenceManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
@@ -59,6 +61,7 @@ public class AnlegenController {
 	
 	@PostMapping("/ci-typ")
 	public String typeSubmit(@ModelAttribute CiType TypObj, Model model) {		
+		
 		for(Attributtypen at : TypObj.getTypen()) {
 		at.setConfigItemTyp(TypObj.getName());	
 		}
@@ -94,6 +97,10 @@ public class AnlegenController {
 	
 	@PostMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
+		
+		if(suche.getSuchbegriff().isEmpty()) {
+			throw new TypeMussGesetztSeinException();
+		}
 
 		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
 		CiRecord neuRec = new CiRecord();
@@ -110,26 +117,9 @@ public class AnlegenController {
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
 		
-//		Zwischenspeicher=suche.getSuchbegriff();
-//		
-//		List<Attributtypen> ListeAttributtypen = lesen.getAttributTypNachCiType(suche.getSuchbegriff());
-//		List<String> TypObj = lesen.getCiTypeAsString();
-//		
-//		int laenge = ListeAttributtypen.size();
-//		ArrayList<Attribute> ListeAttribute = new ArrayList<Attribute>();
-//		for(int i=0; i<laenge; i++){
-//			ListeAttribute.add(new Attribute());
-//		}
-//		
-//		Hilfsobjekt hilfe = new Hilfsobjekt();
-//		hilfe.setTypen(ListeAttributtypen);
-//		hilfe.setType(ListeAttribute);
-//		hilfe.setCiType(suche.getSuchbegriff());
-		
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("RecObj", neuRec);
-//		model.addAttribute("AttObj", hilfe);
 		
 		return "ci-record1";
 	}
@@ -138,7 +128,8 @@ public class AnlegenController {
 	
 	@PostMapping(value = "/ci-record-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeType(@ModelAttribute CiRecord RecObj, Model model) {
-		
+	
+		//fehlerhandling leerer Name und Attribute
 		ZwischenspeicherCiRecObj.setName(RecObj.getName());
 		int laenge = ZwischenspeicherCiRecObj.getAttribute().size();
 		for(int i =0; i<laenge;i++) {

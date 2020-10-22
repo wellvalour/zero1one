@@ -39,7 +39,7 @@
                <div id="Suchfeld">
 				<div id="dropdown">
 					<form th:action="@{/dashboard}" th:object="${suche}" method="post">
-						<input list="ci-typ-liste" type="text" th:field="*{id}" th:placeholder="Ci-Record-Suche">
+						<input list="ci-typ-liste" type="text" placeholder="Ci-Record suchen" th:field="*{id}">
 							<datalist  id="ci-typ-liste">
 								<option th:each="search, i : ${suchliste}" th:value="${suchliste[__${i.index}__].id}" th:text="${suchliste[__${i.index}__].name}"/>
 		                    </datalist>

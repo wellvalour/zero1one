@@ -99,6 +99,11 @@
     margin-bottom:20px;
   }
  
+ #message{
+
+  margin-bottom:20px;
+  color: red;
+}
 
 label{
     font-size:20px;

@@ -39,6 +39,7 @@
             <p id="name">
                 <label id="ci-typ-name">CI-Typ Name</label>
                 <input type="text" name="name-ci-typ" th:field="*{name}">
+  				<label id="message" th:text="${message}"></label>
   				<p>                         
                 <label>Attributvorgabe für CI-Records.</label>
             	</p>
@@ -49,7 +50,7 @@
                 	</tr>
 				</table>
 				
-				<h1 th:text="${message}"></h1>
+
           
             <div id="buttons">
                 <button type="submit" id="anlegen">Anlegen</button>

@@ -1,17 +1,27 @@
 package com.gruppezwei.zero1one.exception;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.gruppezwei.zero1one.controller.Attributtypen;
+import com.gruppezwei.zero1one.controller.CiSearch;
 import com.gruppezwei.zero1one.controller.CiType;
+import com.gruppezwei.zero1one.manager.ReadManager;
+
 
 @ControllerAdvice
 public class CiExceptionHandler {
 
+	@Autowired
+	ReadManager lesen;
+	
 	@ExceptionHandler(EmptyResultDataAccessException.class)
 	public String handleException(Model model, EmptyResultDataAccessException ex){
 		
@@ -39,9 +49,16 @@ public class CiExceptionHandler {
 	@ExceptionHandler(FieldCanNotBeEmptyException.class)
 	public String handleException(Model model, FieldCanNotBeEmptyException ex){
 
-		String message = "Das Feld Name darf niemals leer sein!";
+		String message = "Das Feld Ci-Typ Name darf niemals leer sein!";
 		CiType neu = new CiType();
-		
+		neu.setTypen(new ArrayList<Attributtypen>());
+		for(int i=0; i<3; i++){
+			neu.getTypen().add(new Attributtypen());
+		}
+		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
@@ -53,11 +70,14 @@ public class CiExceptionHandler {
 
 		String message = "Das Feld CiTyp darf niemals leer sein!";
 		CiType neu = new CiType();
-		
+		List<String> TypObj = lesen.getCiTypeAsString();
+
+		model.addAttribute("search", TypObj);
+		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
-		return "ci-typ";//Recordanlegen-Seite + Model richtig befüllen
+		return "ci-record";//Recordanlegen-Seite + Model richtig befüllen
 	}
 	
 	@ExceptionHandler(UserAllreadyExistsException.class)

@@ -45,11 +45,12 @@
 	                        <option th:each="search : ${search}" th:value="${search.toString()}" th:text="${search.toString()}"/>
 	                    </datalist>
 	                    <button type="submit" id="anlegen">Auswählen</button>
+	                    <label id="message" th:text="${message}"></label>
 	                </input>
 	            </form>    
              </div>
+           
         </div>
-        
 
 
         <div id="footer"></div>

@@ -40,7 +40,7 @@
         <div id="content">
              <div id="dropdown">
             	<form th:action="@{/ci-record}" th:object="${suche}" method="post">
-	                <input list="ci-typ-liste" type="text" placeholder="Ci-Typ" th:field="*{suchbegriff}">
+	                <input list="ci-typ-liste" type="text" th:placeholder="${RecObj.ciTyp}" th:field="*{suchbegriff}">
 	                    <datalist id="ci-typ-liste">
 	                        <option th:each="search : ${search}" th:value="${search.toString()}" th:text="${search.toString()}"/>
 	                    </datalist>
@@ -48,6 +48,8 @@
 	                </input>
 	            </form>   
              </div>
+
+        <h1 th:text="${message}"></h1>
 
              <form th:action="@{/ci-record-submit}" th:object="${RecObj}" method="post"> 
             	<p id="name">
