@@ -1,6 +1,7 @@
 package com.gruppezwei.zero1one.manager;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,20 @@ public class AuthenticationManager {
 	 */
 	public List<User> getUserByName(String name) {
 		return userRepo.findByName(name);
+	}
+	
+	/**
+	 * Gibt eine Liste aller User zurück
+	 */
+	public List<User> getAllUsers(){
+		return userRepo.findAll();
+	}
+	
+	/**
+	 * Gibt eine Liste aller Usernamen zurück
+	 */
+	public List<String> getAllUsernames(){
+		return userRepo.findAll().stream().map(this::convertToString).collect(Collectors.toList());
 	}
 	
 	/**
@@ -97,5 +112,9 @@ public class AuthenticationManager {
 		deleteUser(user);
 		user.setName(nameNeu);
 		userAnlegen(user);
+	}
+
+	private String convertToString(User user) {
+		return user.getName();
 	}
 }

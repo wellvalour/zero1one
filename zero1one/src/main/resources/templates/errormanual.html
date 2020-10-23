@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 
-<link rel="stylesheet" type="text/css" href="./ccs/errorstyles.css">
+<link rel="stylesheet" type="text/css" th:href="@{/ccs/errorstyles.css}">
 </head>
 <main>
 	<div class="col-md-6 align-self-center">
@@ -13,7 +13,7 @@
 		<br>
 		<p>Aber du kannst hier klicken, um wieder auf die Startseite zu
 			kommen.</p>
-		<form method="get" action="dashboard">
+		<form method="get" th:action="@{/dashboard}">
 			<button class="btn" type="submit">Start</button>
 		</form>
 	</div>

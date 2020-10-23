@@ -12,7 +12,7 @@
 
     <div class="container">
         <div id="nav">
-        	<a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+        	<a href="/exit"><i class="fas fa-sign-out-alt"></i></a>
             <div id="logo">
                 <img src="/logo-ohne-hintergrund.png">
             </div>
@@ -22,7 +22,7 @@
         <div id="sidebar">
             <div class="profil">
                 <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
-                <div id="profil-name">Name</div>
+                <div id="profil-name" th:text=${name}></div>
             </div>
                
             <ul>
@@ -47,7 +47,6 @@
              	</div>
             </div>
 
-        <!-- Muss über ein Script neue Tabellen erzeugt werden wenn CI-Record gedrückt wird muss dadurch eine liste erstellt werden , frage ist wie man dies umsetzt ??? -->
 			<ul class="CI-Type">
 				<th:block  th:each="ciTypen : ${type}">
 					<li><a th:text="${ciTypen.name}" th:href="@{/dashboard/{type}(type=${ciTypen.name})}"></a></li>

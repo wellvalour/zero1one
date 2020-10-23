@@ -11,7 +11,7 @@
 
     <div class="container">
         <div id="nav">
-            <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/exit"><i class="fas fa-sign-out-alt"></i></a>
             <div id="logo">
                 <img src="logo-ohne-hintergrund.png">
             </div>
@@ -21,7 +21,7 @@
         <div id="sidebar">
             <div class="profil">
                 <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
-                <div id="profil-name">Name</div>
+                <div id="profil-name" th:text="${name}"></div>
             </div>
                
             <ul>
@@ -30,26 +30,22 @@
                 <li><a href="ci-record" id="ci-records"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
                 <li><a href="profil" id="profil2" ><i class="fas fa-user"></i>Profil</a></li>
                 <li><a href="hilfe" id="hilfe" class="aktiv"><i class="fas fa-question"></i>Hilfe</a></li>
-    
             </ul>
-
-            </div>
+        </div>
 
 
         <div id="content">
-
-      <a href="javascript:toggle('f1')">Leitfaden</a>
-    <div id="f1" style="display: none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat numquam fuga facilis placeat eveniet rerum veniam omnis dicta enim explicabo earum, modi provident dolorum accusantium asperiores culpa quibusdam maxime nemo atque. Ratione quibusdam officiis, ea vitae culpa esse. Ullam, inventore eos asperiores laborum quia provident iure repellat unde doloremque consectetur itaque dolorem enim tenetur dolor aut incidunt assumenda earum non quibusdam magni? Debitis ipsam magni blanditiis officia odit! Accusamus sint exercitationem ad sit praesentium necessitatibus alias ducimus minima mollitia illo eaque, ea molestias cupiditate placeat, nulla vero doloremque voluptatibus impedit ipsa in suscipit aliquid dicta animi. Illo quisquam vel deleniti.
-    </div>
- 
-    <a href="javascript:toggle('f2')">Lets start</a>
-    <div id="f2" style="display: none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus eligendi natus sequi hic illum quaerat perspiciatis, dolore aspernatur repellendus voluptatum doloribus fuga architecto eos libero quos deleniti dolorem maiores repudiandae incidunt voluptatem qui reiciendis, mollitia illo. Repellendus ipsum recusandae aperiam culpa eos, labore tempora ipsa quisquam quidem animi est numquam non voluptatum doloribus ea aspernatur voluptas quos, suscipit dolore. Magni aliquam nesciunt velit possimus aliquid earum nam atque aspernatur quam quia accusantium dolores voluptatibus odio libero alias enim, inventore sint. Unde aspernatur optio ut voluptas natus, earum architecto nobis ullam nostrum odio excepturi ea accusantium laboriosam doloremque numquam aut veniam!
-    </div>
- 
-    <a href="javascript:toggle('f3')">Impressum</a>
-    <div id="f3" style="display: none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officiis ex cum sed harum est vero quaerat quia incidunt reiciendis deserunt odio nisi consequatur esse placeat maxime voluptatem explicabo illum, obcaecati, provident voluptates ducimus! Beatae aliquam consequatur voluptatibus voluptate, atque inventore provident dolorem perferendis eos quo facere voluptates fuga porro ullam! Consequuntur est similique rem. Fuga, illum praesentium sit aut excepturi officia nihil iure, placeat laboriosam delectus, doloribus porro rem nam dolores enim quos architecto repudiandae! Dolorum nesciunt odit fugit eaque reprehenderit repellendus nam unde. Provident vel odit, minus saepe deleniti voluptates sunt, aspernatur non tempora autem iste molestiae consectetur.
-    </div>
-
+		    <a href="javascript:toggle('f1')">Leitfaden</a>
+		    <div id="f1" style="display: none">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat numquam fuga facilis placeat eveniet rerum veniam omnis dicta enim explicabo earum, modi provident dolorum accusantium asperiores culpa quibusdam maxime nemo atque. Ratione quibusdam officiis, ea vitae culpa esse. Ullam, inventore eos asperiores laborum quia provident iure repellat unde doloremque consectetur itaque dolorem enim tenetur dolor aut incidunt assumenda earum non quibusdam magni? Debitis ipsam magni blanditiis officia odit! Accusamus sint exercitationem ad sit praesentium necessitatibus alias ducimus minima mollitia illo eaque, ea molestias cupiditate placeat, nulla vero doloremque voluptatibus impedit ipsa in suscipit aliquid dicta animi. Illo quisquam vel deleniti.
+		    </div>
+		 
+		    <a href="javascript:toggle('f2')">Lets start</a>
+		    <div id="f2" style="display: none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus eligendi natus sequi hic illum quaerat perspiciatis, dolore aspernatur repellendus voluptatum doloribus fuga architecto eos libero quos deleniti dolorem maiores repudiandae incidunt voluptatem qui reiciendis, mollitia illo. Repellendus ipsum recusandae aperiam culpa eos, labore tempora ipsa quisquam quidem animi est numquam non voluptatum doloribus ea aspernatur voluptas quos, suscipit dolore. Magni aliquam nesciunt velit possimus aliquid earum nam atque aspernatur quam quia accusantium dolores voluptatibus odio libero alias enim, inventore sint. Unde aspernatur optio ut voluptas natus, earum architecto nobis ullam nostrum odio excepturi ea accusantium laboriosam doloremque numquam aut veniam!
+		    </div>
+		 
+		    <a href="javascript:toggle('f3')">Impressum</a>
+		    <div id="f3" style="display: none">Lorem ipsum dolor sit amet consectetur adipisicing elit. Et officiis ex cum sed harum est vero quaerat quia incidunt reiciendis deserunt odio nisi consequatur esse placeat maxime voluptatem explicabo illum, obcaecati, provident voluptates ducimus! Beatae aliquam consequatur voluptatibus voluptate, atque inventore provident dolorem perferendis eos quo facere voluptates fuga porro ullam! Consequuntur est similique rem. Fuga, illum praesentium sit aut excepturi officia nihil iure, placeat laboriosam delectus, doloribus porro rem nam dolores enim quos architecto repudiandae! Dolorum nesciunt odit fugit eaque reprehenderit repellendus nam unde. Provident vel odit, minus saepe deleniti voluptates sunt, aspernatur non tempora autem iste molestiae consectetur.
+		    </div>
     </div>
 
         <div id="footer">footer</div>

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gruppezwei.zero1one.manager.AuthenticationManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
+import com.gruppezwei.zero1one.repository.User;
+
 
 @SpringBootApplication
 @Controller
@@ -37,22 +39,39 @@ public class userController {
 			
 			Passwort PWObj = new Passwort();
 			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<User> userList = user.getAllUsers(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
 			model.addAttribute("nameAlt", nameAlt);
 			model.addAttribute("nameObj", nameObj);
 			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			
+			return "profil1";
 			
 		}else {
+			String nameAlt = HomeController.getUser();
 			Name nameObj = new Name();
 			nameObj.setNameAlt(HomeController.getUser());
 			
 			Passwort PWObj = new Passwort();
 			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
 			model.addAttribute("nameObj", nameObj);
 			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("name", Uname);
 
+			return "profil2";
 		}
-		
-		return "profil2";
 	}
 	
 	@PostMapping(value = "/profil/Name-Aendern", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
@@ -74,13 +93,102 @@ public class userController {
 		
 			List<CiType> TypObj = lesen.getCiTypeAll();
 			List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-	
+			String Uname = HomeController.getUser();
+
 			model.addAttribute("type", TypObj);
 			model.addAttribute("suchliste", SeaListRec);
 			model.addAttribute("suche", new CiSearch());
+			model.addAttribute("name", Uname);
 		}
 		return "dashboard/record";
 	}
+	
+	@PostMapping(value = "/profil/PW-Aendern", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String setNewPasswort(@ModelAttribute Passwort PWObj, Model model) {
+		
+		String PW1 ="" + PWObj.getPWAlt().hashCode();
+		PWObj.setPWAlt(PW1);
+		String PW2 = "" + PWObj.getPWNeu().hashCode();
+		PWObj.setPWNeu(PW2);
+		String PW3 = "" + PWObj.getPWNeuWdh().hashCode();
+		PWObj.setPWNeuWdh(PW3);
+		
+		if(PWObj.getPWNeu().equals(PWObj.getPWNeuWdh())) {
+			if(PWObj.getPWAlt().equals(user.getUserByName(HomeController.getUser()).get(0).getPasswort())) {
+				List<User> UserListPW = user.getUserByName(HomeController.getUser());
+				User neuUserPW = UserListPW.get(0);
+				neuUserPW.setPasswort(PWObj.getPWNeu());
+				user.changePassword(neuUserPW);
+			}else {
+				System.out.println("Passwort falsch!");
+			}
+		}else {
+			System.out.println("Passwörter stimmen nicht überein!");
+		}
+
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
+
+		model.addAttribute("type", TypObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
+
+		return "dashboard/record";
+	}
+	
+	
+	@PostMapping(value = "/profil/Nutzer-Anlegen", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String setNewUser(@ModelAttribute UserObjekt UserObj, Model model) {
+		
+		String PW2 = "" + UserObj.getPWNeu().hashCode();
+		UserObj.setPWNeu(PW2);
+		String PW3 = "" + UserObj.getPWNeuWdh().hashCode();
+		UserObj.setPWNeuWdh(PW3);
+		if(UserObj.getPWNeu().equals(UserObj.getPWNeuWdh())){
+			User neuUser = new User();
+			neuUser.setPasswort(UserObj.getPWNeu());
+			neuUser.setName(UserObj.getName());
+			if(UserObj.getBerechtigung().equals("Admin")) {
+				neuUser.setBerechtigungsID(1);
+			}else {
+				neuUser.setBerechtigungsID(0);
+			}
+			user.userAnlegen(neuUser);			
+		}else {
+			System.out.println("Passwörter stimmen nicht überein!");
+		}
+
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
+
+		model.addAttribute("type", TypObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
+		
+		return "dashboard/record";
+	}
+	
+	@PostMapping(value = "/profil/Nutzer-Loeschen", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
+	public String setNewUser(@ModelAttribute User loeschUser, Model model) {
+		
+		user.deleteUserById(loeschUser.getName());
+		
+		List<CiType> TypObj = lesen.getCiTypeAll();
+		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
+
+		model.addAttribute("type", TypObj);
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
+		
+		return "dashboard/record";
+	}
+
 	
 	@GetMapping(value = "/hilfe", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getHelp(Model model) {
