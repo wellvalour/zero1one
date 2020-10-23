@@ -89,7 +89,7 @@ public class CiExceptionHandler {
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
-		return "ci-typ";
+		return "ci-typ";// Beim user anlegen  wird im manager geworfen
 	}
 	
 	@ExceptionHandler(UserPasswordException.class)
@@ -141,5 +141,19 @@ public class CiExceptionHandler {
 		model.addAttribute("message", message);
 		
 		return "ci-typ";//User der gelöscht werden soll existiert nicht
+	}
+	
+	
+	@ExceptionHandler(NewPasswordCanNotBEmptyException.class)
+	public String handleException(Model model, NewPasswordCanNotBEmptyException ex){
+
+		String message = "Nachricht";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//Passwordcheck für leeren benutzer
+		
 	}
 }
