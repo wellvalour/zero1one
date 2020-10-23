@@ -77,7 +77,7 @@ public class CiExceptionHandler {
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
-		return "ci-record";//Recordanlegen-Seite + Model richtig befüllen
+		return "ci-record";
 	}
 	
 	@ExceptionHandler(UserAllreadyExistsException.class)
@@ -89,8 +89,57 @@ public class CiExceptionHandler {
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
-		return "ci-typ";//User-Seite + Model richtig befüllen
+		return "ci-typ";
+	}
+	
+	@ExceptionHandler(UserPasswordException.class)
+	public String handleException(Model model, UserPasswordException ex){
+
+		String message = "Nachricht";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//aktuelles Passwort ist falsch
 	}
 	
 	
+	@ExceptionHandler(PasswordsDoNotMatchException.class)
+	public String handleException(Model model, PasswordsDoNotMatchException ex){
+
+		String message = "Nachricht";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//Neue Passwörter stimmen nicht überein
+	}
+	
+	@ExceptionHandler(PasswortfeldLeerException.class)
+	public String handleException(Model model, PasswortfeldLeerException ex){
+
+		String message = "Nachricht";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//Passwordfelf hat keinen Wert
+		//kann ja eigentlich für neu und alt genommen werden, oder?
+	}
+	
+	
+	@ExceptionHandler(UserCanNotBeDeletedException.class)
+	public String handleException(Model model, UserCanNotBeDeletedException ex){
+
+		String message = "Nachricht";
+		CiType neu = new CiType();
+		
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("message", message);
+		
+		return "ci-typ";//User der gelöscht werden soll existiert nicht
+	}
 }
