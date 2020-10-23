@@ -13,7 +13,7 @@
         <div id="nav">
             <a href="/exit"><i class="fas fa-sign-out-alt"></i></a>
             <div id="logo">
-                <img src="logo-ohne-hintergrund.png">
+                <img src="/logo-ohne-hintergrund.png">
             </div>
        
         </div>               
@@ -25,11 +25,11 @@
             </div>
                
             <ul>
-                <li><a href="dashboard" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
-                <li><a href="ci-typ" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
-                <li><a href="ci-record" id="ci-records"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
-                <li><a href="profil" id="profil2" class="aktiv"><i class="fas fa-user"></i>Profil</a></li>
-                <li><a href="hilfe" id="hilfe" ><i class="fas fa-question"></i>Hilfe</a></li>
+                <li><a href="/dashboard" id="übersicht" ><i class="fas fa-align-justify"></i>Dashboard</a></li>
+                <li><a href="/ci-typ" id="ci-types"><i class="fas fa-folder-plus"></i>CI-Typ verwalten</a></li>
+                <li><a href="/ci-record" id="ci-records"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
+                <li><a href="/profil" id="profil2" class="aktiv"><i class="fas fa-user"></i>Profil</a></li>
+                <li><a href="/hilfe" id="hilfe" ><i class="fas fa-question"></i>Hilfe</a></li>
         
             </ul>
           </div>  
@@ -37,7 +37,7 @@
         <div id="content">
 
             <div class="benutzername-aendern">
-                <h3>Benutzername: </h3><h3 th:text="${nameAlt}"></h3>
+                <label id="ueberschrift">Benutzername: </label><label id="ueberschrift" th:text="${nameAlt}"></label>
 
                 <h3>Benutzername ändern</h3>
                 <form th:action="@{/profil/Name-Aendern}" th:object="${nameObj}" method="post">
@@ -45,11 +45,12 @@
 	                    <tr>
 	                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
 	                        <td><input type="text" size="10" id="eingabe-name" th:field="*{nameNeu}"/></td>
-	                        <td><label for="name" id="neuer-benutzername" th:text="${message1}"></label></td>
 	                    </tr>    
 	                </table>
+
 	                <p>
 	                    <input type="submit" id="button" value="Bestätigen">
+	                    <label id="message" th:text="${message1}"></label>
 	                </p>
                 </form>
             </div>
@@ -71,8 +72,8 @@
 	                        <td><input type="password" size="10" maxlength="10" th:field="*{PWNeuWdh}"/></td>
 	                    </tr>
 	                </table>
-	                <label for="name" id="neuer-benutzername" th:text="${message2}"></label> 
 	                <input type="submit" id="button" value="Bestätigen">
+	                <label id="message" th:text="${message2}"></label>
                 </form>
                 
             </div>

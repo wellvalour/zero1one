@@ -1,6 +1,5 @@
 package com.gruppezwei.zero1one.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +9,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gruppezwei.zero1one.exception.FieldCanNotBeEmptyException2;
+import com.gruppezwei.zero1one.exception.PasswordsDoNotMatchException2;
+import com.gruppezwei.zero1one.exception.PasswortfeldLeerException2;
+import com.gruppezwei.zero1one.exception.UserPasswordException2;
 import com.gruppezwei.zero1one.manager.AuthenticationManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
 import com.gruppezwei.zero1one.repository.User;
@@ -79,14 +81,7 @@ public class userController {
 		
 		
 		if(nameObj.getNameNeu().isEmpty()) {
-			//throw Exception möglich
-			List<CiType> TypObj = lesen.getCiTypeAll();
-			List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-
-			model.addAttribute("type", TypObj);
-			model.addAttribute("suchliste", SeaListRec);
-			model.addAttribute("suche", new CiSearch());
-			
+			throw new FieldCanNotBeEmptyException2();
 		}else {
 			user.changeUsername(HomeController.getUser(), nameObj.getNameNeu());
 			HomeController.setUser(nameObj.getNameNeu());
@@ -106,13 +101,17 @@ public class userController {
 	@PostMapping(value = "/profil/PW-Aendern", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String setNewPasswort(@ModelAttribute Passwort PWObj, Model model) {
 		
+		if(PWObj.getPWNeu().isEmpty() || PWObj.getPWNeuWdh().isEmpty() || PWObj.getPWAlt().isEmpty()) {
+			throw new PasswortfeldLeerException2();
+		}
+		
 		String PW1 ="" + PWObj.getPWAlt().hashCode();
 		PWObj.setPWAlt(PW1);
 		String PW2 = "" + PWObj.getPWNeu().hashCode();
 		PWObj.setPWNeu(PW2);
 		String PW3 = "" + PWObj.getPWNeuWdh().hashCode();
 		PWObj.setPWNeuWdh(PW3);
-		
+			
 		if(PWObj.getPWNeu().equals(PWObj.getPWNeuWdh())) {
 			if(PWObj.getPWAlt().equals(user.getUserByName(HomeController.getUser()).get(0).getPasswort())) {
 				List<User> UserListPW = user.getUserByName(HomeController.getUser());
@@ -120,10 +119,10 @@ public class userController {
 				neuUserPW.setPasswort(PWObj.getPWNeu());
 				user.changePassword(neuUserPW);
 			}else {
-				System.out.println("Passwort falsch!");
+				throw new UserPasswordException2();
 			}
 		}else {
-			System.out.println("Passwörter stimmen nicht überein!");
+			throw new PasswordsDoNotMatchException2();
 		}
 
 		List<CiType> TypObj = lesen.getCiTypeAll();

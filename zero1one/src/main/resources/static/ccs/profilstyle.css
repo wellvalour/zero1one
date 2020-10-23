@@ -16,11 +16,10 @@
       "footer footer "
   }
   
-  br{
-    content:"";
-    display:block;
-    height: 440px;
-  }
+#message{
+
+  color: red;
+}
   
   #nav{
     background: black;
