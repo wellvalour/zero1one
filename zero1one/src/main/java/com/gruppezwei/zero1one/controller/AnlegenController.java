@@ -51,10 +51,12 @@ public class AnlegenController {
 		}
 
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
+		model.addAttribute("name", Uname);
 		
 		return "ci-typ";
 	}
@@ -76,10 +78,12 @@ public class AnlegenController {
 		}
 
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
+		model.addAttribute("name", Uname);
 		
 		return "ci-typ";
 	}
@@ -88,9 +92,11 @@ public class AnlegenController {
 	public String getRecord(Model model) {
 
 		List<String> TypObj = lesen.getCiTypeAsString();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "ci-record";
 	}
@@ -116,10 +122,12 @@ public class AnlegenController {
 		ZwischenspeicherCiRecObj=neuRec;
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
+		String Uname = HomeController.getUser();
 		
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("RecObj", neuRec);
+		model.addAttribute("name", Uname);
 		
 		return "ci-record1";
 	}
@@ -150,10 +158,11 @@ public class AnlegenController {
 		
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
-		
+		model.addAttribute("name", Uname);		
 		
 		return "ci-record";
 	}

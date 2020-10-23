@@ -43,9 +43,10 @@ public class UpdateController {
 		
 		CiRecord RecObjOut = lesen.getSingleCiRecordByID(Integer.parseInt(record));
 		ZwischenspeicherObj = RecObjOut;
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("RecObj", RecObjOut);
-
+		model.addAttribute("name", Uname);
 
 		return "ci-record-aendern";
 	}
@@ -70,10 +71,12 @@ public class UpdateController {
 		
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "dashboard/record";
 	}
@@ -147,14 +150,15 @@ public class UpdateController {
 	@GetMapping(value = "/ci-record-loeschen/{record}", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String deleteRecord(@PathVariable String record, Model model) {
 
-
 		loeschen.deleteCiRecord(Integer.parseInt(record));
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "dashboard/record";
 	}
@@ -162,14 +166,15 @@ public class UpdateController {
 	@PostMapping(value = "/ci-typ-loeschen", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String deleteTyp(@ModelAttribute CiSearch suchobjekt , Model model) {
 
-		System.out.println(suchobjekt.getSuchbegriff());
 		loeschen.deleteCiType(suchobjekt.getSuchbegriff());
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "dashboard/record";
 	}

@@ -26,7 +26,7 @@ import com.gruppezwei.zero1one.manager.ReadManager;
 public class HomeController {
 
 	//Zwischenspeicher für den angemelden Benutzer
-	private static String user = "max";//new String();
+	private static String user = new String();
 	
 	
 	public static String getUser() {
@@ -44,10 +44,12 @@ public class HomeController {
 	public String getType(Model model) {
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "dashboard/record";
 	}
@@ -59,6 +61,7 @@ public class HomeController {
 		List<Attribute> neuListAtt = lesen.getAttributToRecord(suchobjekt.getId());
 		List<CiRecord> RecObjList = lesen.getCiRecordByID(suchobjekt.getId());
 		CiRecord RecObj = lesen.getSingleCiRecordByID(suchobjekt.getId());
+		String Uname = HomeController.getUser();
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObjList);
@@ -67,6 +70,7 @@ public class HomeController {
 		model.addAttribute("RecObj", RecObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 		
 		return "dashboard/attribute";
 	}
@@ -77,13 +81,15 @@ public class HomeController {
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> RecObj = lesen.getCiRecordByTyp(type);
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObj);
 		model.addAttribute("id", type);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
-
+		model.addAttribute("name", Uname);
+		
 		return "dashboard/record";
 	}
 	
@@ -96,6 +102,7 @@ public class HomeController {
 		List<CiRecord> RecObjListTemp = lesen.getCiRecordByID(Integer.parseInt(record));
 		CiRecord RecObj = RecObjListTemp.get(0);
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
+		String Uname = HomeController.getUser();
 		
 		model.addAttribute("type", TypObj);
 		model.addAttribute("record", RecObjList);
@@ -104,6 +111,7 @@ public class HomeController {
 		model.addAttribute("RecObj", RecObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("name", Uname);
 
 		return "dashboard/attribute";
 	}

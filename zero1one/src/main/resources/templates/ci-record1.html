@@ -13,7 +13,7 @@
         
         <div id="nav">
             
-            <a href="login.html"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="/exit"><i class="fas fa-sign-out-alt"></i></a>
             <div id="logo">
                 <img src="logo-ohne-hintergrund.png">
             </div>
@@ -23,7 +23,7 @@
         <div id="sidebar">
             <div class="profil">
                 <img src="https://www.levcons.de/wp-content/plugins/all-in-one-seo-pack/images/default-user-image.png">
-                <div id="profil-name">Name</div>
+                <div id="profil-name" th:text="${name}"></div>
             </div>
                
             <ul>
@@ -32,9 +32,7 @@
                 <li><a href="/ci-record" id="ci-records" class="aktiv"><i class="fas fa-window-restore"></i>CI-Record anlegen</a></li>
                 <li><a href="/profil" id="profil2"><i class="fas fa-user"></i>Profil</a></li>
                 <li><a href="/hilfe" id="hilfe"><i class="fas fa-question"></i>Hilfe</a></li>
-    
             </ul>
-
             
         </div>
         <div id="content">
@@ -64,16 +62,12 @@
                     	<td><input type="text" name="1" id="1" th:field="${RecObj.attribute[__${i.index}__].wert}"/></td>
                 	</tr>
 				</table>
-          
             <div id="buttons">
                 <button type="submit" id="anlegen">Anlegen</button>
             </div>
           </form>
         </div>
-        </div>
         
-
-
         <div id="footer"></div>
     </div>
    
