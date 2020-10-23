@@ -51,14 +51,14 @@
 
              <form th:action="@{/ci-record-submit}" th:object="${RecObj}" method="post"> 
             	<p id="name">
-                	<label id="ci-typ-name">Record Name: </label>
-                	<input type="text" name="name-ci-typ" th:field="*{name}">
-  				<p>                         
-                	<label>Attributvorgabe für CI-Records.</label>
+                	<label>Record Name: </label>
+                	<input type="text" th:field="*{name}">
+  				<p id="name">                         
+                	<label>Attributvorgabe für CI-Records:</label>
             	</p>
             	<table id="attribute" th:each="typ,i: ${RecObj.attribute}">
             		<tr>
-                    	<td><label id="ci-typ-name" th:text="${RecObj.attribute[__${i.index}__].attributtyp}"></label></td>
+                    	<td><label th:text="${RecObj.attribute[__${i.index}__].attributtyp}"></label></td>
                     	<td><input type="text" name="1" id="1" th:field="${RecObj.attribute[__${i.index}__].wert}"/></td>
                 	</tr>
 				</table>

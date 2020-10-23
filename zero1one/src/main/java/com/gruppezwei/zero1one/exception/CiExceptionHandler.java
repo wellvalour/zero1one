@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.gruppezwei.zero1one.controller.Attributtypen;
 import com.gruppezwei.zero1one.controller.CiSearch;
+import com.gruppezwei.zero1one.controller.CiTypObjekt;
 import com.gruppezwei.zero1one.controller.CiType;
+import com.gruppezwei.zero1one.controller.HomeController;
 import com.gruppezwei.zero1one.manager.ReadManager;
 
 
@@ -38,9 +40,14 @@ public class CiExceptionHandler {
 	public String handleException(Model model, ObjektAllreadyExistsException ex){
 
 		String message = "Das Item das angelegt werden soll existiert bereits!";
-		CiType neu = new CiType();
-		
+		CiTypObjekt neu = new CiTypObjekt();
+		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+		String Uname = HomeController.getUser();
+
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
+		model.addAttribute("name", Uname);
 		model.addAttribute("message", message);
 		
 		return "ci-typ";
@@ -50,17 +57,15 @@ public class CiExceptionHandler {
 	public String handleException(Model model, FieldCanNotBeEmptyException ex){
 
 		String message = "Das Feld Ci-Typ Name darf niemals leer sein!";
-		CiType neu = new CiType();
-		neu.setTypen(new ArrayList<Attributtypen>());
-		for(int i=0; i<3; i++){
-			neu.getTypen().add(new Attributtypen());
-		}
+		CiTypObjekt neu = new CiTypObjekt();
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
+		model.addAttribute("name", Uname);
 		
 		return "ci-typ";
 	}
@@ -69,12 +74,12 @@ public class CiExceptionHandler {
 	public String handleException(Model model, TypeMussGesetztSeinException ex){
 
 		String message = "Das Feld CiTyp darf niemals leer sein!";
-		CiType neu = new CiType();
 		List<String> TypObj = lesen.getCiTypeAsString();
+		String Uname = HomeController.getUser();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("TypObj", neu);
+		model.addAttribute("name", Uname);;
 		model.addAttribute("message", message);
 		
 		return "ci-record";
@@ -89,7 +94,7 @@ public class CiExceptionHandler {
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("message", message);
 		
-		return "ci-typ";// Beim user anlegen  wird im manager geworfen
+		return "profile1";// Beim user anlegen  wird im manager geworfen
 	}
 	
 	@ExceptionHandler(UserPasswordException.class)
@@ -99,7 +104,7 @@ public class CiExceptionHandler {
 		CiType neu = new CiType();
 		
 		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
+		model.addAttribute("message2", message);
 		
 		return "ci-typ";//aktuelles Passwort ist falsch
 	}
@@ -112,7 +117,7 @@ public class CiExceptionHandler {
 		CiType neu = new CiType();
 		
 		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
+		model.addAttribute("message2", message);
 		
 		return "ci-typ";//Neue Passwörter stimmen nicht überein
 	}
@@ -124,7 +129,7 @@ public class CiExceptionHandler {
 		CiType neu = new CiType();
 		
 		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
+		model.addAttribute("message2", message);
 		
 		return "ci-typ";//Passwordfelf hat keinen Wert
 		//kann ja eigentlich für neu und alt genommen werden, oder?

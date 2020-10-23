@@ -73,10 +73,12 @@
 						</th:block>
 					</tbody>
 				</table>
-				
+				<div id="aendern-loeschen">
+					<a th:href="@{/ci-record-aendern/{record}(record=${RecObj.id})}"><Button type="Button" >Aendern</Button></a>
+					<a th:href="@{/ci-record-loeschen/{record}(record=${RecObj.id})}"><Button type="Button" >Löschen</Button></a>
+				</div>
 			</div>
-			<a th:href="@{/ci-record-aendern/{record}(record=${RecObj.id})}"><Button type="Button" >Aendern</Button></a>
-			<a th:href="@{/ci-record-loeschen/{record}(record=${RecObj.id})}"><Button type="Button" >Löschen</Button></a>
+
 		</div>
         <div id="footer">footer</div>
     </div>

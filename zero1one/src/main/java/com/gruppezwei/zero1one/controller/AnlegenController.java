@@ -26,8 +26,6 @@ import com.gruppezwei.zero1one.repository.Attributtyp;
  *
  */
 
-
-
 @SpringBootApplication
 @Controller
 public class AnlegenController {
@@ -39,17 +37,13 @@ public class AnlegenController {
 	
 	String Zwischenspeicher = new String();
 	CiRecord ZwischenspeicherCiRecObj = new CiRecord();
+	String name = new String();
 	
 	
 	@GetMapping(value = "/ci-typ", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String setType(Model model) {
 
-		CiType neu = new CiType();
-		neu.setTypen(new ArrayList<Attributtypen>());
-		for(int i=0; i<3; i++){
-			neu.getTypen().add(new Attributtypen());
-		}
-
+		CiTypObjekt neu = new CiTypObjekt();
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
 		String Uname = HomeController.getUser();
 
@@ -57,25 +51,46 @@ public class AnlegenController {
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
 		model.addAttribute("name", Uname);
+
 		
 		return "ci-typ";
 	}
 	
 	@PostMapping("/ci-typ")
-	public String typeSubmit(@ModelAttribute CiType TypObj, Model model) {		
+	public String typeSubmit(@ModelAttribute CiTypObjekt TypObj, Model model) {		
 		
+		if(TypObj.getName().isEmpty()) {
+			throw new FieldCanNotBeEmptyException();
+		}else {
+		CiType neuTypObj = new CiType();
+		neuTypObj.setName(TypObj.getName());
+		name=TypObj.getName();
+		if(TypObj.getAttAnzahl()==0) {
+			TypObj.setAttAnzahl(3);
+		}
+		neuTypObj.setTypen(new ArrayList<Attributtypen>());
+		for(int i=0; i<TypObj.getAttAnzahl(); i++){
+			neuTypObj.getTypen().add(new Attributtypen());
+		}
+		
+		model.addAttribute("TypObj", neuTypObj);
+
+		return "ci-typ-attribute";
+		}
+	}
+	
+	@PostMapping("/ci-typ-attribute")
+	public String AttributeSubmit(@ModelAttribute CiType TypObj, Model model) {		
+		
+		TypObj.setName(name);
 		for(Attributtypen at : TypObj.getTypen()) {
 		at.setConfigItemTyp(TypObj.getName());	
 		}
 		ArrayList<CiType> neueListe = new ArrayList<CiType>();
 		neueListe.add(TypObj);
 		speichern.persistConfigItemTypeMitAttributen(neueListe);
-		
-		CiType neu = new CiType();
-		neu.setTypen(new ArrayList<Attributtypen>());
-		for(int i=0; i<3; i++){
-			neu.getTypen().add(new Attributtypen());
-		}
+
+		CiTypObjekt neu = new CiTypObjekt();
 
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
 		String Uname = HomeController.getUser();
@@ -132,12 +147,9 @@ public class AnlegenController {
 		return "ci-record1";
 	}
 	
-	
-	
 	@PostMapping(value = "/ci-record-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeType(@ModelAttribute CiRecord RecObj, Model model) {
-	
-		//fehlerhandling leerer Name und Attribute
+
 		ZwischenspeicherCiRecObj.setName(RecObj.getName());
 		int laenge = ZwischenspeicherCiRecObj.getAttribute().size();
 		for(int i =0; i<laenge;i++) {
@@ -148,14 +160,6 @@ public class AnlegenController {
 		speichern.persistConfigItemMitAttributen(neuRecList);
 		ZwischenspeicherCiRecObj=null;
 		
-//		CiRecord neuerRecord = new CiRecord();
-//		neuerRecord.setAttribute(hilfsObj.getType());
-//		neuerRecord.setCiTyp(Zwischenspeicher);
-//		neuerRecord.setName(hilfsObj.getRecordName());
-//		ArrayList<CiRecord> neueRecordListe = new ArrayList<CiRecord>();
-//		neueRecordListe.add(neuerRecord);
-//		speichern.persistConfigItemMitAttributen(neueRecordListe);
-		
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
 		String Uname = HomeController.getUser();
@@ -165,5 +169,6 @@ public class AnlegenController {
 		model.addAttribute("name", Uname);		
 		
 		return "ci-record";
+
 	}
 }

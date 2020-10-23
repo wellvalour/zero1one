@@ -38,8 +38,7 @@
         <div id="content">
 
             <div class="benutzername-aendern">
-                <h3>Benutzername: </h3>
-                <h3 th:text="${nameAlt}"></h3>
+                <label id="ueberschrift">Benutzername: </label><label id="ueberschrift" th:text="${nameAlt}"></label>
 
                 <h3>Benutzername ändern</h3>
                 <form th:action="@{/profil/Name-Aendern}" th:object="${nameObj}" method="post">
@@ -94,16 +93,17 @@
 	                        <td><lable for="name" id="passwort">Passwort wiederholen</lable></td>
 	                        <td><input type="password" size="10" maxlength="10" th:field="*{PWNeuWdh}"/></td>                    
 	                    </tr>
-	                    <tr>
-	                        <td><lable for="name" id="berechtigung">Berechtigung auswaehlen</lable></td>
-	                        <td><input type="text" size="10" maxlength="10" th:field="*{berechtigung}">
-		                        <datalist  id="berechtigungs-liste">
-									<option text="Admin" value="Admin"/>
-									<option text="User" value="User"/>
-			                    </datalist>
-			                </td>                    
-	                    </tr>
 	                </table>
+	                
+	                <div id="dropdown">
+	                	<lable for="name" id="berechtigung">Berechtigung auswählen</lable>
+		                <input list="ci-typ-liste" type="text" placeholder="Berechtigung" th:field="*{berechtigung}">
+		                    <datalist id="ci-typ-liste">
+		                        <option value="Admin"/>
+		                        <option value="User"/>
+		                    </datalist>
+		                </input>
+		             </div>
 	                <input type="submit" id="button" value="Bestätigen">
 	       		</form>
             </div>
@@ -111,16 +111,11 @@
             <div class="benutzer-loeschen">
                 <h3>Benutzer löschen</h3>
                 <form th:action="@{/profil/Nutzer-Loeschen}" th:object="${loeschObj}" method="post">
-                <table>
-                    <tr>
-                        <td><lable for="name" id="benutzer">Benutzer wählen</lable></td>
-                        <td><input list="benutzer" type="text" th:field="*{name}">
-                            <datalist id="benutzer"  th:each="userList : ${userList}" >
-                                <option th:value="${userList.name}" th:text="${userList.name}"/>
-                            </datalist>
-                        </td>
-                    </tr>
-                </table>
+                        <lable for="name" id="benutzer">Benutzer wählen</lable>
+						<input list="user-list" type="text" th:placeholder="Berechtigung" th:field="*{name}">
+		                    <datalist id="user-list">
+		                        <option th:each="list, i : ${userList}" th:value="${userList[__${i.index}__]}"/>
+		                    </datalist>  
                 <input type="submit" id="button" value="Bestätigen">
                 </form>
             </div>

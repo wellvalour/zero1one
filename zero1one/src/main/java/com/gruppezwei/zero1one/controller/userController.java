@@ -41,7 +41,7 @@ public class userController {
 			
 			UserObjekt UserObj = new UserObjekt();
 			
-			List<User> userList = user.getAllUsers(); 
+			List<String> userList = user.getAllUsernames(); 
 			User loeschObj = new User();
 			
 			String Uname = HomeController.getUser();

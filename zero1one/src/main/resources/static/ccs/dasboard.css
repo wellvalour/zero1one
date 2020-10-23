@@ -106,11 +106,17 @@
     float:left;
     
     margin-left:50px;
-    
+
   }
   
+  p{
+  font-weight: bold;
+  }
 
-  
+  table{
+  	margin-bottom: 30px;
+  	margin-top: 30px;
+  }
   
   table,th,td{
     border: 1px solid black;
@@ -121,11 +127,16 @@
   ul,li{
     width:500px;
   }
-  .CI-Typ{
+  .CI-Type{
     width:500px;
     float:left;
 
   }
+
+#aendern-loeschen'{
+	margin-top:20 px;
+	
+}
 
   #Suchfeld{
     width:500px;

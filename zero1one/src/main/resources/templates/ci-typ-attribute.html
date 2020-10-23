@@ -34,35 +34,25 @@
             
         </div>
         <div id="content">
-        	<p id="name"><label id="ueberschrift">Ci-Typ-Anlegen</label></p>
-           	<form th:action="@{/ci-typ}" th:object="${TypObj}" method="post"> 
+           <form th:action="@{/ci-typ-attribute}" th:object="${TypObj}" method="post"> 
             <p id="name">
-                <label>CI-Typ-Name</label>
-                <input type="text" th:field="*{name}">
-  				<label id="message" th:text="${message}"></label>
-  		    </p>
-            <p id="name">
-	            <label>Anzahl Attribute</label>
-	            <input type="text" name="1" id="1" th:field="*{AttAnzahl}"/>
-	        </p>
-	            <div id="buttons">
-	                <button type="submit" id="anlegen">Weiter</button>
-	            </div>
-          </form>
-		  <div id="ci-typ-loeschen">
-           <p id="name"><label id="ueberschrift">Ci-Typ-Löschen</label></p>
-             <div id="Suchfeld">
-				<div id="dropdown">
-					<form th:action="@{/ci-typ-loeschen}" th:object="${suche}" method="post">
-						<input list="ci-typ-liste" type="text" th:field="*{suchbegriff}" th:placeholder="Ci-Typ-Suche">
-							<datalist  id="ci-typ-liste">
-								<option th:each="search, i : ${suchliste}" th:value="${suchliste[__${i.index}__].name}" th:text="${suchliste[__${i.index}__].name}"/>
-		                    </datalist>
-		                 <button type="submit" id="löschen">Löschen</button>
-		            </form>
-             	</div>
+                <label id="ueberschrift">CI-Typ Name:</label>
+                <label id="ci-typ-name" th:text="${TypObj.name}"></label>
+            </p>
+            <p>
+                <label>Attribute festlegen</label>
+            </p>
+            	<table id="attribute" th:each="typ,i: ${TypObj.typen}">
+            		<tr>
+	                    <td>Attribut</td>
+                    	<td><input type="text" name="1" id="1" th:field="*{typen[__${i.index}__].name}"/></td>
+                	</tr>
+				</table>
+            <div id="buttons">
+                <button type="submit" id="anlegen">Anlegen</button>
             </div>
-          </div> 
+          </form>
+            
         </div>
         <div id="footer">footer</div>
     </div>

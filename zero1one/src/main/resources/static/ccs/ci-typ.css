@@ -95,6 +95,10 @@
     margin-right:10px;
 }
 
+#ueberschrift{
+	font-weight:bold;
+}
+
 button{
   width: 120px;
   font-size:20px;
@@ -119,12 +123,11 @@ textarea{
 
 #name{
 
-  margin-bottom:20px;
+  margin-bottom:10px;
 }
 
 #message{
 
-  margin-bottom:20px;
   color: red;
 }
 
@@ -136,9 +139,14 @@ table{
 }
 
 #buttons{
-  margin-top:40px;
+  margin-top:20px;
   
 }
+
+#ci-typ-loeschen{
+	margin-top: 80px;
+}
+
 #nav .fas{
   color: white;
   margin-left: 97%;

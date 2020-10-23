@@ -37,8 +37,7 @@
         <div id="content">
 
             <div class="benutzername-aendern">
-                <h3>Benutzername: </h3>
-                <h3 th:text="${nameAlt}"></h3>
+                <h3>Benutzername: </h3><h3 th:text="${nameAlt}"></h3>
 
                 <h3>Benutzername ändern</h3>
                 <form th:action="@{/profil/Name-Aendern}" th:object="${nameObj}" method="post">
@@ -46,6 +45,7 @@
 	                    <tr>
 	                        <td><label for="name" id="neuer-benutzername">Neuer Benutzername</label></td>
 	                        <td><input type="text" size="10" id="eingabe-name" th:field="*{nameNeu}"/></td>
+	                        <td><label for="name" id="neuer-benutzername" th:text="${message1}"></label></td>
 	                    </tr>    
 	                </table>
 	                <p>
@@ -70,9 +70,11 @@
 	                        <td><label for="name" id="neues-passwort">Neues Passwort wiederholen</label></td> 
 	                        <td><input type="password" size="10" maxlength="10" th:field="*{PWNeuWdh}"/></td>
 	                    </tr>
-	                </table> 
+	                </table>
+	                <label for="name" id="neuer-benutzername" th:text="${message2}"></label> 
 	                <input type="submit" id="button" value="Bestätigen">
                 </form>
+                
             </div>
 
         </div>
