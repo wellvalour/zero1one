@@ -50,6 +50,7 @@
 	                </table>
 	                <p>
 	                    <input type="submit" id="button" value="Bestätigen">
+	                    <label id="message" th:text="${message1}"></label>
 	                </p>
                 </form>
             </div>
@@ -72,6 +73,7 @@
 	                    </tr>
 	                </table> 
 	                <input type="submit" id="button" value="Bestätigen">
+	                <label id="message" th:text="${message2}"></label>
                 </form>
             </div>
 
@@ -105,6 +107,7 @@
 		                </input>
 		             </div>
 	                <input type="submit" id="button" value="Bestätigen">
+	                <label id="message" th:text="${message3}"></label>
 	       		</form>
             </div>
 
@@ -117,6 +120,7 @@
 		                        <option th:each="list, i : ${userList}" th:value="${userList[__${i.index}__]}"/>
 		                    </datalist>  
                 <input type="submit" id="button" value="Bestätigen">
+                <label id="message" th:text="${message4}"></label>
                 </form>
             </div>
 

@@ -15,7 +15,10 @@ import com.gruppezwei.zero1one.controller.CiType;
 import com.gruppezwei.zero1one.controller.HomeController;
 import com.gruppezwei.zero1one.controller.Name;
 import com.gruppezwei.zero1one.controller.Passwort;
+import com.gruppezwei.zero1one.controller.UserObjekt;
+import com.gruppezwei.zero1one.manager.AuthenticationManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
+import com.gruppezwei.zero1one.repository.User;
 
 
 @ControllerAdvice
@@ -23,6 +26,9 @@ public class CiExceptionHandler {
 
 	@Autowired
 	ReadManager lesen;
+	
+	@Autowired
+	AuthenticationManager user;
 	
 	@ExceptionHandler(EmptyResultDataAccessException.class)
 	public String handleException(Model model, EmptyResultDataAccessException ex){
@@ -89,62 +95,114 @@ public class CiExceptionHandler {
 	public String handleException(Model model, UserAllreadyExistsException ex){
 
 		String message = ex.getMessage();
-		CiType neu = new CiType();
-		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
-		
-		return "profil1";// Beim user anlegen  wird im manager geworfen
-	}
-	
-	@ExceptionHandler(FieldCanNotBeEmptyException1.class)
-	public String handleException1(Model model, FieldCanNotBeEmptyException1 ex){
-
-		String message = "Das Feld Benutzername ist leer!";
-
-		model.addAttribute("message1", message);
-
-		
-		return "profil1";
-	}
-	
-	@ExceptionHandler(FieldCanNotBeEmptyException2.class)
-	public String handleException2(Model model, FieldCanNotBeEmptyException2 ex){
-
-		String message = "Das Feld Benutzername ist leer!";
 		String nameAlt = HomeController.getUser();
 		Name nameObj = new Name();
 		nameObj.setNameAlt(HomeController.getUser());
 		
 		Passwort PWObj = new Passwort();
 		
+		UserObjekt UserObj = new UserObjekt();
+		
+		List<String> userList = user.getAllUsernames(); 
+		User loeschObj = new User();
+		
 		String Uname = HomeController.getUser();
 		
 		model.addAttribute("nameAlt", nameAlt);
 		model.addAttribute("nameObj", nameObj);
 		model.addAttribute("PWObj", PWObj);
+		model.addAttribute("UserObj", UserObj);
+		model.addAttribute("userList", userList);
+		model.addAttribute("loeschObj", loeschObj);
 		model.addAttribute("name", Uname);
-		model.addAttribute("message1", message);
-
+		model.addAttribute("message3", message);
 		
-		return "profil2";
+		return "profil1";// Beim user anlegen  wird im manager geworfen
+	}
+	
+	
+	@ExceptionHandler(FieldCanNotBeEmptyException1.class)
+	public String handleException1(Model model, FieldCanNotBeEmptyException1 ex){
+
+		if(user.getUserByName(HomeController.getUser()).get(0).getBerechtigungsID() == 1) {
+			String message = "Benutzername darf nicht leer sein";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<String> userList = user.getAllUsernames(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message1", message);
+			
+			return "profil1";
+			
+		}else {
+		
+			String message = "Benutzername darf nicht leer sein";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message1", message);
+			
+			return "profil2";
+		}
 	}
 	
 	@ExceptionHandler(UserPasswordException.class)
 	public String handleException(Model model, UserPasswordException ex){
 
-		String message = "Aktuelles Passwort ist nicht korrekt";
-		CiType neu = new CiType();
+		if(user.getUserByName(HomeController.getUser()).get(0).getBerechtigungsID() == 1) {
+			
+			String message = "Aktuelles Passwort ist nicht korrekt";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<String> userList = user.getAllUsernames(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message2", message);
+			
+			return "profil1";
+			
+		}else {
 		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message2", message);
-		
-		return "profil1";//aktuelles Passwort ist falsch
-	}
-	
-	@ExceptionHandler(UserPasswordException2.class)
-	public String handleException2(Model model, UserPasswordException2 ex){
-
 		String message = "Aktuelles Passwort ist nicht korrekt";
 		String nameAlt = HomeController.getUser();
 		Name nameObj = new Name();
@@ -161,57 +219,115 @@ public class CiExceptionHandler {
 		model.addAttribute("message2", message);
 		
 		return "profil2";//aktuelles Passwort ist falsch
+		}
 	}
 	
 	
 	@ExceptionHandler(PasswordsDoNotMatchException.class)
 	public String handleException(Model model, PasswordsDoNotMatchException ex){
 
-		String message = "Neues Passwort stimmt nicht überein";
-		CiType neu = new CiType();
+		if(user.getUserByName(HomeController.getUser()).get(0).getBerechtigungsID() == 1) {
+			String message = "Neues Passwort stimmt nicht überein";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<String> userList = user.getAllUsernames(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message2", message);
+			
+			return "profil1";
+			
+		}else {
 		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message2", message);
-		
-		return "profil1";//Neue Passwörter stimmen nicht überein
+			String message = "Neues Passwort stimmt nicht überein";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message2", message);
+			
+			return "profil2";//Neue Passwörter stimmen nicht überei
+		}
 	}
-	
-	@ExceptionHandler(PasswordsDoNotMatchException2.class)
-	public String handleException2(Model model, PasswordsDoNotMatchException2 ex){
 
-		String message = "Neues Passwort stimmt nicht überein";
-		String nameAlt = HomeController.getUser();
-		Name nameObj = new Name();
-		nameObj.setNameAlt(HomeController.getUser());
-		
-		Passwort PWObj = new Passwort();
-		
-		String Uname = HomeController.getUser();
-		
-		model.addAttribute("nameAlt", nameAlt);
-		model.addAttribute("nameObj", nameObj);
-		model.addAttribute("PWObj", PWObj);
-		model.addAttribute("name", Uname);
-		model.addAttribute("message2", message);
-		
-		return "profil2";//Neue Passwörter stimmen nicht überein
-	}
 	
 	@ExceptionHandler(PasswortfeldLeerException.class)
 	public String handleException(Model model, PasswortfeldLeerException ex){
 
-		String message = "Nachricht";
-		CiType neu = new CiType();
+		if(user.getUserByName(HomeController.getUser()).get(0).getBerechtigungsID() == 1) {
+			
+			String message = "Angaben unvollständig";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<String> userList = user.getAllUsernames(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message2", message);
+			
+			return "profil1";
+			
+		}else {
 		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message2", message);
-		
-		return "profil1";//Passwordfelf hat keinen Wert
-		//kann ja eigentlich für neu und alt genommen werden, oder?
+			String message = "Angaben unvollständig";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message2", message);
+		}
+			
+		return "profil2";//Passwordfelf hat keinen Wert
 	}
 	
-	@ExceptionHandler(PasswortfeldLeerException2.class)
-	public String handleException2(Model model, PasswortfeldLeerException2 ex){
+	
+	@ExceptionHandler(NewPasswordCanNotBEmptyException.class)
+	public String handleException(Model model, NewPasswordCanNotBEmptyException ex){
 
 		String message = "Angaben unvollständig";
 		String nameAlt = HomeController.getUser();
@@ -220,42 +336,82 @@ public class CiExceptionHandler {
 		
 		Passwort PWObj = new Passwort();
 		
+		UserObjekt UserObj = new UserObjekt();
+		
+		List<String> userList = user.getAllUsernames(); 
+		User loeschObj = new User();
+		
 		String Uname = HomeController.getUser();
 		
 		model.addAttribute("nameAlt", nameAlt);
 		model.addAttribute("nameObj", nameObj);
 		model.addAttribute("PWObj", PWObj);
+		model.addAttribute("UserObj", UserObj);
+		model.addAttribute("userList", userList);
+		model.addAttribute("loeschObj", loeschObj);
 		model.addAttribute("name", Uname);
-		model.addAttribute("message2", message);
+		model.addAttribute("message3", message);
 		
-		return "profil2";//Passwordfelf hat keinen Wert
-		//kann ja eigentlich für neu und alt genommen werden, oder?
+		return "profil1";//Passwordcheck für leeren benutzer	
 	}
 	
-	
+	@ExceptionHandler(PasswordsDoNotMatchException2.class)
+	public String handleException2(Model model, PasswordsDoNotMatchException2 ex){
+
+			String message = "Neues Passwort stimmt nicht überein";
+			String nameAlt = HomeController.getUser();
+			Name nameObj = new Name();
+			nameObj.setNameAlt(HomeController.getUser());
+			
+			Passwort PWObj = new Passwort();
+			
+			UserObjekt UserObj = new UserObjekt();
+			
+			List<String> userList = user.getAllUsernames(); 
+			User loeschObj = new User();
+			
+			String Uname = HomeController.getUser();
+			
+			model.addAttribute("nameAlt", nameAlt);
+			model.addAttribute("nameObj", nameObj);
+			model.addAttribute("PWObj", PWObj);
+			model.addAttribute("UserObj", UserObj);
+			model.addAttribute("userList", userList);
+			model.addAttribute("loeschObj", loeschObj);
+			model.addAttribute("name", Uname);
+			model.addAttribute("message3", message);
+			
+			return "profil1";
+			
+	}
+
 	@ExceptionHandler(UserCanNotBeDeletedException.class)
 	public String handleException(Model model, UserCanNotBeDeletedException ex){
 
-		String message = "Nachricht";
-		CiType neu = new CiType();
+		String message = ex.getMessage();
+		String nameAlt = HomeController.getUser();
+		Name nameObj = new Name();
+		nameObj.setNameAlt(HomeController.getUser());
 		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
+		Passwort PWObj = new Passwort();
+		
+		UserObjekt UserObj = new UserObjekt();
+		
+		List<String> userList = user.getAllUsernames(); 
+		User loeschObj = new User();
+		
+		String Uname = HomeController.getUser();
+		
+		model.addAttribute("nameAlt", nameAlt);
+		model.addAttribute("nameObj", nameObj);
+		model.addAttribute("PWObj", PWObj);
+		model.addAttribute("UserObj", UserObj);
+		model.addAttribute("userList", userList);
+		model.addAttribute("loeschObj", loeschObj);
+		model.addAttribute("name", Uname);
+		model.addAttribute("message4", message);
 		
 		return "profil1";//User der gelöscht werden soll existiert nicht
 	}
-	
-	
-	@ExceptionHandler(NewPasswordCanNotBEmptyException.class)
-	public String handleException(Model model, NewPasswordCanNotBEmptyException ex){
 
-		String message = "Nachricht";
-		CiType neu = new CiType();
-		
-		model.addAttribute("TypObj", neu);
-		model.addAttribute("message", message);
-		
-		return "profil1";//Passwordcheck für leeren benutzer
-		
-	}
 }
