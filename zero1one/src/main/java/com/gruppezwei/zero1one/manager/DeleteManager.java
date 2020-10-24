@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.gruppezwei.zero1one.exception.TypExistiertNichtOderLeerException;
 import com.gruppezwei.zero1one.repository.AttributRepository;
 import com.gruppezwei.zero1one.repository.AttributtypRepository;
 import com.gruppezwei.zero1one.repository.ConfigitemRepository;
@@ -40,6 +41,13 @@ public class DeleteManager {
 	 * Löscht den CiTyp mit diesem Namen und alle zugehörigen Attribute.
 	 */
 	public void deleteCiType(String name) {
+		
+		if(!confTypRepo.existsById(name)) {
+			throw new TypExistiertNichtOderLeerException("Der gewählte Ci-Typ existiert nicht");
+		} else if(name.contentEquals("")) {
+			throw new TypExistiertNichtOderLeerException("Es muss ein Ci-Typ ausgewählt werden");
+		}
+		
 		confTypRepo.deleteById(name);
 		
 		List<String> ids = readman.getAttributTypIDtoCiType(name);
