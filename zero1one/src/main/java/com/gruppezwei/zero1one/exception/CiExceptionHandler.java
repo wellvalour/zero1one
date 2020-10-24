@@ -76,6 +76,26 @@ public class CiExceptionHandler {
 
 		return "ci-typ";
 	}
+	
+	@ExceptionHandler(TypExistiertNichtOderLeerException.class)
+	public String handleException(Model model, TypExistiertNichtOderLeerException ex) {
+
+		String message = ex.getMessage();
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
+		CiTypObjekt neu = new CiTypObjekt();
+		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
+
+		model.addAttribute("suchliste", SeaListRec);
+		model.addAttribute("suche", new CiSearch());
+		model.addAttribute("TypObj", neu);
+		model.addAttribute("name", user);
+		model.addAttribute("message1", message);
+;
+
+		return "ci-typ";
+	}
+	
 
 	@ExceptionHandler(TypeMussGesetztSeinException.class)
 	public String handleException(Model model, TypeMussGesetztSeinException ex) {

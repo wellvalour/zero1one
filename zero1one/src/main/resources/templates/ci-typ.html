@@ -39,12 +39,12 @@
            	<form th:action="@{/ci-typ}" th:object="${TypObj}" method="post"> 
             <p id="name">
                 <label>CI-Typ-Name</label>
-                <input type="text" th:field="*{name}">
+                <input type="text" placeholder="Name" th:field="*{name}">
   				<label id="message" th:text="${message}"></label>
   		    </p>
             <p id="name">
 	            <label>Anzahl Attribute</label>
-	            <input type="text" name="1" id="1" th:field="*{AttAnzahl}"/>
+	            <input type="text" placeholder="Attributanzahl" th:field="*{AttAnzahl}"/>
 	        </p>
 	            <div id="buttons">
 	                <button type="submit" id="anlegen">Weiter</button>
@@ -61,6 +61,7 @@
 		                    </datalist>
 		                 <button type="submit" id="löschen">Löschen</button>
 		            </form>
+		            <label id="message" th:text="${message1}"></label>
              	</div>
             </div>
           </div> 
