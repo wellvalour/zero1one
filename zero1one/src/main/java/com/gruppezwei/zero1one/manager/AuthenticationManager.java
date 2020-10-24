@@ -109,7 +109,7 @@ public class AuthenticationManager {
 		if(!userRepo.existsById(name)) {
 			throw new UserCanNotBeDeletedException("Benutzname existiert nicht!");
 		}
-		else if(name.isEmpty()) {
+		else if(name.equals("Berechtigung")) {
 			throw new UserCanNotBeDeletedException("Benutzname darf nicht leer sein!");
 		}
 		userRepo.deleteById(name);
