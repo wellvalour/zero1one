@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.gruppezwei.zero1one.exception.UserAllreadyExistsException;
+import com.gruppezwei.zero1one.exception.UserCanNotBeDeletedException;
 import com.gruppezwei.zero1one.repository.BerechtigungRepository;
 import com.gruppezwei.zero1one.repository.User;
 import com.gruppezwei.zero1one.repository.UserRepository;
@@ -60,10 +61,10 @@ public class AuthenticationManager {
 	 */
 	public void userAnlegen(User user) {
 		if(userRepo.existsById(user.getName())) {
-			throw new UserAllreadyExistsException("User existiert bereits!");
+			throw new UserAllreadyExistsException("Benutzname existiert bereits!");
 		}
 		else if(user.getName().isEmpty()) {
-			throw new UserAllreadyExistsException("Username darf nicht leer sein!");
+			throw new UserAllreadyExistsException("Benutzname darf nicht leer sein!");
 		}
 		userRepo.save(user);
 	}
@@ -91,6 +92,12 @@ public class AuthenticationManager {
 	 * @param user
 	 */
 	public void deleteUser(User user) {
+		if(!userRepo.existsById(user.getName())) {
+			throw new UserCanNotBeDeletedException("Benutzname existiert nicht!");
+		}
+		else if(user.getName().isEmpty()) {
+			throw new UserCanNotBeDeletedException("Benutzname darf nicht leer sein!");
+		}
 		userRepo.delete(user);;
 	}
 	
@@ -99,6 +106,12 @@ public class AuthenticationManager {
 	 * @param name
 	 */
 	public void deleteUserById(String name) {
+		if(!userRepo.existsById(name)) {
+			throw new UserCanNotBeDeletedException("Benutzname existiert nicht!");
+		}
+		else if(name.isEmpty()) {
+			throw new UserCanNotBeDeletedException("Benutzname darf nicht leer sein!");
+		}
 		userRepo.deleteById(name);
 	}
 	
