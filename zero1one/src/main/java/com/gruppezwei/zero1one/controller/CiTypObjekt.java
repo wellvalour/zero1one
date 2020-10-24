@@ -1,7 +1,5 @@
 package com.gruppezwei.zero1one.controller;
 
-import java.util.List;
-
 public class CiTypObjekt {
 
 	

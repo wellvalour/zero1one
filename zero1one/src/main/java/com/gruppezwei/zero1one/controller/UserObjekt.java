@@ -1,8 +1,5 @@
 package com.gruppezwei.zero1one.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class UserObjekt {
 
 		private String name;
