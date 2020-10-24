@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,15 +31,17 @@ public class userController {
 
 	@Autowired
 	ReadManager lesen;
-
+	
 	@GetMapping(value = "/profil", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getData(Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
-		if (user.getUserByName(HomeController.getUser()).get(0).getBerechtigungsID() == 1) {
+		if (user.getUserByName(username).get(0).getBerechtigungsID() == 1) {
 
-			String nameAlt = HomeController.getUser();
+			String nameAlt = username;
 			Name nameObj = new Name();
-			nameObj.setNameAlt(HomeController.getUser());
+			nameObj.setNameAlt(username);
 
 			Passwort PWObj = new Passwort();
 
@@ -47,31 +50,27 @@ public class userController {
 			List<String> userList = user.getAllUsernames();
 			User loeschObj = new User();
 
-			String Uname = HomeController.getUser();
-
 			model.addAttribute("nameAlt", nameAlt);
 			model.addAttribute("nameObj", nameObj);
 			model.addAttribute("PWObj", PWObj);
 			model.addAttribute("UserObj", UserObj);
 			model.addAttribute("userList", userList);
 			model.addAttribute("loeschObj", loeschObj);
-			model.addAttribute("name", Uname);
+			model.addAttribute("name", username);
 
 			return "profil1";
 
 		} else {
-			String nameAlt = HomeController.getUser();
+			String nameAlt = username;
 			Name nameObj = new Name();
-			nameObj.setNameAlt(HomeController.getUser());
+			nameObj.setNameAlt(username);
 
 			Passwort PWObj = new Passwort();
-
-			String Uname = HomeController.getUser();
 
 			model.addAttribute("nameAlt", nameAlt);
 			model.addAttribute("nameObj", nameObj);
 			model.addAttribute("PWObj", PWObj);
-			model.addAttribute("name", Uname);
+			model.addAttribute("name", username);
 
 			return "profil2";
 		}
@@ -80,21 +79,21 @@ public class userController {
 	@PostMapping(value = "/profil/Name-Aendern", consumes = { MediaType.ALL_VALUE }, produces = {
 			MediaType.TEXT_HTML_VALUE })
 	public String getAttributeToType(@ModelAttribute Name nameObj, Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
 		if (nameObj.getNameNeu().isEmpty()) {
 			throw new FieldCanNotBeEmptyException1();
 		} else {
-			user.changeUsername(HomeController.getUser(), nameObj.getNameNeu());
-			HomeController.setUser(nameObj.getNameNeu());
+			user.changeUsername(username, nameObj.getNameNeu());
 
 			List<CiType> TypObj = lesen.getCiTypeAll();
 			List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-			String Uname = HomeController.getUser();
 
 			model.addAttribute("type", TypObj);
 			model.addAttribute("suchliste", SeaListRec);
 			model.addAttribute("suche", new CiSearch());
-			model.addAttribute("name", Uname);
+			model.addAttribute("name", username);
 		}
 		return "dashboard/record";
 	}
@@ -102,6 +101,8 @@ public class userController {
 	@PostMapping(value = "/profil/PW-Aendern", consumes = { MediaType.ALL_VALUE }, produces = {
 			MediaType.TEXT_HTML_VALUE })
 	public String setNewPasswort(@ModelAttribute Passwort PWObj, Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
 		if (PWObj.getPWNeu().isEmpty() || PWObj.getPWNeuWdh().isEmpty() || PWObj.getPWAlt().isEmpty()) {
 			throw new PasswortfeldLeerException();
@@ -118,8 +119,8 @@ public class userController {
 			throw new PasswordsDoNotMatchException();
 		}
 
-		if (PWObj.getPWAlt().equals(user.getUserByName(HomeController.getUser()).get(0).getPasswort())) {
-			List<User> UserListPW = user.getUserByName(HomeController.getUser());
+		if (PWObj.getPWAlt().equals(user.getUserByName(username).get(0).getPasswort())) { // SecurityContextHolder.getContext().getAuthentication() alternativ
+			List<User> UserListPW = user.getUserByName(username);
 			User neuUserPW = UserListPW.get(0);
 			neuUserPW.setPasswort(PWObj.getPWNeu());
 			user.changePassword(neuUserPW);
@@ -129,12 +130,11 @@ public class userController {
 
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", username);
 
 		return "dashboard/record";
 	}
@@ -142,6 +142,8 @@ public class userController {
 	@PostMapping(value = "/profil/Nutzer-Anlegen", consumes = { MediaType.ALL_VALUE }, produces = {
 			MediaType.TEXT_HTML_VALUE })
 	public String setNewUser(@ModelAttribute UserObjekt UserObj, Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
 		if (UserObj.getPWNeu().isEmpty() || UserObj.getPWNeuWdh().isEmpty()) {
 			throw new NewPasswordCanNotBEmptyException();
@@ -167,12 +169,11 @@ public class userController {
 
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", username);
 
 		return "dashboard/record";
 	}
@@ -180,17 +181,18 @@ public class userController {
 	@PostMapping(value = "/profil/Nutzer-Loeschen", consumes = { MediaType.ALL_VALUE }, produces = {
 			MediaType.TEXT_HTML_VALUE })
 	public String setNewUser(@ModelAttribute User loeschUser, Model model) {
+		
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 
 		user.deleteUserById(loeschUser.getName());
 
 		List<CiType> TypObj = lesen.getCiTypeAll();
 		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("type", TypObj);
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", username);
 
 		return "dashboard/record";
 	}
@@ -198,8 +200,9 @@ public class userController {
 	@GetMapping(value = "/hilfe", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getHelp(Model model) {
 
-		String Uname = HomeController.getUser();
-		model.addAttribute("name", Uname);
+		String username = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
+		model.addAttribute("name", username);
 		return "hilfe";
 	}
 

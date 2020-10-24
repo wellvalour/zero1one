@@ -2,8 +2,6 @@ package com.gruppezwei.zero1one.security;
 
 import java.util.ArrayList;
 
-import com.gruppezwei.zero1one.controller.HomeController;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -22,7 +20,6 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 
 		String name = authentication.getName();
-		HomeController.setUser(name);
 		
 		String password = "" + authentication.getCredentials().toString().hashCode();
 		

@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,11 +15,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gruppezwei.zero1one.exception.FieldCanNotBeEmptyException;
 import com.gruppezwei.zero1one.exception.TypeMussGesetztSeinException;
-import com.gruppezwei.zero1one.manager.DeleteManager;
 import com.gruppezwei.zero1one.manager.PersistenceManager;
 import com.gruppezwei.zero1one.manager.ReadManager;
-import com.gruppezwei.zero1one.manager.UpdateManager;
-import com.gruppezwei.zero1one.repository.Attributtyp;
 
 /**
  * Controller für die Seiten Ci-Typ und Ci-Record.
@@ -43,16 +41,16 @@ public class AnlegenController {
 	@GetMapping(value = "/ci-typ", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String setType(Model model) {
 
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
 		CiTypObjekt neu = new CiTypObjekt();
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", user);
 
-		
 		return "ci-typ";
 	}
 	
@@ -82,6 +80,8 @@ public class AnlegenController {
 	@PostMapping("/ci-typ-attribute")
 	public String AttributeSubmit(@ModelAttribute CiType TypObj, Model model) {		
 		
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
 		TypObj.setName(name);
 		for(Attributtypen at : TypObj.getTypen()) {
 		at.setConfigItemTyp(TypObj.getName());	
@@ -93,12 +93,11 @@ public class AnlegenController {
 		CiTypObjekt neu = new CiTypObjekt();
 
 		List<CiType> SeaListRec = lesen.getCiTypeAll(); //Suchliste
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("suchliste", SeaListRec);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("TypObj", neu);
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", user);
 		
 		return "ci-typ";
 	}
@@ -106,18 +105,21 @@ public class AnlegenController {
 	@GetMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getRecord(Model model) {
 
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
 		List<String> TypObj = lesen.getCiTypeAsString();
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", user);
 		
 		return "ci-record";
 	}
 	
 	@PostMapping(value = "/ci-record", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeToType(@ModelAttribute CiSearch suche, Model model) {
+		
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
 		
 		if(suche.getSuchbegriff().isEmpty()) {
 			throw new TypeMussGesetztSeinException();
@@ -137,12 +139,11 @@ public class AnlegenController {
 		ZwischenspeicherCiRecObj=neuRec;
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
-		String Uname = HomeController.getUser();
 		
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
 		model.addAttribute("RecObj", neuRec);
-		model.addAttribute("name", Uname);
+		model.addAttribute("name", user);
 		
 		return "ci-record1";
 	}
@@ -150,6 +151,8 @@ public class AnlegenController {
 	@PostMapping(value = "/ci-record-submit", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getAttributeType(@ModelAttribute CiRecord RecObj, Model model) {
 
+		String user = SecurityContextHolder.getContext().getAuthentication().getPrincipal().toString();
+		
 		ZwischenspeicherCiRecObj.setName(RecObj.getName());
 		int laenge = ZwischenspeicherCiRecObj.getAttribute().size();
 		for(int i =0; i<laenge;i++) {
@@ -162,11 +165,10 @@ public class AnlegenController {
 		
 		
 		List<String> TypObj = lesen.getCiTypeAsString();
-		String Uname = HomeController.getUser();
 
 		model.addAttribute("search", TypObj);
 		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", Uname);		
+		model.addAttribute("name", user);		
 		
 		return "ci-record";
 
