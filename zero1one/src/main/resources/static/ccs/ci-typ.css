@@ -8,12 +8,11 @@
     display:grid;
     height:100vh;
     grid-template-columns: 14% 86%;
-    grid-template-rows: 80px 83% 10%;
+    grid-template-rows: 80px 90%;
     grid-template-areas: 
       "nav nav"
       "sidebar content "
       "sidebar content  "
-      "footer footer "
   }
   
   br{
@@ -155,11 +154,3 @@ table{
   
 }
 
-
-
-  
-  #footer{
-    background:black;
-      grid-area:footer;
-      height:200px;
-  }

@@ -86,16 +86,8 @@ public class userController {
 			throw new FieldCanNotBeEmptyException1();
 		} else {
 			user.changeUsername(username, nameObj.getNameNeu());
-
-			List<CiType> TypObj = lesen.getCiTypeAll();
-			List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-
-			model.addAttribute("type", TypObj);
-			model.addAttribute("suchliste", SeaListRec);
-			model.addAttribute("suche", new CiSearch());
-			model.addAttribute("name", username);
 		}
-		return "dashboard/record";
+		return "login";
 	}
 
 	@PostMapping(value = "/profil/PW-Aendern", consumes = { MediaType.ALL_VALUE }, produces = {
@@ -128,15 +120,7 @@ public class userController {
 			throw new UserPasswordException();
 		}
 
-		List<CiType> TypObj = lesen.getCiTypeAll();
-		List<CiRecord> SeaListRec = lesen.getCiRecordAll();
-
-		model.addAttribute("type", TypObj);
-		model.addAttribute("suchliste", SeaListRec);
-		model.addAttribute("suche", new CiSearch());
-		model.addAttribute("name", username);
-
-		return "dashboard/record";
+		return "login";
 	}
 
 	@PostMapping(value = "/profil/Nutzer-Anlegen", consumes = { MediaType.ALL_VALUE }, produces = {
