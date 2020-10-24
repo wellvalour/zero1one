@@ -198,6 +198,8 @@ public class userController {
 	@GetMapping(value = "/hilfe", consumes = { MediaType.ALL_VALUE }, produces = { MediaType.TEXT_HTML_VALUE })
 	public String getHelp(Model model) {
 
+		String Uname = HomeController.getUser();
+		model.addAttribute("name", Uname);
 		return "hilfe";
 	}
 
